@@ -54,7 +54,7 @@
         /* 슬라이더 페이드 애니메이션 */
         .slide {
             opacity: 0;
-            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+            transition: opacity 3s ease-in-out, transform 3s ease-in-out;
             transform: scale(1.05);
         }
 
@@ -142,13 +142,6 @@
                     <div class="relative group flex items-center h-full">
                         <a href="recruit_1.html"
                             class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">채용정보</a>
-                        <!-- <div
-                            class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
-                            <a href="recruit_1.html"
-                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인재상</a>
-                            <a href="recruit_2.html"
-                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">채용절차</a>
-                        </div> -->
                     </div>
                 </nav>
                 <!-- CTA Button -->
@@ -169,9 +162,6 @@
             <section class="relative w-full h-screen overflow-hidden bg-brand-dark  items-center justify-center">
                 <!-- Slide 1 -->
                 <div class="main_slide-1 slide active absolute inset-0 w-full h-full">
-                    <!-- <div
-                        class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/80 to-transparent z-10">
-                    </div> -->
                     <!-- 백그라운드 대체용 CSS 패턴/그라디언트 -->
                     <div class="main1_bg">
                         <video id="bgVideo" autoplay muted loop playsinline>
@@ -190,20 +180,10 @@
                         <p class="text-slate-300 text-lg md:text-lg max-w-2xl font-light fade-in-up delay-200">
                             BEST OF YOUR PARTNER, 새로운 시각 더 나은 서비스
                         </p>
-                        <div class="mt-10 fade-in-up delay-300">
-                            <!-- <a href="#business"
-                                class="hover-bg-red text-white inline-flex items-center gap-2 px-8 py-4 bg-brand-dark/50 border-[1px] text-brand-primary font-Regular rounded-full hover:bg-slate-100 transition-all shadow-lg">
-                                비즈니스 알아보기 <i class="ph-bold ph-arrow-right"></i>
-                            </a> -->
-                            <!-- <a href="business" class=" w-[20px]"><img src="./images/arrwo_white.png" alt="바로가기"></a> -->
-                        </div>
                     </div>
                 </div>
                 <!--------2번재 슬라이드-------->
                 <div class="main_slide-2 slide absolute inset-0 w-full h-full">
-                    <!-- <div
-                        class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/80 to-transparent z-10">
-                    </div> -->
                     <!-- 백그라운드 대체용 CSS 패턴/그라디언트 -->
                     <div class="main2_bg">
                         <video id="bgVideo2" autoplay muted loop playsinline>
@@ -222,12 +202,6 @@
                         <p class="text-slate-300 text-lg md:text-lg max-w-2xl font-light fade-in-up delay-200">
                             관세청, 조달청, 산림청 등 국가 핵심 정보망을 </br> 무결점으로 구축 및 운영하는 신뢰의 IT 기업
                         </p>
-                        <!-- <div class="mt-10 fade-in-up delay-300">
-                            <a href="#portfolio"
-                                class="hover-bg-red text-white inline-flex items-center gap-2 px-5 py-3 bg-brand-accent text-brand-primary font-Regular rounded-full hover:bg-slate-100 transition-all shadow-lg">
-                                성공 사례 보기 <i class="ph-bold ph-arrow-right"></i>
-                            </a>
-                        </div> -->
                     </div>
                 </div>
 
@@ -376,6 +350,7 @@
                         <div class="bsn-items-txt">
                             <p>365일 안정성 극대화</p>
                             <p>대규모 데이터망 운영·관리</p>
+                        </div>
                     </li>
 
                 </ul>
@@ -427,7 +402,7 @@
                             </div>
                         </div>
                         <p class="text-slate-800 text-based line-clamp-2 break-keep">초거대 AI 공통기반 성공적 수행으로 범정부
-                            차원의 AI 활용
+                            차원의 <br>AI 활용
                             체계
                             구축
                         </p>
@@ -632,19 +607,6 @@
             let currentSlide = 0;
             let slideInterval;
 
-            // function showSlide(index) {
-            //     slides.forEach(slide => slide.classList.remove('active'));
-            //     dots.forEach(dot => {
-            //         dot.classList.remove('bg-brand-accent');
-            //         dot.classList.add('bg-white/30');
-            //     });
-
-            //     slides[index].classList.add('active');
-            //     dots[index].classList.remove('bg-white/30');
-            //     dots[index].classList.add('bg-brand-accent');
-            // }
-
-
             function showSlide(index) {
 
                 // 슬라이드 변경
@@ -659,15 +621,20 @@
                 dots[index].classList.remove('bg-white/30');
                 dots[index].classList.add('bg-brand-accent');
 
-                // 모든 영상 정지 후 처음으로
-                document.querySelectorAll('.slide video').forEach(video => {
-                    video.pause();
-                    video.currentTime = 0;
-                });
+                // 이전 슬라이드 영상 정지
+                const prevVideo = slides[currentSlide].querySelector('video');
+                if (prevVideo) {
+                    prevVideo.pause();
+                    prevVideo.currentTime = 0;
+                }
 
-                // 현재 슬라이드 영상 재생
+                // 슬라이드 변경
+                currentSlide = index;
+
+                // 새 슬라이드 영상 재생
                 const currentVideo = slides[index].querySelector('video');
                 if (currentVideo) {
+                    currentVideo.currentTime = 0;
                     currentVideo.play();
                 }
             }
@@ -717,7 +684,7 @@
 
 
             document.querySelectorAll('.slide video').forEach(video => {
-                video.playbackRate = 0.6;
+                video.playbackRate = 0.5;
             });
 
 
