@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주요실적 - 아이웨이브(iWave)</title>
+    <!-- 폰트: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 아이콘: Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#121f41',    // 딥 네이비
+                            primary: '#1e3a8a', // 메인 블루
+                            light: '#3b82f6',   // 밝은 블루
+                            accent: '#ae3b4d',  // 포인트 옐로우
+                            gray: '#f8fafc'     // 배경 연회색
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        
+        /* 서브페이지 헤더 기본 배경 */
+        #header.subpage-header { background-color: #0f172a; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        /* 그라디언트 텍스트 */
+        .text-gradient-portfolio {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 탭 필터 애니메이션 */
+        .portfolio-item { transition: all 0.4s ease; }
+        .portfolio-item.hidden { display: none; opacity: 0; }
+        .portfolio-item.show { display: table-row; opacity: 1; animation: fadeInRow 0.4s ease forwards; }
+
+        @keyframes fadeInRow {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* 클라이언트 마키(Marquee) 애니메이션 */
+        .marquee-container {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            gap: 2rem;
+        }
+        .marquee-content {
+            display: flex;
+            flex-shrink: 0;
+            justify-content: space-around;
+            min-width: 100%;
+            gap: 2rem;
+            animation: scroll_left 300s linear infinite;
+        }
+        .marquee-content.scroll_right {
+            animation: scroll_right 300s linear infinite !important;
+        }
+        @keyframes scroll_left {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-100% - 2rem)); }
+        }
+        @keyframes scroll_right {
+            from { transform: translateX(calc(-100% - 2rem)); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-brand-gray antialiased">
+
+    <!-- Header (GNB) -->
+    <header id="header"
+            class="fixed w-full top-0 z-[100] transition-all duration-300 bg-brand-dark/60 text-white border-b border-white/10">
+            <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
+                    <img src="./images/logo.png" alt="iWave Logo" class="Head_logo w-52 ">
+                    <!-- <i class="ph-fill ph-waves text-brand-accent text-3xl"></i>
+                    iWave -->
+                </a>
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex gap-28 font-medium h-full">
+                    <!-- 회사소개 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="introduce_1.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">회사소개</a>
+                        <div
+                            class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                            <a href="introduce_1.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">회사개요</a>
+                            <a href="introduce_ceo.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">대표인사말</a>
+                            <a href="introduce_history.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">연혁</a>
+                            <a href="introduce_awards.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인증
+                                및 수상</a>
+                            <a href="introduce_location.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">오시는길</a>
+                        </div>
+                    </div>
+                    <!-- 사업분야 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="biz_ai.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">사업분야</a>
+                        <div
+                            class="absolute top-full left-0 w-56 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                            <a href="biz_ai.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">AI사업</a>
+                            <a href="biz_si.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템통합(SI)</a>
+                            <a href="biz_sm.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템운영유지관리(SM)</a>
+                        </div>
+                    </div>
+                    <!-- 주요실적 -->
+                    <div class="flex items-center h-full">
+                        <a href="reference.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">주요실적</a>
+                    </div>
+                    <!-- 채용정보 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="recruit_1.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">채용정보</a>
+                    </div>
+                </nav>
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact"
+                        class="text-white px-3 py-1.5 rounded-full bg-brand-dark/20 text-brand-dark  border font-bold text-xs hover:bg-brand-accent transition-colors shadow-lg">
+                        문의하기
+                    </a>
+                </div>
+                <!-- Mobile Menu Toggle -->
+                <button class="md:hidden text-2xl" aria-label="Menu">
+                    <i class="ph ph-list"></i>
+                </button>
+            </div>
+        </header>
+
+    <!-- Subpage Hero Section -->
+    <section class="relative pt-24 pb-5 bg-brand-dark overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-20">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+                        <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-primary/30 rounded-full blur-[100px]"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 pt-5 max-w-7xl relative z-10 text-center md:text-left">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center justify-center md:justify-start gap-2 text-sm text-slate-400 mb-3 fade-in-up">
+                <a href="index.html" class="hover:text-brand-accent transition-colors"><i class="ph-fill ph-house"></i></a>
+                <i class="ph-bold ph-caret-right text-xs"></i>
+                <span class="text-white font-medium">주요실적</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 fade-in-up delay-100">주요실적</h1>
+            <!-- <p class="text-slate-300 text-lg fade-in-up delay-200">대한민국 공공 IT 인프라, 아이웨이브가 함께 혁신합니다.</p> -->
+        </div>
+    </section>
+
+    <!-- 1. Highlight Projects (Cards) -->
+    <section class="py-24 bg-brand-gray relative border-b border-slate-200">
+        <div class="container py-20 mx-auto px-6 max-w-7xl ">
+            <div class="text-left mb-8 fade-in-up flex flex-col justify-center py-6 gap-4 text-center">
+                <div class="relative">
+                    <div class="w-[40%] border-t border-brand-dark absolute left-0 top-10 z-1"></div>
+                    <div class="w-[40%] border-t border-brand-dark absolute right-0 top-10 z-1"></div>
+                    <h2 class="bg-brand-gray px-10 text-3xl font-bold text-slate-900 mt-2 inline-block relative z-4">핵심 프로젝트 하이라이트</h2>
+                    <p class="text-slate-500 mt-2 block ">아이웨이브가 수행한 국가 규모의 대형 대표 실적입니다.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Highlight 1 -->
+                <div class="duration-300 fade-in-up">
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-md transition-all border border-slate-200 group hover:-translate-y-2 hover:shadow-xl">
+                        <div class="h-60 bg-slate-100 relative overflow-hidden flex items-center p-7">
+                            <div class="absolute inset-0 bg-brand-dark/80"></div>
+                            <i class="opacity-[0.03] absolute -right-6 -bottom-10">
+                                <img class=" w-60 h-60" src="images/reference/highlight_bg.svg" alt="">
+                            </i>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-between">
+                                <div class="flex justify-between mb-2">
+                                    <div class="flex gap-1">
+                                        <div class="bg-white text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">산림청</div>
+                                        <span class="bg-white text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">시스템구축(SI)</span>
+                                    </div>
+                                    <span class="bg-slate-100 text-slate-600 text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">2026년 예정</span>
+                                </div>
+                                <h3 class="text-white text-2xl font-bold leading-snug break-keep">AI 산림행정업무시스템<br>(e-푸른샘) 구축 (3차)</h3>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <p class="text-slate-600 text-lg leading-relaxed break-keep">산림 사업의 부정비리 방지와 산림 기술 수준 향상을 위한 AI 기반의 혁신적인 행정 업무 통합 시스템 구축</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlight 2 -->
+                <div class="duration-300 fade-in-up delay-100">
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-md transition-all border border-slate-200 group hover:-translate-y-2 hover:shadow-xl">
+                        <div class="h-60 bg-slate-100 relative overflow-hidden flex items-center p-7">
+                            <div class="absolute inset-0 bg-brand-dark/80"></div>
+                            <i class="opacity-[0.03] absolute -right-6 -bottom-10">
+                                <img class=" w-60 h-60" src="images/reference/highlight_bg.svg" alt="">
+                            </i>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-between">
+                                <div class="flex justify-between mb-2">
+                                    <div class="flex gap-1">
+                                        <div class="bg-white text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">관세청</div>
+                                        <span class="bg-white text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">시스템구축(SI)</span>
+                                    </div>
+                                    <span class="bg-slate-100 text-slate-600 text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">2025년</span>
+                                </div>
+                                <h3 class="text-white text-2xl font-bold leading-snug break-keep">생성형 AI 기반 개인통관<br>종합 상담 시스템 구축</h3>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <p class="text-slate-600 text-lg leading-relaxed break-keep">언제 어디서나 24시간 빠르고 친절하게 대응하는 관세청 마이통관 지능형 챗봇 및 종합 상담 플랫폼 개발</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlight 3 -->
+                <div class="duration-300 fade-in-up delay-200">
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-md transition-all border border-slate-200 group hover:-translate-y-2 hover:shadow-xl">
+                        <div class="h-60 bg-slate-100 relative overflow-hidden flex items-center p-7">
+                            <div class="absolute inset-0 bg-brand-dark/80"></div>
+                            <i class="opacity-[0.03] absolute -right-6 -bottom-10">
+                                <img class=" w-60 h-60" src="images/reference/highlight_bg.svg" alt="">
+                            </i>
+                            <div class="relative z-10 w-full h-full flex flex-col justify-between">
+                                <div class="flex justify-between mb-2">
+                                    <div class="flex gap-1">
+                                        <div class="bg-white text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">통계청</div>
+                                        <span class="bg-white text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">운영유지관리(SM)</span>
+                                    </div>
+                                    <span class="bg-slate-100 text-slate-600 text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">2024 - 2026년</span>
+                                </div>
+                                <h3 class="text-white text-2xl font-bold leading-snug break-keep">차세대 Census 통합관리<br>시스템 구축 용역</h3>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <p class="text-slate-600 text-lg leading-relaxed break-keep">국가 인구주택총조사 등 핵심 통계의 기반이 되는 센서스 데이터의 무결점 관리 및 안정적 시스템 구축·운영</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                 <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200 group hover:-translate-y-2 hover:shadow-xl transition-all duration-300 fade-in-up">
+                    <div class="bg-slate-100 relative overflow-hidden flex items-center justify-start p-8 h-full">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-brand-primary to-cyan-500 opacity-90"></div>
+                        <i class="ph-fill ph-tree-evergreen text-6xl text-white/50 absolute -right-4 -bottom-4 group-hover:scale-125 transition-transform duration-700"></i>
+                        <div class="relative z-10">
+                            <div class="bg-white text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">산림청</div>
+                            <div class="bg-slate-100 text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">2026년 예정</div>
+                            <div class="bg-blue-50 text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">시스템구축(SI)</div>
+                            <h3 class="text-white text-xl font-bold leading-snug break-keep">AI 산림행정업무시스템<br>(e-푸른샘) 구축 (3차)</h3>
+                            <p class="text-slate-200 text-sm leading-relaxed break-keep mt-4">산림 사업의 부정비리 방지와 산림 기술 수준 향상을 위한 AI 기반의 혁신적인 행정 업무 통합 시스템 구축</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200 group hover:-translate-y-2 hover:shadow-xl transition-all duration-300 fade-in-up delay-100">
+                    <div class="bg-slate-100 relative overflow-hidden flex items-center justify-center p-8 h-full">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-indigo-900 to-blue-800 opacity-90"></div>
+                        <i class="ph-fill ph-airplane-in-flight text-6xl text-white/50 absolute -right-4 -bottom-4 group-hover:scale-125 transition-transform duration-700"></i>
+                        <div class="relative z-10">
+                            <div class="bg-white text-indigo-900 text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">관세청</div>
+                            <div class="bg-slate-100 text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">2025년</div>
+                            <div class="bg-blue-50 text-brand-primary text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">시스템구축(SI)</div>
+                            <h3 class="text-white text-xl font-bold leading-snug break-keep">생성형 AI 기반 개인통관<br>종합 상담 시스템 구축</h3>
+                            <p class="text-slate-200 text-sm leading-relaxed break-keep mt-4">언제 어디서나 24시간 빠르고 친절하게 대응하는 관세청 마이통관 지능형 챗봇 및 종합 상담 플랫폼 개발</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md border border-slate-200 group hover:-translate-y-2 hover:shadow-xl transition-all duration-300 fade-in-up delay-200">
+                    <div class="bg-slate-100 relative overflow-hidden flex items-center justify-center p-8 h-full">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-teal-700 to-emerald-500 opacity-90"></div>
+                        <i class="ph-fill ph-users-three text-6xl text-white/50 absolute -right-4 -bottom-4 group-hover:scale-125 transition-transform duration-700"></i>
+                        <div class="relative z-10">
+                            <div class="bg-white text-teal-700 text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">통계청</div>
+                            <div class="bg-slate-100 text-teal-700 text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">2024 - 2026년</div>
+                            <div class="bg-blue-50 text-teal-700 text-xs font-black px-3 py-1 rounded-full mb-3 inline-block shadow-sm">운영유지관리(SM)</div>
+                            <h3 class="text-white text-xl font-bold leading-snug break-keep">차세대 Census 통합관리<br>시스템 구축 용역</h3>
+                            <p class="text-slate-200 text-sm leading-relaxed break-keep mt-4">국가 인구주택총조사 등 핵심 통계의 기반이 되는 센서스 데이터의 무결점 관리 및 안정적 시스템 구축·운영</p>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- 2. Portfolio Filter & List -->
+    <section class="py-24 bg-white relative">
+        <div class="container py-20 mb-5 mx-auto px-6 max-w-7xl">
+            
+            <div class="flex justify-between items-end mb-4">
+                <div class="fade-in-up">
+                    <h2 class="text-3xl font-bold text-slate-900 flex gap-2 items-center"><i class="w-3 h-3 rounded-full bg-brand-primary inline-block"></i>아이웨이브 전체 실적 현황</h2>
+                    <!-- <p class="text-slate-500 max-w-2xl mx-auto break-keep">성공적인 공공/금융 IT 프로젝트 수행 내역을 분야별로 확인하실 수 있습니다.</p> -->
+                </div>
+
+                <!-- 탭 필터 UI -->
+                <div class="flex justify-end flex-wrap gap-2 md:gap-4 fade-in-up delay-100" id="portfolio-filters">
+                    <button class="filter-btn active px-6 py-2.5 bg-brand-dark text-white rounded-full text-sm font-bold shadow-md transition-colors" data-filter="all">전체보기</button>
+                    <button class="filter-btn px-6 py-2.5 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold hover:border-brand-primary hover:text-brand-primary transition-colors shadow-sm" data-filter="si">시스템 구축 (SI)</button>
+                    <button class="filter-btn px-6 py-2.5 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold hover:border-brand-primary hover:text-brand-primary transition-colors shadow-sm" data-filter="sm">운영유지관리 (SM)</button>
+                    <button class="filter-btn px-6 py-2.5 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-bold hover:border-brand-primary hover:text-brand-primary transition-colors shadow-sm" data-filter="cs">컨설팅 / 기타</button>
+                </div>
+            </div>
+            
+
+            <!-- 실적 리스트 (Table) -->
+            <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden fade-in-up delay-200">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[800px]">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-sm font-bold text-slate-500 text-center">
+                                <th class="p-4 px-6 text-left">사업명</th>
+                                <th class="p-4 px-6 w-32">구분</th>
+                                <th class="p-4 px-6 w-48">고객사</th>
+                                <th class="p-4 px-6 w-32">수행연도</th>
+                            </tr>
+                        </thead>
+                        <tbody id="portfolio-list" class="divide-y divide-slate-100">
+                            
+                            <!-- === 2026년 실적 === -->
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">AI 산림행정업무시스템(e-푸른샘) 구축(3차)</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">산림청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2026년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">정보체계 통합유지관리</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">국방과학연구소</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2026년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">중소벤처기업부 정보시스템 유지보수</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">중소벤처기업부</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2026년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">차세대 Census 통합관리시스템 구축 용역</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">국가데이터처</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2026년</td>
+                            </tr>
+
+                            <!-- === 2025년 실적 === -->
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">생성형 AI기반 개인통관 종합 상담 시스템</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">관세청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">화학물질안전원 교육시스템 국가정보자원관리원 이전 및 기능개선</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">화학물질안전원</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">2025년 기상기후 데이터허브 구축 및 개선(SW 개발)</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">기상청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">LTE-R 기울기 감사시스템 구매설치-전기본부 통신</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">한국철도공사</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">차세대 종합물류시스템 구축</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">대신정기화물자동차(주)</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">2025년 대국민 인터넷 기상정보서비스 개선</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">기상청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">전자통관시스템 전산장비 전면 교체 및 전환사업</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">관세청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">차세대 국가종합전자조달시스템 구축</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">조달청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">항만시설 보안심사 시스템 구축</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">한국해양교통안전공단</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">여단전투모 테스트베드 제작 모델링 S/W구현</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">국방과학연구소</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">도심지 오염 대응 제독작전 지원 모델링 S/W구현</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">국방과학연구소</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">2025년 철도시설종합관리시스템 선형자산 유지관리</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">국가철도공단</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">KOMSCO 지급결제플랫폼 운영 및 유지보수</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">한국조폐공사</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">화학사고 대응정보시스템 유지관리</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">화학물질안전원</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">화학물질 종합정보시스템 유지관리</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">화학물질안전원</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">2025년 내부정보시스템 유지관리</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">관세청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">국민소통시스템 운영 및 Help Desk위탁 운영</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">국민권익위원회</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">차세대 Census 통합관리시스템 구축 용역</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">통계청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2025년</td>
+                            </tr>
+
+                            <!-- === 2024년 실적 === -->
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">중소기업 디지털전환(DX) 자가진단 시스템 구축</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">중소기업기술정보진흥원</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2024년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">태양광 전기설계 적정성 검증 시스템 개발 용역</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">한국전기안전공사</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2024년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">전자통관시스템 전산장비 전면교체 및 전환사업</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">관세청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2024년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="si">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">강원도 학교급식 통합운영시스템 운영관리용역</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템구축</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">강원도 홍천군</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2024년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">2024년 철도시설종합관리시스템 선형자산 유지관리</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">국가철도공단</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2024년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">2024년 내부정보시스템 유지관리 사업</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">관세청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2024년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">2024년 인터넷보훈민원시스템(ERMS) 유지보수</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">국가보훈부</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2024년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">2024년 지능형 해상교통정보시스템 운영 및 유지보수</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">해양수산부</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2024년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="sm">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">차세대 Census 통합관리시스템 구축 운영</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-teal-100 text-teal-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">시스템운영</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">통계청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2024년</td>
+                            </tr>
+
+                            <!-- === 2023년 실적 (컨설팅) === -->
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="cs">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">스마트팜 R&D 빅데이터 플랫폼 컨설팅</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-purple-100 text-purple-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">IT컨설팅</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">(재)스마트팜연구개발사업단</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2023년</td>
+                            </tr>
+                            <tr class="portfolio-item show hover:bg-slate-50 transition-colors" data-category="cs">
+                                <td class="p-4 px-6 font-bold text-slate-800 break-keep">관세 대규모 전자상거래 및 전자통관 개선 BPR</td>
+                                <td class="p-4 px-6 text-center"><span class="bg-purple-100 text-purple-700 text-xs font-bold px-2.5 py-1 rounded whitespace-nowrap">IT컨설팅</span></td>
+                                <td class="p-4 px-6 text-center font-bold text-slate-700 text-sm break-keep">관세청</td>
+                                <td class="p-4 px-6 text-center font-bold text-brand-primary text-sm whitespace-nowrap">2023년</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 더보기 버튼 -->
+                <div class="bg-slate-50 p-4 text-center border-t border-slate-200">
+                    <button class="text-sm font-bold text-slate-600 hover:text-brand-primary transition-colors flex items-center justify-center gap-2 mx-auto">
+                        더 많은 실적 불러오기 <i class="ph-bold ph-caret-down"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Client Logos (Marquee) -->
+    <section class="py-16 bg-white border-t border-slate-200 overflow-hidden">
+        <div class="container py-20 mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-10 fade-in-up">
+                <!-- <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">Our Clients & Partners</span> -->
+                <h2 class="text-3xl font-bold text-slate-900 mt-2">아이웨이브와 함께하는 기업</h2><p class="text-slate-500 mt-2 text-sm max-w-2xl mx-auto break-keep leading-relaxed">
+                    신뢰를 바탕으로 다양한 고객 및 파트너와 협력하고 있습니다
+                </p>
+            </div>
+            
+            <div class="marquee-container fade-in-up delay-100">
+                <div class="marquee-content items-center">
+                    <!-- Text based logos representing clients since actual images are not available -->
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner1.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner2.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner3.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner4.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner5.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner6.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner7.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner8.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner9.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner10.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner11.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner12.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner13.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner14.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner15.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner16.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner17.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner18.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner19.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner20.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner21.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner22.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner23.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner24.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner25.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner26.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner27.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner28.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner29.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner30.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner31.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner32.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner33.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner34.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner35.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner36.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner37.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner38.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner39.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner40.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner41.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner42.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner43.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner44.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner45.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner46.png" alt=""></div>
+                </div>
+                <div class="marquee-content items-center" aria-hidden="true">
+                    <!-- Duplicate for infinite scroll -->
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner1.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner2.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner3.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner4.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner5.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner6.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner7.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner8.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner9.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner10.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner11.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner12.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner13.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner14.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner15.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner16.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner17.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner18.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner19.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner20.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner21.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner22.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner23.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner24.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner25.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner26.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner27.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner28.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner29.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner30.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner31.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner32.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner33.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner34.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner35.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner36.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner37.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner38.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner39.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner40.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner41.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner42.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner43.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner44.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner45.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner46.png" alt=""></div>
+                </div>
+            </div>
+
+            <div class="marquee-container fade-in-up delay-100 mt-8">
+                <div class="marquee-content scroll_right items-center">
+                    <!-- Text based logos representing clients since actual images are not available -->
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner1.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner2.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner3.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner4.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner5.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner6.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner7.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner8.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner9.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner10.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner11.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner12.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner13.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner14.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner15.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner16.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner17.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner18.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner19.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner20.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner21.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner22.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner23.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner24.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner25.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner26.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner27.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner28.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner29.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner30.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner31.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner32.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner33.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner34.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner35.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner36.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner37.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner38.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner39.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner40.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner41.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner42.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner43.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner44.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner45.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner46.png" alt=""></div>
+                </div>
+                <div class="marquee-content scroll_right items-center" aria-hidden="true">
+                    <!-- Duplicate for infinite scroll -->
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner1.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner2.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner3.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner4.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner5.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner6.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner7.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner8.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner9.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner10.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner11.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner12.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner13.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner14.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner15.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner16.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner17.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner18.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner19.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner20.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner21.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner22.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner23.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner24.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner25.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner26.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner27.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner28.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner29.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner30.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner31.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner32.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner33.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner34.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner35.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner36.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner37.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner38.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner39.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner40.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner41.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner42.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner43.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner44.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner45.png" alt=""></div>
+                    <div class="h-[80px] w-[240px] border border-slate-200 rounded-lg bg-slate-50 whitespace-nowrap"><img class="h-auto w-auto" src="images/reference/partner46.png" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 하단 공통 콜투액션 (CTA) -->
+    <!-- <section id="contact" class="bg-brand-dark py-24 relative overflow-hidden">
+        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-primary/20 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 z-0"></div>
+        <div class="container mx-auto px-6 max-w-4xl text-center fade-in-up relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">최고의 파트너, 아이웨이브와 상의하세요.</h2>
+            <p class="text-slate-400 text-lg mb-12 break-keep">공공/금융 인프라 통합 구축부터 안정적인 운영까지 최적의 맞춤형 솔루션을 제안합니다.</p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#contact" class="w-full sm:w-auto px-10 py-4 bg-brand-accent text-brand-dark font-bold rounded-xl hover:bg-yellow-300 transition-colors shadow-lg flex items-center justify-center gap-2 text-lg">
+                    프로젝트 문의하기 <i class="ph-bold ph-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Sub Footer -->
+    <footer class="bg-[#0b1120] text-slate-500 py-8 border-t border-white/5 text-sm text-center md:text-left">
+        <div class="container mx-auto px-6 max-w-7xl  flex-col md:flex-row items-center justify-between gap-4">
+            <ul class="list_footer flex text-[#fff] font-light">
+                <li class="item_footer">(주)아이웨이브 | </li>
+                <li class="item_footer">&nbsp;대표이사: 이지현 |</li>
+                <li class="item_footer">&nbsp;주소: 대전광역시 유성구 노은동로 75번길 66 유안빌딩(아이웨이브)</li>
+            </ul>
+            <ul class="list_footer flex text-[#fff] font-light mt-1">
+                <li class="item_footer">대표전화: 042-719-8853 |</li>
+                <li class="item_footer">&nbsp;Fax: 042-719-8854 |</li>
+                <li class="item_footer">&nbsp;이메일:</li><a href="mailto:pm@iwave.kr"> pm@iwave.kr</a>
+            </ul>
+            <p class="text-[#fff]/70 font-light  mt-2 ">&copy; COPRYRIGHT 2026 (주)아이웨이브 All rights
+                reserved</p>
+            <!-- <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors">개인정보처리방침</a>
+                    <a href="#" class="hover:text-white transition-colors">오시는 길</a>
+                </div> -->
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-brand-primary text-white rounded-full shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 z-50 hover:bg-brand-dark">
+        <i class="ph-bold ph-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Scroll Intersection Observer (Fade in up 효과)
+            const fadeObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px', threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-up').forEach(el => fadeObserver.observe(el));
+
+            // 2. 탭 필터 로직
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 버튼 스타일 업데이트
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-brand-dark', 'text-white');
+                        b.classList.add('bg-white', 'text-slate-600');
+                    });
+                    btn.classList.remove('bg-white', 'text-slate-600');
+                    btn.classList.add('bg-brand-dark', 'text-white');
+
+                    // 필터링 적용
+                    const filterValue = btn.getAttribute('data-filter');
+                    
+                    portfolioItems.forEach(item => {
+                        item.classList.remove('show');
+                        item.classList.add('hidden');
+
+                        if(filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            // 리플로우를 강제하여 애니메이션 재시작
+                            void item.offsetWidth;
+                            item.classList.remove('hidden');
+                            item.classList.add('show');
+                        }
+                    });
+                });
+            });
+
+            // 3. Scroll to Top Button
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                    scrollToTopBtn.classList.add('opacity-100', 'pointer-events-auto');
+                } else {
+                    scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                    scrollToTopBtn.classList.remove('opacity-100', 'pointer-events-auto');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

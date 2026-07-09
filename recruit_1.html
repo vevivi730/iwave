@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인재상 - 아이웨이브(iWave)</title>
+    <!-- 폰트: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 아이콘: Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#121f41',    // 딥 네이비
+                            primary: '#1e3a8a', // 메인 블루
+                            light: '#3b82f6',   // 밝은 블루
+                            accent: '#ae3b4d',  // 포인트 옐로우
+                            gray: '#f8fafc'     // 배경 연회색
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        
+        /* 서브페이지 헤더 기본 배경 */
+        #header.subpage-header { background-color: #0f172a; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        /* 장식 애니메이션 */
+        .float-anim { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* 연결선 애니메이션 (데스크탑 프로세스 화살표) */
+        .process-line {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background-color: #e2e8f0; /* slate-200 */
+            z-index: 0;
+        }
+        .process-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: #1e3a8a; /* brand-primary */
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .visible .process-line::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-brand-gray antialiased">
+
+    <!-- Header (GNB) -->
+    <header id="header"
+            class="fixed w-full top-0 z-[100] transition-all duration-300 bg-brand-dark/60 text-white border-b border-white/10">
+            <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
+                    <img src="./images/logo.png" alt="iWave Logo" class="Head_logo w-52 ">
+                    <!-- <i class="ph-fill ph-waves text-brand-accent text-3xl"></i>
+                    iWave -->
+                </a>
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex gap-28 font-medium h-full">
+                    <!-- 회사소개 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="introduce_1.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">회사소개</a>
+                        <div
+                            class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                            <a href="introduce_1.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">회사개요</a>
+                            <a href="introduce_ceo.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">대표인사말</a>
+                            <a href="introduce_history.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">연혁</a>
+                            <a href="introduce_awards.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인증
+                                및 수상</a>
+                            <a href="introduce_location.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">오시는길</a>
+                        </div>
+                    </div>
+                    <!-- 사업분야 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="biz_ai.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">사업분야</a>
+                        <div
+                            class="absolute top-full left-0 w-56 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                            <a href="biz_ai.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">AI사업</a>
+                            <a href="biz_si.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템통합(SI)</a>
+                            <a href="biz_sm.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템운영유지관리(SM)</a>
+                        </div>
+                    </div>
+                    <!-- 주요실적 -->
+                    <div class="flex items-center h-full">
+                        <a href="reference.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">주요실적</a>
+                    </div>
+                    <!-- 채용정보 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="recruit_1.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">채용정보</a>
+                    </div>
+                </nav>
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact"
+                        class="text-white px-3 py-1.5 rounded-full bg-brand-dark/20 text-brand-dark  border font-bold text-xs hover:bg-brand-accent transition-colors shadow-lg">
+                        문의하기
+                    </a>
+                </div>
+                <!-- Mobile Menu Toggle -->
+                <button class="md:hidden text-2xl" aria-label="Menu">
+                    <i class="ph ph-list"></i>
+                </button>
+            </div>
+        </header>
+
+    <!-- Subpage Hero Section -->
+     <section class="relative pt-24 pb-5 bg-brand-dark overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PHBhdGggZD0iTTAgMGgyMHYyMEgweiIgZmlsbD0iIzBmMTcyYSIvPjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIyIiBmaWxsPSIjMWUzYThhIi8+PC9zdmc+')] opacity-30 z-0"></div>
+        <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/20 to-transparent z-0"></div>
+        
+        <div class="container mx-auto px-6 pt-5 max-w-7xl relative z-10 text-center md:text-left">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center justify-center md:justify-start gap-2 text-sm text-slate-400 mb-3 fade-in-up">
+                <a href="index.html" class="hover:text-brand-accent transition-colors"><i class="ph-fill ph-house"></i></a>
+                <i class="ph-bold ph-caret-right text-xs"></i>
+                <span class="text-white font-medium">채용정보</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 fade-in-up delay-100">채용정보</h1>
+            <!-- <p class="text-slate-300 text-lg fade-in-up delay-200">아이웨이브와 함께 열어갈 인재를 모십니다.</p> -->
+        </div>
+    </section>
+
+    <!-- Sub Navigation Tabs -->
+    <!-- <div class="bg-white border-b border-slate-200 sticky top-20 z-40 hidden md:block shadow-sm">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <ul class="flex">
+                <li class="w-1/2"><a href="#" class="block py-4 text-center text-brand-primary font-bold border-b-2 border-brand-primary">인재상</a></li>
+                <li class="w-1/2"><a href="recruit_2.html" class="block py-4 text-center text-slate-500 font-medium hover:text-brand-primary transition-colors">채용절차</a></li>
+            </ul>
+        </div>
+    </div> -->
+
+    <!-- 1. Ideal Candidate Section -->
+    <section class="py-24 bg-brand-primary/[0.08] relative overflow-hidden">
+        <!-- 배경 장식 요소 -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-accent/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 max-w-7xl relative z-10">
+            <div class="text-center mb-20 fade-in-up">
+                <!-- <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">Ideal Candidate</span> -->
+                <h2 class="text-4xl font-bold text-slate-900 mt-2">아이웨이브 인재상</h2>
+                <p class="text-lg max-w-2xl mx-auto break-keep leading-relaxed text-slate-500 mt-4">
+                    회사의 핵심 가치인 <strong class="text-brand-primary">전문성, 신뢰, 혁신, 파트너십</strong>을 공유하며,<br class="hidden sm:block">함께 성장해 나갈 3가지 핵심 인재를 정의합니다.
+                </p>
+            </div>
+
+            <!-- 3가지 인재상 카드 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+                
+                <!-- 인재상 1: 혁신인 -->
+                <div class="bg-white rounded-3xl p-10 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center fade-in-up relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-b from-brand-primary/5 to-transparent opacity-0 opacity-100 transition-opacity"></div>
+                    <div class="relative z-10 w-full flex flex-col items-center">
+                        <div class="w-24 h-24 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-md relative float-anim bg-brand-dark transition-colors duration-500">
+                            <i class="ph-fill ph-rocket-launch text-4xl text-white transition-colors duration-500"></i>
+                        </div>
+                        <span class="inline-block text-3xl text-slate-400 tracking-widest uppercase border-b border-slate-100 w-full mb-2">Innovation</span>
+                        <h3 class="text-base text-slate-500 mb-4">미래를 주도하는 <span class="font-bold text-brand-primary">혁신인</span></h3>
+                        
+                        <div class="w-full py-4 px-6 border-t border-brand-primary/20">
+                            <p class="text-brand-primary font-bold text-xl"><span class="">"</span>변화를 두려워하지 않고<br>신기술에 도전합니다."</p>
+                        </div>
+                        <!-- <p class="text-slate-600 leading-relaxed break-keep">
+                            생성형 AI, 클라우드 등 급변하는 IT 트렌드에 대한 끊임없는 호기심을 바탕으로 새로운 비즈니스 가치를 창출하고 디지털 전환을 주도하는 인재
+                        </p> -->
+                    </div>
+                </div>
+
+                <!-- 인재상 2: 전문인 -->
+                <div class="bg-white rounded-3xl p-10 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center fade-in-up delay-100 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-b from-brand-primary/5 to-transparent opacity-0 opacity-100 transition-opacity"></div>
+                    <div class="relative z-10 w-full flex flex-col items-center">
+                        <div class="w-24 h-24 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-md relative float-anim bg-brand-primary transition-colors duration-500" style="animation-delay: -1s;">
+                            <i class="ph-fill ph-laptop text-4xl text-white transition-colors duration-500"></i>
+                        </div>
+                        <span class="inline-block text-3xl text-slate-400 tracking-widest uppercase border-b border-slate-100 w-full mb-2">Expertise</span>
+                        <h3 class="text-base text-slate-500 mb-4">최고를 지향하는 <span class="font-bold text-brand-primary">전문인</span></h3>
+                        
+                        <div class="w-full py-4 px-6 border-t border-blue-600/20">
+                            <p class="text-brand-primary font-bold text-xl">"지속적인 학습으로<br>탁월한 기술력을 갖춥니다."</p>
+                        </div>
+                        <!-- <p class="text-slate-600 leading-relaxed break-keep">
+                            시스템 통합(SI), 시스템 운영(SM), AI 등 각자의 직무 분야에서 최고가 되기 위해 스스로 학습하고 역량을 발전시켜 나가는 IT 전문가
+                        </p> -->
+                    </div>
+                </div>
+
+                <!-- 인재상 3: 협력인 -->
+                <div class="bg-white rounded-3xl p-10 border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center fade-in-up delay-200 relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-b from-brand-primary/5 to-transparent opacity-0 opacity-100 transition-opacity"></div>
+                    <div class="relative z-10 w-full flex flex-col items-center">
+                        <div class="w-24 h-24 rounded-full flex items-center justify-center mb-4 border-4 border-white shadow-md relative float-anim bg-brand-dark transition-colors duration-500" style="animation-delay: -2s;">
+                            <i class="ph-fill ph-handshake text-4xl text-white transition-colors duration-500"></i>
+                        </div>
+                        <span class="inline-block text-3xl text-slate-400 tracking-widest uppercase border-b border-slate-100 w-full mb-2">Trust</span>
+                        <h3 class="text-base text-slate-500 mb-4">상호 존중하는 <span class="font-bold text-brand-primary">협력인</span></h3>
+                        
+                        <div class="w-full py-4 px-6 border-t border-brand-primary/20">
+                            <p class="text-brand-primary font-bold text-xl">"소통과 협력을 통해<br>공동의 목표를 달성합니다."</p>
+                        </div>
+                        <!-- <p class="text-slate-600 leading-relaxed break-keep">
+                            동료를 존중하고 열린 마음으로 소통하며, 탄탄한 팀워크를 바탕으로 고객이 가장 신뢰할 수 있는 파트너십을 완성하는 인재
+                        </p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. Recruitment Process Steps -->
+    <section class="py-24 bg-brand-gray relative overflow-hidden">
+        <div class="container py-10 mx-auto px-6 max-w-7xl relative z-10">
+            <div class="text-center mb-20 fade-in-up">
+                <!-- <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">Process</span> -->
+                <h2 class="text-4xl font-bold text-slate-900 mt-2">입사 전형 안내</h2>
+                <p class="text-slate-500 mt-4 text-lg max-w-2xl mx-auto break-keep leading-relaxed">
+                    서류 접수부터 최종 합격까지, 아이웨이브의 표준 채용 절차입니다.<br>
+                    <span class="text-sm">(채용 부문 및 직무 특성에 따라 일부 전형이 추가되거나 생략될 수 있습니다.)</span>
+                </p>
+            </div>
+
+            <!-- 프로세스 다이어그램 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative fade-in-up delay-100">
+                
+                <!-- Desktop Connection Lines -->
+                <div class="hidden md:block process-line" style="width: 75%; left: 12.5%;"></div>
+
+                <!-- Step 1 -->
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-20 h-20 rounded-full flex items-center justify-center mb-6 shadow-md border-4 border-white bg-brand-dark text-white transition-all duration-300 group-hover:scale-110">
+                        <i class="ph-fill ph-file-text text-3xl text-white transition-colors"></i>
+                    </div>
+                    <div class="bg-brand-dark text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 01</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">서류 전형</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep px-2">
+                        지원자의 직무 적합성과<br>경험, 기본 요건 등을<br>종합적으로 심사합니다.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-20 h-20 rounded-full flex items-center justify-center mb-6 shadow-md border-4 border-white bg-brand-dark text-white transition-all duration-300 group-hover:scale-110">
+                        <i class="ph-fill ph-users-three text-3xl text-white transition-colors"></i>
+                    </div>
+                    <div class="bg-brand-dark text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 02</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">실무 면접</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep px-2">
+                        실무진과 함께 직무 수행에<br>필요한 전문 지식 및<br>기술 역량을 평가합니다.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-20 h-20 rounded-full flex items-center justify-center mb-6 shadow-md border-4 border-white bg-brand-dark text-white transition-all duration-300 group-hover:scale-110">
+                        <i class="ph-fill ph-user-circle-gear text-3xl text-white transition-colors"></i>
+                    </div>
+                    <div class="bg-brand-dark text-white text-xs font-bold px-3 py-1 rounded-full mb-3">STEP 03</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">임원 면접</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep px-2">
+                        경영진과 함께 조직 적합도,<br>인성, 회사 핵심가치 부합<br>여부를 확인합니다.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative z-10 flex flex-col items-center text-center group">
+                    <div class="w-20 h-20 rounded-full flex items-center justify-center mb-6 shadow-md border-4 border-white bg-brand-accent text-white transition-all duration-300 group-hover:scale-110">
+                        <i class="ph-fill ph-confetti text-3xl text-white transition-colors"></i>
+                    </div>
+                    <div class="bg-brand-accent text-white text-xs font-black px-3 py-1 rounded-full mb-3">STEP 04</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">최종 합격 및 입사</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep px-2">
+                        처우 협의 후 채용이 확정되며,<br>아이웨이브의 새로운<br>가족으로 합류합니다.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- 안내 박스 -->
+            <!-- <div class="mt-16 bg-slate-50 border border-slate-200 p-6 rounded-2xl max-w-4xl mx-auto fade-in-up delay-200 shadow-sm">
+                <div class="flex items-start gap-3 text-sm text-slate-700 leading-relaxed">
+                    <i class="ph-fill ph-info text-brand-primary text-xl shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="font-bold text-slate-900 mb-2 block">지원 시 유의사항</strong>
+                        <ul class="space-y-1">
+                            <li>• 모든 전형 결과는 합격/불합격 여부와 관계없이 개별적으로 이메일 또는 유선 안내를 드립니다.</li>
+                            <li>• 입사지원서의 내용이 사실과 다를 경우, 합격(입사)이 취소될 수 있습니다.</li>
+                            <li>• 개발 직군의 경우 필요 시 서류 전형과 실무 면접 사이에 별도의 코딩 테스트(또는 포트폴리오 리뷰)가 진행될 수 있습니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- 2. Welfare & Benefits -->
+    <section class="pt-24 bg-brand-dark border-t border-slate-200">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center mb-16 fade-in-up">
+                <!-- <span class="text-white font-bold tracking-widest text-sm uppercase">Benefits</span> -->
+                <h2 class="text-4xl font-bold text-white mt-2">아이웨이브 복리후생</h2>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto break-keep leading-relaxed">
+                    임직원들이 일과 삶의 균형을 맞추며, 최상의 환경에서 역량을 발휘할 수 있도록<br class="hidden sm:block">다양하고 실질적인 복지 제도를 운영하고 있습니다.
+                </p>
+            </div>
+        </div>
+
+        <div class="pb-24 w-full px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto container max-w-7xl">
+                <!-- Benefit 1 -->
+                <div class="p-8 transition-all duration-300 fade-in-up border-b border-r border-slate-100/10">
+                    <div class="flex items-center justify-start gap-5">
+                        <div class="w-[50px] h-[50px] text-white bg-brand-accent rounded-xl flex items-center justify-center text-3xl mb-1">
+                            <i class="ph-fill ph-clock"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-1">유연한 근무 환경</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed break-keep mt-1">
+                        효율적인 업무 수행을 위해 유연근무제를 지원하며, 눈치 보지 않는 자유로운 연차 및 반차 사용을 권장합니다.
+                    </p>
+                </div>
+                <!-- <div class="p-6 border border-slate-100 hover:shadow-md hover:border-brand-primary transition-all duration-300 fade-in-up flex gap-5 items-center">
+                    <div class="w-20 h-20 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center text-5xl mb-6 shrink-0">
+                        <i class="ph-fill ph-clock"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">유연한 근무 환경</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed break-keep">
+                            효율적인 업무 수행을 위해 유연근무제를 지원하며, 눈치 보지 않는 자유로운 연차 및 반차 사용을 권장합니다.
+                        </p>
+                    </div>
+                    
+                </div> -->
+
+                <!-- Benefit 2 -->
+                <div class="p-8 transition-all duration-300 fade-in-up delay-100 border-b border-r border-slate-100/10">
+                    <div class="flex items-center justify-start gap-5">
+                        <div class="w-[50px] h-[50px] text-white bg-brand-accent rounded-xl flex items-center justify-center text-3xl mb-1">
+                            <i class="ph-fill ph-book-open-text"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-1">자기계발 적극 지원</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed break-keep mt-1">
+                        임직원의 성장이 곧 회사의 성장입니다. 직무 관련 교육비, 도서 구입비, IT 자격증 취득 비용을 적극 지원합니다.
+                    </p>
+                </div>
+                <!-- <div class="p-6 border border-slate-100 hover:shadow-md hover:border-brand-primary transition-all duration-300 fade-in-up delay-100 flex gap-5 items-center">
+                    <div class="w-20 h-20 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center text-5xl mb-6 shrink-0">
+                        <i class="ph-fill ph-book-open-text"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">자기계발 적극 지원</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed break-keep">
+                            임직원의 성장이 곧 회사의 성장입니다. 직무 관련 교육비, 도서 구입비, IT 자격증 취득 비용을 적극 지원합니다.
+                        </p>
+                    </div>
+                </div> -->
+
+                <!-- Benefit 3 -->
+                <div class="p-8 transition-all duration-300 fade-in-up delay-200 border-b border-slate-100/10">
+                    <div class="flex items-center justify-start gap-5">
+                        <div class="w-[50px] h-[50px] text-white bg-brand-accent rounded-xl flex items-center justify-center text-3xl mb-1">
+                            <i class="ph-fill ph-medal"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-1">우수사원 포상 제도</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed break-keep mt-1">
+                        프로젝트 성공 기여자 및 장기 근속자를 위한 특별 포상금과 리프레시 휴가를 지급하여 노고에 보답합니다.
+                    </p>
+                </div>
+                <!-- <div class="p-6 border border-slate-100 hover:shadow-md hover:border-brand-primary transition-all duration-300 fade-in-up delay-200 flex gap-5 items-center">
+                    <div class="w-20 h-20 bg-brand-accent/10 text-brand-accent rounded-xl flex items-center justify-center text-5xl mb-6 shrink-0">
+                        <i class="ph-fill ph-medal"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">우수사원 포상 제도</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed break-keep">
+                            프로젝트 성공 기여자 및 장기 근속자를 위한 특별 포상금과 리프레시 휴가를 지급하여 노고에 보답합니다.
+                        </p>
+                    </div>
+                </div> -->
+
+                <!-- Benefit 4 -->
+                <div class="p-8 transition-all duration-300 fade-in-up border-r border-slate-100/10">
+                    <div class="flex items-center justify-start gap-5">
+                        <div class="w-[50px] h-[50px] text-white bg-brand-accent rounded-xl flex items-center justify-center text-3xl mb-1">
+                            <i class="ph-fill ph-heartbeat"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-1">건강 관리 지원</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed break-keep mt-1">
+                        임직원들의 든든한 건강을 위해 매년 종합 건강검진을 지원하며, 쾌적하고 안전한 근무 환경을 제공합니다.
+                    </p>
+                </div>
+
+                <!-- Benefit 5 -->
+                <div class="p-8 transition-all duration-300 fade-in-up delay-100 border-r border-slate-100/10">
+                    <div class="flex items-center justify-start gap-5">
+                        <div class="w-[50px] h-[50px] text-white bg-brand-accent rounded-xl flex items-center justify-center text-3xl mb-1">
+                            <i class="ph-fill ph-gift"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-1">경조사 및 명절 지원</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed break-keep mt-2">
+                        기쁨과 슬픔을 함께 나눕니다. 각종 경조사비 및 경조 휴가를 지원하며, 명절에는 풍성한 선물을 지급합니다.
+                    </p>
+                </div>
+
+                <!-- Benefit 6 -->
+                <div class="p-8 transition-all duration-300 fade-in-up delay-200">
+                    <div class="flex items-center justify-start gap-5">
+                        <div class="w-[50px] h-[50px] text-white bg-brand-accent rounded-xl flex items-center justify-center text-3xl mb-1">
+                            <i class="ph-fill ph-credit-card"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-1">복지비 제공</h3>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed break-keep mt-1">
+                        문화생활, 건강관리, 가족 친화 등 임직원의 다채로운 라이프스타일을 존중하며, 자유롭게 사용할 수 있는 복지비를 매년 든든하게 지원합니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / CTA -->
+    <section id="contact" class="bg-white text-white py-16 relative overflow-hidden border-b border-white/10">
+        <div class="container mx-auto px-6 max-w-7xl relative z-10 flex flex-col md:flex-row items-center justify-between">
+            <div class="text-center md:text-left mb-8 md:mb-0">
+                <!-- <span class="inline-block px-4 py-1.5 rounded-full bg-brand-primary text-white font-bold tracking-widest text-sm border border-slate-200 fade-in-up mb-2">입사 지원 안내</span> -->
+                <h2 class="text-2xl font-bold text-brand-dark mb-2 fade-in-up delay-100">아이웨이브와 함께할당신의 연락을 기다립니다.</h2>
+                <p class="text-brand-dark text-sm fade-in-up delay-200">자유 양식의 이력서 및 포트폴리오를 아래 이메일로 보내주세요.<strong class="text-brand-primary block mt-2 text-xl block"><i class="ph-bold ph-envelope-simple align-middle mr-1"></i> pm@iwave.kr</strong></p>
+            </div>
+            <div class="flex flex-row sm:flex-col items-center justify-center gap-2 fade-in-up delay-300">
+                <a href="#" class="w-full sm:w-auto px-8 py-2 bg-white text-slate-700 font-bold rounded-xl border-2 border-brand-dark hover:border-brand-light hover:text-brand-primary transition-colors flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-magnifying-glass"></i> 진행 중인 채용 공고
+                </a>
+                <a href="#" class="w-full sm:w-auto px-8 py-2 bg-brand-primary text-white font-bold rounded-xl border-2 border-brand-primary hover:border-brand-light hover:bg-brand-light transition-colors shadow-lg flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-question"></i> 채용 관련 문의하기
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 공통 하단 Call to Action -->
+    <!-- <section id="contact" class="bg-white py-24 border-t border-slate-200 relative overflow-hidden">
+        <div class="absolute -top-10 -right-10 w-[200px] h-[200px] bg-brand-accent opacity-10 blur-3xl rounded-full"></div>
+        <div class="absolute -bottom-10 left-0 w-[200px] h-[200px] bg-brand-primary opacity-10 blur-3xl rounded-full"></div>
+        <div class="container mx-auto px-6 max-w-7xl text-center relative z-10">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-brand-primary text-white font-bold tracking-widest text-sm border border-slate-200 fade-in-up">입사 지원 안내</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mt-2 fade-in-up delay-100">아이웨이브와 함께할<br>당신의 연락을 기다립니다.</h2>
+            <p class="text-brand-primary text-lg mt-4 break-keep fade-in-up delay-200">
+                자유 양식의 이력서 및 포트폴리오를 아래 이메일로 보내주세요.<br>
+                <strong class="text-brand-primary block mt-2 text-xl"><i class="ph-bold ph-envelope-simple align-middle mr-1"></i> pm@iwave.kr</strong>
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in-up delay-300 mt-10">
+                <a href="#" class="w-full sm:w-auto px-8 py-4 bg-brand-primary text-white font-bold rounded-xl border-2 border-brand-primary hover:border-brand-light hover:bg-brand-light transition-colors shadow-lg flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-magnifying-glass"></i> 진행 중인 채용 공고
+                </a>
+                <a href="#" class="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 font-bold rounded-xl border-2 border-brand-dark hover:border-brand-light hover:text-brand-primary transition-colors flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-question"></i> 채용 관련 문의하기
+                </a>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- 2. 공통 하단 Call to Action -->
+    <!-- <section id="contact" class="bg-white py-24 border-t border-slate-200 relative overflow-hidden">
+        <div class="container mx-auto px-6 max-w-4xl text-center relative z-10">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-slate-100 text-slate-600 font-bold tracking-widest text-xs mb-6 border border-slate-200 fade-in-up">상시 채용 안내</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 fade-in-up delay-100">아이웨이브는 우수한 인재를<br>항상 기다리고 있습니다.</h2>
+            <p class="text-slate-600 text-lg mb-12 break-keep fade-in-up delay-200">
+                지원서 및 포트폴리오를 아래 이메일로 보내주시면 검토 후 개별 연락드리겠습니다.<br>
+                <strong class="text-brand-primary block mt-2 text-xl"><i class="ph-bold ph-envelope-simple align-middle mr-1"></i> pm@iwave.kr</strong>
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in-up delay-300">
+                <a href="#" class="w-full sm:w-auto px-8 py-4 bg-brand-dark text-white font-bold rounded-xl hover:bg-brand-primary transition-colors shadow-lg flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-magnifying-glass"></i> 채용 공고 바로가기
+                </a>
+                <a href="#" class="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 font-bold rounded-xl border-2 border-slate-200 hover:border-brand-primary hover:text-brand-primary transition-colors flex items-center justify-center gap-2">
+                    <i class="ph-bold ph-question"></i> 채용 관련 문의하기
+                </a>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Sub Footer -->
+    <footer class="bg-[#0b1120] text-slate-500 py-8 border-t border-white/5 text-sm text-center md:text-left">
+        <div class="container mx-auto px-6 max-w-7xl  flex-col md:flex-row items-center justify-between gap-4">
+            <ul class="list_footer flex text-[#fff] font-light">
+                <li class="item_footer">(주)아이웨이브 | </li>
+                <li class="item_footer">&nbsp;대표이사: 이지현 |</li>
+                <li class="item_footer">&nbsp;주소: 대전광역시 유성구 노은동로 75번길 66 유안빌딩(아이웨이브)</li>
+            </ul>
+            <ul class="list_footer flex text-[#fff] font-light mt-1">
+                <li class="item_footer">대표전화: 042-719-8853 |</li>
+                <li class="item_footer">&nbsp;Fax: 042-719-8854 |</li>
+                <li class="item_footer">&nbsp;이메일:</li><a href="mailto:pm@iwave.kr"> pm@iwave.kr</a>
+            </ul>
+            <p class="text-[#fff]/70 font-light  mt-2 ">&copy; COPRYRIGHT 2026 (주)아이웨이브 All rights
+                reserved</p>
+            <!-- <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors">개인정보처리방침</a>
+                    <a href="#" class="hover:text-white transition-colors">오시는 길</a>
+                </div> -->
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-brand-primary text-white rounded-full shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 z-50 hover:bg-brand-dark">
+        <i class="ph-bold ph-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Scroll Intersection Observer (Fade in up 효과)
+            const fadeObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px', threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-up').forEach(el => fadeObserver.observe(el));
+
+            // Scroll to Top Button
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                    scrollToTopBtn.classList.add('opacity-100', 'pointer-events-auto');
+                } else {
+                    scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                    scrollToTopBtn.classList.remove('opacity-100', 'pointer-events-auto');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인증 및 수상 - 아이웨이브(iWave)</title>
+    <!-- 폰트: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 아이콘: Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans KR"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#121f41',    // 딥 네이비
+                            primary: '#1e3a8a', // 메인 블루
+                            light: '#3b82f6',   // 밝은 블루
+                            accent: '#ae3b4d',  // 포인트 옐로우
+                            gray: '#f8fafc'     // 배경 연회색
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .fade-in-up { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+        
+        /* 서브페이지 헤더 기본 배경 */
+        #header.subpage-header { background-color: #0f172a; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        /* 3D Flip Card Animation Styles */
+        .flip-card {
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            border-radius: 1rem; /* rounded-2xl */
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+<body class="text-slate-800 bg-brand-gray antialiased">
+
+    <!-- Header (GNB) -->
+    <header id="header"
+        class="fixed w-full top-0 z-50 transition-all duration-300 bg-brand-dark text-white border-b border-white/10">
+        <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
+                <img src="./images/logo.png" alt="iWave Logo" class="Head_logo w-52 ">
+                <!-- <i class="ph-fill ph-waves text-brand-accent text-3xl"></i>
+                iWave -->
+            </a>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex gap-28 font-medium h-full">
+                <!-- 회사소개 -->
+                <div class="relative group flex items-center h-full">
+                    <a href="introduce_1.html"
+                        class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">회사소개</a>
+                    <div
+                        class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                        <a href="introduce_1.html"
+                            class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">회사개요</a>
+                        <a href="introduce_ceo.html"
+                            class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">대표인사말</a>
+                        <a href="introduce_history.html"
+                            class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">연혁</a>
+                        <a href="introduce_awards.html"
+                            class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인증
+                            및 수상</a>
+                        <a href="introduce_location.html"
+                            class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">오시는길</a>
+                    </div>
+                </div>
+
+                <!-- 사업분야 -->
+                <div class="relative group flex items-center h-full">
+                    <a href="biz_ai.html"
+                        class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">사업분야</a>
+                    <div
+                        class="absolute top-full left-0 w-56 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                        <a href="biz_ai.html"
+                            class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">AI사업</a>
+                        <a href="biz_si.html"
+                            class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템통합(SI)</a>
+                        <a href="biz_sm.html"
+                            class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템운영유지관리(SM)</a>
+                    </div>
+                </div>
+
+                <!-- 주요실적 -->
+                <div class="flex items-center h-full">
+                    <a href="reference.html"
+                        class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">주요실적</a>
+                </div>
+
+                <!-- 채용정보 -->
+                <div class="relative group flex items-center h-full">
+                    <a href="recruit_1.html"
+                        class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">채용정보</a>
+                </div>
+            </nav>
+            <!-- CTA Button -->
+            <div class="hidden md:block">
+                <a href="#contact"
+                    class="text-white px-5 py-2.5 rounded-full bg-brand-accent text-brand-dark font-bold text-sm hover:bg-yellow-300 transition-colors shadow-lg">
+                    문의하기
+                </a>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-2xl" aria-label="Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Subpage Hero Section -->
+    <section class="relative pt-24 pb-5 bg-brand-dark overflow-hidden">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PHBhdGggZD0iTTAgMGgyMHYyMEgweiIgZmlsbD0iIzBmMTcyYSIvPjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIyIiBmaWxsPSIjMWUzYThhIi8+PC9zdmc+')] opacity-30 z-0"></div>
+        <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/20 to-transparent z-0"></div>
+        
+        <div class="container mx-auto px-6 pt-5 max-w-7xl relative z-10 text-center md:text-left">
+            <!-- Breadcrumbs -->
+            <div class="flex items-center justify-center md:justify-start gap-2 text-sm text-slate-400 mb-3 fade-in-up">
+                <a href="index.html" class="hover:text-brand-accent transition-colors"><i class="ph-fill ph-house"></i></a>
+                <i class="ph-bold ph-caret-right text-xs"></i>
+                <span>회사소개</span>
+                <i class="ph-bold ph-caret-right text-xs"></i>
+                <span class="text-white font-medium">인증 및 수상</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 fade-in-up delay-100">인증 및 수상</h1>
+            <!-- <p class="text-slate-300 text-lg fade-in-up delay-200">완벽을 향한 아이웨이브의 노력, 다양한 공식 인증으로 증명합니다.</p> -->
+        </div>
+    </section>
+
+    <!-- Sub Navigation Tabs -->
+    <div class="bg-white border-b border-slate-200 sticky top-20 z-40 hidden md:block shadow-sm">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <ul class="flex">
+                <li class="w-1/5"><a href="introduce_1.html" class="block py-4 text-center text-slate-500 font-medium hover:text-brand-primary transition-colors">회사개요</a></li>
+                <li class="w-1/5"><a href="introduce_ceo.html" class="block py-4 text-center text-slate-500 font-medium hover:text-brand-primary transition-colors">대표인사말</a></li>
+                <li class="w-1/5"><a href="introduce_history.html" class="block py-4 text-center text-slate-500 font-medium hover:text-brand-primary transition-colors">연혁</a></li>
+                <li class="w-1/5"><a href="#" class="block py-4 text-center text-brand-primary font-bold border-b-2 border-brand-primary">인증 및 수상</a></li>
+                <li class="w-1/5"><a href="introduce_location.html" class="block py-4 text-center text-slate-500 font-medium hover:text-brand-primary transition-colors">오시는길</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Intro text -->
+    <section class="pt-24 pb-12 bg-white">
+        <div class="container mx-auto px-6 max-w-7xl text-center fade-in-up">
+            <span class="inline-block py-1 px-3 rounded-full bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-widest mb-3">Gallery of Trust</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">경영 및 기술 혁신 인증</h2>
+            <p class="text-slate-600 text-lg max-w-3xl mx-auto break-keep leading-relaxed">
+                아이웨이브는 기술력뿐만 아니라 경영 안정성, 보안, 사회적 책임 등 다방면에서 뛰어난 공식 인증을 보유하고 있습니다. 마우스를 올려 각 인증이 갖는 고객을 향한 약속을 확인해 보세요.
+            </p>
+        </div>
+    </section>
+
+    <!-- Certification Gallery Groups -->
+    <section class="pb-24 bg-white">
+        <div class="container mx-auto px-6 max-w-7xl">
+
+            <!-- Group 1: 글로벌 표준 및 보안 -->
+            <div class="mb-20 fade-in-up">
+                <div class="flex items-center gap-3 mb-8 border-b border-slate-200 pb-4">
+                    <div class="w-12 h-12 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-2xl">
+                        <i class="ph-fill ph-globe-hemisphere-east"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900">글로벌 표준 및 보안 <span class="text-sm text-slate-400 font-normal ml-2 block sm:inline">Global Standards</span></h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- ISO 9001 -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-certificate text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">ISO 9001</h4>
+                                <p class="text-brand-primary font-medium">품질경영시스템</p>
+                            </div>
+                            <div class="flip-card-back bg-brand-primary p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-check-circle text-4xl text-brand-accent mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">국제 표준 품질 보장</h4>
+                                <p class="text-brand-light/90 text-sm leading-relaxed break-keep">
+                                    글로벌 기준에 부합하는 체계적인 품질 관리 시스템을 통해 고객에게 최상의 IT 서비스와 솔루션을 지속적으로 제공합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ISO 45001 -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-shield-check text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">ISO 45001</h4>
+                                <p class="text-brand-primary font-medium">안전보건경영시스템</p>
+                            </div>
+                            <div class="flip-card-back bg-brand-primary p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-heartbeat text-4xl text-brand-accent mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">안전한 근로 환경 구축</h4>
+                                <p class="text-brand-light/90 text-sm leading-relaxed break-keep">
+                                    임직원의 안전과 보건을 최우선으로 하여 산업 재해를 예방하고, 건전하고 안정적인 업무 환경을 유지합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ISO/IEC 27001 -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-lock-key text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">ISO/IEC 27001</h4>
+                                <p class="text-brand-primary font-medium">정보보안 관리체계</p>
+                            </div>
+                            <div class="flip-card-back bg-brand-primary p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-fingerprint text-4xl text-brand-accent mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">철저한 데이터 보호</h4>
+                                <p class="text-brand-light/90 text-sm leading-relaxed break-keep">
+                                    국가 공공망 및 금융권에 걸맞은 가장 엄격한 국제 정보보호 규격을 준수하며 고객의 핵심 자산을 완벽히 보호합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 2: 기술 혁신 및 파트너십 -->
+            <div class="mb-20 fade-in-up">
+                <div class="flex items-center gap-3 mb-8 border-b border-slate-200 pb-4">
+                    <div class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl">
+                        <i class="ph-fill ph-rocket-launch"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900">기술 혁신 및 파트너십 <span class="text-sm text-slate-400 font-normal ml-2 block sm:inline">Tech & Partnership</span></h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 기업부설연구소 -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-flask text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">기업부설연구소 인정서</h4>
+                                <p class="text-indigo-600 font-medium">자체 R&D 기술력 입증</p>
+                            </div>
+                            <div class="flip-card-back bg-indigo-600 p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-lightbulb text-4xl text-yellow-300 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">끊임없는 선행 기술 연구</h4>
+                                <p class="text-indigo-100 text-sm leading-relaxed break-keep">
+                                    클라우드 인프라 최적화 및 AI 연계 아키텍처 등 차세대 IT 환경을 주도할 독자적인 기술력을 지속 연구 개발합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 삼성SDS 파트너 -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-handshake text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">삼성SDS 파트너 인증서</h4>
+                                <p class="text-indigo-600 font-medium">SCP / FabriX 공식 파트너</p>
+                            </div>
+                            <div class="flip-card-back bg-indigo-600 p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-cloud-check text-4xl text-yellow-300 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">클라우드 및 생성형 AI</h4>
+                                <p class="text-indigo-100 text-sm leading-relaxed break-keep">
+                                    삼성 클라우드 플랫폼(SCP)과 생성형 AI 서비스(FabriX) 역량을 인정받아 혁신적인 기업용 AI 서비스를 제공합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 저작권 등록증 -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-copyright text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">저작권 등록증</h4>
+                                <p class="text-indigo-600 font-medium">디지털 AI 교수학습 플랫폼</p>
+                            </div>
+                            <div class="flip-card-back bg-indigo-600 p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-graduation-cap text-4xl text-yellow-300 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">에듀테크 지식재산권</h4>
+                                <p class="text-indigo-100 text-sm leading-relaxed break-keep">
+                                    미래 교육 환경을 선도할 AI 기반 교수학습 통합 플랫폼의 핵심 소프트웨어 저작권을 공식적으로 보호받고 있습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 3: 경영 및 재무 신뢰도 -->
+            <div class="mb-20 fade-in-up">
+                <div class="flex items-center gap-3 mb-8 border-b border-slate-200 pb-4">
+                    <div class="w-12 h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-2xl">
+                        <i class="ph-fill ph-briefcase"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900">경영 및 재무 신뢰도 <span class="text-sm text-slate-400 font-normal ml-2 block sm:inline">Management & Trust</span></h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 신용평가등급 -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-chart-line-up text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">신용평가등급 BBB0</h4>
+                                <p class="text-teal-600 font-medium">탄탄한 재무구조 증명</p>
+                            </div>
+                            <div class="flip-card-back bg-teal-600 p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-bank text-4xl text-teal-100 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">안정적인 사업 파트너</h4>
+                                <p class="text-teal-50 text-sm leading-relaxed break-keep">
+                                    우수한 재무 건전성과 채무 상환 능력을 공식 인정받아, 장기적이고 안정적인 대형 프로젝트 수행에 적합합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MAIN-BIZ -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-trend-up text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">MAIN-BIZ 확인서</h4>
+                                <p class="text-teal-600 font-medium">경영혁신형 중소기업</p>
+                            </div>
+                            <div class="flip-card-back bg-teal-600 p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-medal text-4xl text-teal-100 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">미래 지향적 경영 시스템</h4>
+                                <p class="text-teal-50 text-sm leading-relaxed break-keep">
+                                    마케팅, 조직관리, 생산성 향상 등 다방면에서 혁신적인 경영 활동을 통해 지속 가능한 성장을 추구합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 벤처기업확인서 -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-shooting-star text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">벤처기업확인서</h4>
+                                <p class="text-teal-600 font-medium">혁신성장유형</p>
+                            </div>
+                            <div class="flip-card-back bg-teal-600 p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-rocket text-4xl text-teal-100 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">높은 잠재력과 기술력</h4>
+                                <p class="text-teal-50 text-sm leading-relaxed break-keep">
+                                    우수한 기술 평가를 통해 국가 혁신성장을 견인할 벤처기업으로서의 잠재력과 독창성을 인정받았습니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 4: 사회적 책임 -->
+            <div class="mb-20 fade-in-up">
+                <div class="flex items-center gap-3 mb-8 border-b border-slate-200 pb-4">
+                    <div class="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-2xl">
+                        <i class="ph-fill ph-leaf"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900">사회적 책임 <span class="text-sm text-slate-400 font-normal ml-2 block sm:inline">Social Responsibility</span></h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- ESG 우수기업 -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-plant text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">ESG 우수 중소기업 확인서</h4>
+                                <p class="text-green-600 font-medium">환경, 사회, 지배구조 모범</p>
+                            </div>
+                            <div class="flip-card-back bg-green-600 p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-globe text-4xl text-green-200 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">지속가능한 가치 창출</h4>
+                                <p class="text-green-50 text-sm leading-relaxed break-keep">
+                                    친환경 실천, 사회적 기여, 투명한 지배구조를 확립하여 사회와 함께 상생하는 건강한 기업 문화를 선도합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 가족친화인증서 -->
+                    <div class="flip-card h-[320px] cursor-pointer">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front bg-slate-50 border border-slate-200 p-8 flex flex-col items-center justify-center text-center shadow-sm">
+                                <i class="ph-fill ph-users text-6xl text-slate-300 mb-6"></i>
+                                <h4 class="text-xl font-bold text-slate-900 mb-2">가족친화인증서</h4>
+                                <p class="text-green-600 font-medium">일과 생활의 균형(워라밸)</p>
+                            </div>
+                            <div class="flip-card-back bg-green-600 p-8 flex flex-col items-center justify-center text-center shadow-xl text-white">
+                                <i class="ph-fill ph-smiley text-4xl text-green-200 mb-4"></i>
+                                <h4 class="text-xl font-bold mb-4">행복한 일터 조성</h4>
+                                <p class="text-green-50 text-sm leading-relaxed break-keep">
+                                    임직원이 일과 삶의 균형을 맞출 수 있도록 유연근무제, 가족 돌봄 휴가 등 훌륭한 복지 제도를 적극 지원합니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer / CTA -->
+    <section id="contact" class="bg-brand-dark text-white py-16 relative overflow-hidden border-b border-white/10">
+        <div class="container mx-auto px-6 max-w-7xl relative z-10 flex flex-col md:flex-row items-center justify-between">
+            <div class="text-center md:text-left mb-8 md:mb-0">
+                <h2 class="text-2xl md:text-3xl font-bold mb-2">성공적인 비즈니스 혁신, 아이웨이브와 함께하세요.</h2>
+                <p class="text-slate-400">최적의 IT 솔루션을 위한 전문가 상담을 받아보세요.</p>
+            </div>
+            <a href="#" class="px-8 py-4 bg-brand-accent text-brand-dark font-bold rounded-lg hover:bg-yellow-300 transition-colors shadow-lg flex items-center gap-2 shrink-0">
+                <i class="ph-bold ph-envelope-simple"></i> 문의하기
+            </a>
+        </div>
+    </section>
+
+    <!-- Sub Footer -->
+    <footer class="bg-[#0b1120] text-slate-500 py-8 text-sm text-center md:text-left">
+        <div class="container mx-auto px-6 max-w-7xl flex flex-col md:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 iWave. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white transition-colors">개인정보처리방침</a>
+                <a href="#" class="hover:text-white transition-colors">이용약관</a>
+                <a href="#" class="hover:text-white transition-colors">오시는 길</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-brand-primary text-white rounded-full shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 z-50 hover:bg-brand-dark">
+        <i class="ph-bold ph-arrow-up text-xl"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Scroll Intersection Observer (Fade in up 효과)
+            const fadeObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px', threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-up').forEach(el => fadeObserver.observe(el));
+
+            // Scroll to Top Button
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                    scrollToTopBtn.classList.add('opacity-100', 'pointer-events-auto');
+                } else {
+                    scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                    scrollToTopBtn.classList.remove('opacity-100', 'pointer-events-auto');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
