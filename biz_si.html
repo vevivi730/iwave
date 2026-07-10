@@ -21,10 +21,10 @@
                     },
                     colors: {
                         brand: {
-                            dark: '#0f172a',    // 딥 네이비
+                            dark: '#121f41',    // 딥 네이비
                             primary: '#1e3a8a', // 메인 블루
                             light: '#3b82f6',   // 밝은 블루
-                            accent: '#fbbf24',  // 포인트 옐로우
+                            accent: '#ae3b4d',  // 포인트 옐로우
                             gray: '#f8fafc'     // 배경 연회색
                         }
                     }
@@ -117,68 +117,149 @@
         .si-node {
             animation: float 4s ease-in-out infinite alternate;
         }
+
+        /* 사업실적 마키(Marquee) 애니메이션 */
+        .marquee-container {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            gap: 2rem;
+        }
+        .marquee-content {
+            display: flex;
+            flex-shrink: 0;
+            justify-content: space-around;
+            min-width: 100%;
+            gap: 2rem;
+            animation: scroll_left 300s linear infinite;
+        }
+        .marquee-content.scroll_right {
+            animation: scroll_right 300s linear infinite !important;
+        }
+        @keyframes scroll_left {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-100% - 2rem)); }
+        }
+        @keyframes scroll_right {
+            from { transform: translateX(calc(-100% - 2rem)); }
+            to { transform: translateX(0); }
+        }
+
+        /* Portfolio Slider */
+        #portfolio-wrapper {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        #portfolio-slider {
+            display: flex;
+            gap: 2rem;                 /* Tailwind gap-8 */
+            width: max-content;
+            will-change: transform;
+            user-select: none;
+        }
+
+        .portfolio-card {
+            flex-shrink: 0;
+        }
+
+        .portfolio-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* 자연스러운 이동 */
+        #portfolio-slider {
+            transition: transform .45s ease;
+        }
+
+        /* Hover 효과 유지 */
+        .portfolio-card a {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 선택사항 - 드래그 시 */
+        #portfolio-slider.dragging {
+            cursor: grabbing;
+            transition: none;
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-white antialiased">
 
     <!-- Header (GNB) -->
-    <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 subpage-header text-white">
-        <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
-            <!-- Logo -->
-            <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
-                <i class="ph-fill ph-waves text-brand-accent text-3xl"></i>
-                iWave
-            </a>
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex gap-8 font-medium h-full">
-                <!-- 회사소개 -->
-                <div class="relative group flex items-center h-full">
-                    <a href="introduce_1.html" class="hover:text-brand-accent transition-colors flex items-center h-full">회사소개</a>
-                    <div class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
-                        <a href="introduce_1.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">회사개요</a>
-                        <a href="introduce_ceo.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">대표인사말</a>
-                        <a href="introduce_history.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">연혁</a>
-                        <a href="introduce_awards.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인증 및 수상</a>
-                        <a href="introduce_location.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">오시는길</a>
-                    </div>
-                </div>
-                
-                <!-- 사업분야 (활성화) -->
-                <div class="relative group flex items-center h-full">
-                    <a href="index.html#business" class="text-brand-accent flex items-center h-full border-b-2 border-brand-accent">사업분야</a>
-                    <div class="absolute top-full left-0 w-56 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
-                        <a href="biz_ai.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">AI사업</a>
-                        <a href="#" class="block px-5 py-2.5 text-sm bg-slate-50 text-brand-primary font-bold transition-colors">시스템통합(SI)</a>
-                        <a href="biz_sm.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템운영유지관리(SM)</a>
-                    </div>
-                </div>
-
-                <!-- 주요실적 -->
-                <div class="flex items-center h-full">
-                    <a href="reference.html" class="hover:text-brand-accent transition-colors flex items-center h-full">주요실적</a>
-                </div>
-                
-                <!-- 채용정보 -->
-                <div class="relative group flex items-center h-full">
-                    <a href="recruit_1.html" class="hover:text-brand-accent transition-colors flex items-center h-full">채용정보</a>
-                    <div class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
-                        <a href="recruit_1.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인재상</a>
-                        <a href="recruit_2.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">채용절차</a>
-                    </div>
-                </div>
-            </nav>
-            <!-- CTA Button -->
-            <div class="hidden md:block">
-                <a href="#contact" class="px-5 py-2.5 rounded-full bg-brand-accent text-brand-dark font-bold text-sm hover:bg-yellow-300 transition-colors shadow-lg">
-                    문의하기
+    <header id="header"
+            class="fixed w-full top-0 z-[100] transition-all duration-300 bg-brand-dark/60 text-white border-b border-white/10">
+            <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
+                    <img src="./images/logo.png" alt="iWave Logo" class="Head_logo w-52 ">
+                    <!-- <i class="ph-fill ph-waves text-brand-accent text-3xl"></i>
+                    iWave -->
                 </a>
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex gap-28 font-medium h-full">
+                    <!-- 회사소개 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="introduce_1.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">회사소개</a>
+                        <div
+                            class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                            <a href="introduce_1.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">회사개요</a>
+                            <a href="introduce_ceo.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">대표인사말</a>
+                            <a href="introduce_history.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">연혁</a>
+                            <a href="introduce_awards.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인증
+                                및 수상</a>
+                            <a href="introduce_location.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">오시는길</a>
+                        </div>
+                    </div>
+                    <!-- 사업분야 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="biz_ai.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">사업분야</a>
+                        <div
+                            class="absolute top-full left-0 w-56 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                            <a href="biz_ai.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">AI사업</a>
+                            <a href="biz_si.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템통합(SI)</a>
+                            <a href="biz_sm.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템운영유지관리(SM)</a>
+                        </div>
+                    </div>
+                    <!-- 주요실적 -->
+                    <div class="flex items-center h-full">
+                        <a href="reference.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">주요실적</a>
+                    </div>
+                    <!-- 채용정보 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="recruit_1.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">채용정보</a>
+                    </div>
+                </nav>
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact"
+                        class="text-white px-3 py-1.5 rounded-full bg-brand-dark/20 text-brand-dark  border font-bold text-xs hover:bg-brand-accent transition-colors shadow-lg">
+                        문의하기
+                    </a>
+                </div>
+                <!-- Mobile Menu Toggle -->
+                <button class="md:hidden text-2xl" aria-label="Menu">
+                    <i class="ph ph-list"></i>
+                </button>
             </div>
-            <!-- Mobile Menu Toggle -->
-            <button class="md:hidden text-2xl" aria-label="Menu">
-                <i class="ph ph-list"></i>
-            </button>
-        </div>
-    </header>
+        </header>
 
     <!-- Subpage Hero Section -->
     <section class="relative pt-32 pb-20 bg-[#070b14] overflow-hidden si-grid-bg">
@@ -209,41 +290,19 @@
         <div class="container mx-auto px-6 max-w-7xl relative z-10 text-center md:text-left">
             <!-- Breadcrumbs -->
             <div class="flex items-center justify-center md:justify-start gap-2 text-sm text-slate-400 mb-6 fade-in-up">
-                <a href="index.html" class="hover:text-blue-400 transition-colors"><i class="ph-fill ph-house"></i></a>
+                <a href="index.html" class="hover:text-brand-accent transition-colors"><i class="ph-fill ph-house"></i></a>
                 <i class="ph-bold ph-caret-right text-xs"></i>
                 <span>사업분야</span>
                 <i class="ph-bold ph-caret-right text-xs"></i>
-                <span class="text-blue-400 font-medium">시스템통합(SI)</span>
+                <span class="text-white font-medium">시스템통합(SI)</span>
             </div>
-            
-            <span class="inline-block bg-brand-primary/20 text-blue-400 px-4 py-1.5 rounded-full font-bold tracking-widest text-xs mb-4 shadow-sm border border-brand-primary/30 fade-in-up delay-100">SYSTEM INTEGRATION</span>
-            <h1 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight fade-in-up delay-100 tracking-tight">
-                공공정보화의 <strong class="text-cyan-400">디지털 인프라</strong>,<br>
+            <h1 class="text-3xl md:text-5xl font-black text-white mb-12 md:leading-[1.2] fade-in-up delay-100 tracking-tight">
+                공공정보화의 디지털 인프라,<br>
                 (주)아이웨이브가 통합·구현합니다.
             </h1>
             <p class="text-slate-300 text-lg md:text-xl max-w-3xl leading-relaxed fade-in-up delay-200 break-keep font-light">
                 중앙부처·공공기관·국방·공기업 등 공공부문 전반에 걸친 정보시스템 통합 구축 경험을 기반으로, 기획부터 설계·구축·안정화까지 전주기 SI 서비스를 제공합니다.
             </p>
-
-            <!-- Hero Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mt-12 border-t border-white/20 pt-10 fade-in-up delay-300">
-                <div class="text-left">
-                    <strong class="block text-3xl font-black text-cyan-400 mb-2 leading-none tracking-tight">4대</strong>
-                    <span class="text-sm text-slate-300 leading-snug block">공공부문 전문영역<br>(중앙·기관·국방·공기업)</span>
-                </div>
-                <div class="text-left">
-                    <strong class="block text-3xl font-black text-cyan-400 mb-2 leading-none tracking-tight">PMO</strong>
-                    <span class="text-sm text-slate-300 leading-snug block">전자정부 프레임워크<br>기반 사업 관리 체계</span>
-                </div>
-                <div class="text-left">
-                    <strong class="block text-3xl font-black text-cyan-400 mb-2 leading-none tracking-tight">ISMS-P</strong>
-                    <span class="text-sm text-slate-300 leading-snug block">정보보호 관리체계<br>인증 준수</span>
-                </div>
-                <div class="text-left">
-                    <strong class="block text-3xl font-black text-cyan-400 mb-2 leading-none tracking-tight">CMMI</strong>
-                    <span class="text-sm text-slate-300 leading-snug block">소프트웨어 개발<br>성숙도 모델 적용</span>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -259,18 +318,22 @@
     </div>
 
     <!-- 1. 사업 영역 (4 Business Domains) -->
-    <section class="py-24 bg-brand-gray relative">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-si font-bold tracking-widest text-sm uppercase">Business Domain</span>
+    <section class="py-24 bg-white relative">
+        <div class="container py-24 mx-auto px-6 max-w-7xl">
+            <div class="text-center pb-5 mb-20 fade-in-up">
+                <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">Business Domain</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">4대 공공정보화 사업 영역</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">각 부문의 특성과 요구사항을 깊이 이해하는 전담 조직을 운영하며, 발주기관의 업무 도메인에 최적화된 SI 서비스를 제공합니다.</p>
+                <p class="text-slate-500 max-w-2xl mx-auto break-keep mt-5 text-lg leading-relaxed">각 부문의 특성과 요구사항을 깊이 이해하는 전담 조직을 운영하며, 발주기관의 업무 도메인에 최적화된 SI 서비스를 제공합니다.</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- 중앙부처 -->
                 <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-brand-primary transition-all duration-300 group relative overflow-hidden fade-in-up">
                     <div class="absolute top-0 left-0 w-full h-1.5 bg-brand-dark group-hover:bg-brand-primary transition-colors"></div>
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.63574 0.804688H25.2168C25.5422 0.804688 25.8548 0.934069 26.085 1.16406C26.3151 1.39419 26.4443 1.70677 26.4443 2.03223V4.78711H30.4258V7.24121H29.0986V22.041H30.4258V24.4951H1.42676V22.041H2.75391V7.24121H1.42676V4.78711H5.40918V2.03223C5.4092 1.70677 5.53842 1.39419 5.76855 1.16406C5.9986 0.934219 6.31055 0.80477 6.63574 0.804688ZM5.20898 22.041H9.39062V12.75H11.8447V22.041H14.6992V12.75H17.1543V22.041H20.0088V12.75H22.4629V22.041H26.6445V7.24121H5.20898V22.041ZM7.86328 4.78711H23.9902V3.25977H7.86328V4.78711Z" fill="black" stroke="white" stroke-width="0.2"/>
+</svg>
+
                     <span class="text-xs font-bold tracking-widest text-brand-primary block mb-2 mt-2">CENTRAL GOVERNMENT</span>
                     <h3 class="text-2xl font-bold text-slate-900 mb-6 pb-6 border-b border-dashed border-slate-200">중앙부처</h3>
                     <ul class="space-y-3">
@@ -285,6 +348,10 @@
                 <!-- 공공기관 -->
                 <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-brand-primary transition-all duration-300 group relative overflow-hidden fade-in-up delay-100">
                     <div class="absolute top-0 left-0 w-full h-1.5 bg-brand-dark group-hover:bg-brand-primary transition-colors"></div>
+                    <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.0088 1.60059H16.701C17.8513 1.60059 18.8097 1.60059 19.5698 1.70295C20.3734 1.81043 21.0989 2.04843 21.6811 2.63063C22.2645 3.21411 22.5025 3.93963 22.61 4.74191C22.6399 4.95944 22.6612 5.19189 22.674 5.43927C23.4289 5.43927 24.0662 5.44439 24.5921 5.49813C25.1973 5.55955 25.7603 5.69391 26.267 6.03171C26.6509 6.2889 26.981 6.61903 27.2382 7.00418C27.576 7.50961 27.7104 8.07261 27.7718 8.67785C27.8306 9.25621 27.8306 9.97149 27.8306 10.8275V27.1918H28.1505C28.4051 27.1918 28.6492 27.2929 28.8291 27.4729C29.0091 27.6529 29.1102 27.897 29.1102 28.1515C29.1102 28.406 29.0091 28.6501 28.8291 28.8301C28.6492 29.0101 28.4051 29.1112 28.1505 29.1112H2.55928C2.30476 29.1112 2.06066 29.0101 1.88069 28.8301C1.70072 28.6501 1.59961 28.406 1.59961 28.1515C1.59961 27.897 1.70072 27.6529 1.88069 27.4729C2.06066 27.2929 2.30476 27.1918 2.55928 27.1918H2.87917V10.8288C2.87917 9.97149 2.87917 9.25621 2.93803 8.67785C2.99945 8.07261 3.13381 7.50961 3.47161 7.0029C3.7288 6.61903 4.05893 6.2889 4.44408 6.03171C4.9495 5.69391 5.51251 5.55955 6.11775 5.49813C6.64237 5.44439 7.28087 5.43927 8.03453 5.43927C8.04903 5.19189 8.07036 4.95986 8.09851 4.74319C8.20727 3.93963 8.44527 3.21411 9.02747 2.63191C9.61095 2.04843 10.3365 1.81043 11.1387 1.70295C11.9001 1.60059 12.8598 1.60059 14.0088 1.60059ZM7.99742 7.35862C7.25144 7.35862 6.72554 7.36502 6.31224 7.40724C5.85799 7.45331 5.64815 7.5352 5.50995 7.62861C5.33626 7.74658 5.18647 7.89636 5.0685 8.07006C4.9751 8.20825 4.8932 8.4181 4.84714 8.87234C4.7998 9.34194 4.79852 9.95997 4.79852 10.8774V27.1918H7.99742V18.8747H7.03775C6.78323 18.8747 6.53913 18.7736 6.35916 18.5936C6.17919 18.4136 6.07808 18.1695 6.07808 17.915C6.07808 17.6605 6.17919 17.4164 6.35916 17.2364C6.53913 17.0564 6.78323 16.9553 7.03775 16.9553H7.99742V15.036H7.03775C6.78323 15.036 6.53913 14.9349 6.35916 14.7549C6.17919 14.5749 6.07808 14.3308 6.07808 14.0763C6.07808 13.8218 6.17919 13.5777 6.35916 13.3977C6.53913 13.2178 6.78323 13.1167 7.03775 13.1167H7.99742V11.1973H7.03775C6.78323 11.1973 6.53913 11.0962 6.35916 10.9162C6.17919 10.7363 6.07808 10.4922 6.07808 10.2376C6.07808 9.98311 6.17919 9.73902 6.35916 9.55904C6.53913 9.37907 6.78323 9.27796 7.03775 9.27796H7.99742V7.35862ZM9.91677 27.1918H14.3952V24.3128C14.3952 24.0583 14.4963 23.8142 14.6763 23.6342C14.8563 23.4543 15.1004 23.3532 15.3549 23.3532C15.6094 23.3532 15.8535 23.4543 16.0335 23.6342C16.2135 23.8142 16.3146 24.0583 16.3146 24.3128V27.1918H20.7931V7.67851C20.7931 6.44501 20.7905 5.61585 20.7073 4.99782C20.628 4.40795 20.4911 4.15459 20.3235 3.98825C20.1558 3.82191 19.905 3.68499 19.3152 3.60438C18.6971 3.52249 17.868 3.51993 16.6345 3.51993H14.0753C12.8418 3.51993 12.0127 3.52249 11.3947 3.60566C10.8048 3.68499 10.5514 3.82191 10.3851 3.98953C10.2187 4.15715 10.0818 4.40795 10.0012 4.99782C9.92061 5.61585 9.91677 6.44501 9.91677 7.67851V27.1918ZM22.7124 11.1973H23.6721C23.9266 11.1973 24.1707 11.0962 24.3507 10.9162C24.5306 10.7363 24.6317 10.4922 24.6317 10.2376C24.6317 9.98311 24.5306 9.73902 24.3507 9.55904C24.1707 9.37907 23.9266 9.27796 23.6721 9.27796H22.7124V7.35862C23.4584 7.35862 23.9843 7.36502 24.3976 7.40724C24.8518 7.45331 25.0617 7.5352 25.2011 7.62861C25.3752 7.74377 25.5249 7.89476 25.6413 8.07006C25.7347 8.20825 25.8166 8.4181 25.8627 8.87234C25.91 9.34194 25.9113 9.95997 25.9113 10.8774V27.1918H22.7124V18.8747H23.6721C23.9266 18.8747 24.1707 18.7736 24.3507 18.5936C24.5306 18.4136 24.6317 18.1695 24.6317 17.915C24.6317 17.6605 24.5306 17.4164 24.3507 17.2364C24.1707 17.0564 23.9266 16.9553 23.6721 16.9553H22.7124V15.036H23.6721C23.9266 15.036 24.1707 14.9349 24.3507 14.7549C24.5306 14.5749 24.6317 14.3308 24.6317 14.0763C24.6317 13.8218 24.5306 13.5777 24.3507 13.3977C24.1707 13.2178 23.9266 13.1167 23.6721 13.1167H22.7124V11.1973ZM15.3549 7.35862C14.9307 7.35862 14.5239 7.52713 14.2239 7.82709C13.924 8.12704 13.7555 8.53387 13.7555 8.95807C13.7555 9.38227 13.924 9.7891 14.2239 10.0891C14.5239 10.389 14.9307 10.5575 15.3549 10.5575C15.7791 10.5575 16.1859 10.389 16.4859 10.0891C16.7858 9.7891 16.9544 9.38227 16.9544 8.95807C16.9544 8.53387 16.7858 8.12704 16.4859 7.82709C16.1859 7.52713 15.7791 7.35862 15.3549 7.35862ZM11.8361 8.95807C11.8361 8.02483 12.2068 7.12981 12.8667 6.46991C13.5266 5.81 14.4217 5.43927 15.3549 5.43927C16.2882 5.43927 17.1832 5.81 17.8431 6.46991C18.503 7.12981 18.8737 8.02483 18.8737 8.95807C18.8737 9.89131 18.503 10.7863 17.8431 11.4462C17.1832 12.1061 16.2882 12.4769 15.3549 12.4769C14.4217 12.4769 13.5266 12.1061 12.8667 11.4462C12.2068 10.7863 11.8361 9.89131 11.8361 8.95807ZM11.8361 15.3559C11.8361 15.1014 11.9372 14.8573 12.1172 14.6773C12.2972 14.4973 12.5413 14.3962 12.7958 14.3962H17.914C18.1686 14.3962 18.4127 14.4973 18.5926 14.6773C18.7726 14.8573 18.8737 15.1014 18.8737 15.3559C18.8737 15.6104 18.7726 15.8545 18.5926 16.0345C18.4127 16.2144 18.1686 16.3156 17.914 16.3156H12.7958C12.5413 16.3156 12.2972 16.2144 12.1172 16.0345C11.9372 15.8545 11.8361 15.6104 11.8361 15.3559ZM11.8361 19.1946C11.8361 18.9401 11.9372 18.696 12.1172 18.516C12.2972 18.336 12.5413 18.2349 12.7958 18.2349H17.914C18.1686 18.2349 18.4127 18.336 18.5926 18.516C18.7726 18.696 18.8737 18.9401 18.8737 19.1946C18.8737 19.4491 18.7726 19.6932 18.5926 19.8732C18.4127 20.0531 18.1686 20.1542 17.914 20.1542H12.7958C12.5413 20.1542 12.2972 20.0531 12.1172 19.8732C11.9372 19.6932 11.8361 19.4491 11.8361 19.1946Z" fill="black"/>
+</svg>
+
                     <span class="text-xs font-bold tracking-widest text-brand-primary block mb-2 mt-2">PUBLIC AGENCY</span>
                     <h3 class="text-2xl font-bold text-slate-900 mb-6 pb-6 border-b border-dashed border-slate-200">공공기관</h3>
                     <ul class="space-y-3">
@@ -299,6 +366,10 @@
                 <!-- 국방 -->
                 <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-brand-primary transition-all duration-300 group relative overflow-hidden fade-in-up delay-200">
                     <div class="absolute top-0 left-0 w-full h-1.5 bg-brand-dark group-hover:bg-brand-primary transition-colors"></div>
+                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M31.5296 32.6973V20.4593C31.5297 20.0837 31.4392 19.7136 31.2658 19.3804C31.0924 19.0473 30.8412 18.7608 30.5335 18.5454L19.8521 11.0707V9.3424H26.8586V2.33594H17.5166V11.0707L6.83526 18.5466C6.52772 18.7619 6.27661 19.0481 6.10322 19.3811C5.92982 19.7141 5.83925 20.0839 5.83917 20.4593V32.6973H2.33594V35.0328H35.0328V32.6973H31.5296ZM19.8521 4.67143H24.5231V7.00692H19.8521V4.67143ZM8.17466 20.4593L18.6844 13.1025L29.1941 20.4593V32.6973H19.8521V23.3553H17.5166V32.6973H8.17466V20.4593Z" fill="black"/>
+</svg>
+
                     <span class="text-xs font-bold tracking-widest text-brand-primary block mb-2 mt-2">NATIONAL DEFENSE</span>
                     <h3 class="text-2xl font-bold text-slate-900 mb-6 pb-6 border-b border-dashed border-slate-200">국방</h3>
                     <ul class="space-y-3">
@@ -313,6 +384,10 @@
                 <!-- 공기업 -->
                 <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 hover:border-brand-primary transition-all duration-300 group relative overflow-hidden fade-in-up delay-300">
                     <div class="absolute top-0 left-0 w-full h-1.5 bg-brand-dark group-hover:bg-brand-primary transition-colors"></div>
+                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.6453 23.6558C10.959 23.6558 11.2598 23.7804 11.4816 24.0022C11.7035 24.224 11.8281 24.5248 11.8281 24.8385C11.8281 25.1522 11.7035 25.4531 11.4816 25.6749C11.2598 25.8967 10.959 26.0213 10.6453 26.0213C10.3316 26.0213 10.0308 25.8967 9.80895 25.6749C9.58714 25.4531 9.46252 25.1522 9.46252 24.8385C9.46252 24.5248 9.58714 24.224 9.80895 24.0022C10.0308 23.7804 10.3316 23.6558 10.6453 23.6558ZM10.6453 18.9247C10.959 18.9247 11.2598 19.0493 11.4816 19.2711C11.7035 19.4929 11.8281 19.7938 11.8281 20.1075C11.8281 20.4211 11.7035 20.722 11.4816 20.9438C11.2598 21.1656 10.959 21.2902 10.6453 21.2902C10.3316 21.2902 10.0308 21.1656 9.80895 20.9438C9.58714 20.722 9.46252 20.4211 9.46252 20.1075C9.46252 19.7938 9.58714 19.4929 9.80895 19.2711C10.0308 19.0493 10.3316 18.9247 10.6453 18.9247ZM10.6453 14.1936C10.959 14.1936 11.2598 14.3182 11.4816 14.54C11.7035 14.7618 11.8281 15.0627 11.8281 15.3764C11.8281 15.6901 11.7035 15.9909 11.4816 16.2127C11.2598 16.4345 10.959 16.5591 10.6453 16.5591C10.3316 16.5591 10.0308 16.4345 9.80895 16.2127C9.58714 15.9909 9.46252 15.6901 9.46252 15.3764C9.46252 15.0627 9.58714 14.7618 9.80895 14.54C10.0308 14.3182 10.3316 14.1936 10.6453 14.1936ZM10.6453 9.46252C10.959 9.46252 11.2598 9.58714 11.4816 9.80895C11.7035 10.0308 11.8281 10.3316 11.8281 10.6453C11.8281 10.959 11.7035 11.2598 11.4816 11.4816C11.2598 11.7035 10.959 11.8281 10.6453 11.8281C10.3316 11.8281 10.0308 11.7035 9.80895 11.4816C9.58714 11.2598 9.46252 10.959 9.46252 10.6453C9.46252 10.3316 9.58714 10.0308 9.80895 9.80895C10.0308 9.58714 10.3316 9.46252 10.6453 9.46252ZM22.473 21.2902C22.7867 21.2902 23.0875 21.4148 23.3093 21.6366C23.5311 21.8585 23.6558 22.1593 23.6558 22.473C23.6558 22.7867 23.5311 23.0875 23.3093 23.3093C23.0875 23.5311 22.7867 23.6558 22.473 23.6558C22.1593 23.6558 21.8585 23.5311 21.6366 23.3093C21.4148 23.0875 21.2902 22.7867 21.2902 22.473C21.2902 22.1593 21.4148 21.8585 21.6366 21.6366C21.8585 21.4148 22.1593 21.2902 22.473 21.2902ZM27.2041 21.2902C27.5178 21.2902 27.8186 21.4148 28.0404 21.6366C28.2622 21.8585 28.3868 22.1593 28.3868 22.473C28.3868 22.7867 28.2622 23.0875 28.0404 23.3093C27.8186 23.5311 27.5178 23.6558 27.2041 23.6558C26.8904 23.6558 26.5895 23.5311 26.3677 23.3093C26.1459 23.0875 26.0213 22.7867 26.0213 22.473C26.0213 22.1593 26.1459 21.8585 26.3677 21.6366C26.5895 21.4148 26.8904 21.2902 27.2041 21.2902ZM22.473 16.5591C22.7867 16.5591 23.0875 16.6838 23.3093 16.9056C23.5311 17.1274 23.6558 17.4282 23.6558 17.7419C23.6558 18.0556 23.5311 18.3564 23.3093 18.5783C23.0875 18.8001 22.7867 18.9247 22.473 18.9247C22.1593 18.9247 21.8585 18.8001 21.6366 18.5783C21.4148 18.3564 21.2902 18.0556 21.2902 17.7419C21.2902 17.4282 21.4148 17.1274 21.6366 16.9056C21.8585 16.6838 22.1593 16.5591 22.473 16.5591ZM27.2041 16.5591C27.5178 16.5591 27.8186 16.6838 28.0404 16.9056C28.2622 17.1274 28.3868 17.4282 28.3868 17.7419C28.3868 18.0556 28.2622 18.3564 28.0404 18.5783C27.8186 18.8001 27.5178 18.9247 27.2041 18.9247C26.8904 18.9247 26.5895 18.8001 26.3677 18.5783C26.1459 18.3564 26.0213 18.0556 26.0213 17.7419C26.0213 17.4282 26.1459 17.1274 26.3677 16.9056C26.5895 16.6838 26.8904 16.5591 27.2041 16.5591ZM20.1075 4.73145C21.0485 4.73145 21.951 5.10528 22.6165 5.77072C23.2819 6.43616 23.6558 7.33868 23.6558 8.27975V11.8281H29.5696C30.5107 11.8281 31.4132 12.2019 32.0786 12.8673C32.7441 13.5328 33.1179 14.4353 33.1179 15.3764V30.7524C33.1179 31.3798 32.8687 31.9814 32.4251 32.4251C31.9814 32.8687 31.3798 33.1179 30.7524 33.1179H7.09698C6.4696 33.1179 5.86792 32.8687 5.4243 32.4251C4.98067 31.9814 4.73145 31.3798 4.73145 30.7524V8.27975C4.73145 7.33868 5.10528 6.43616 5.77072 5.77072C6.43616 5.10528 7.33868 4.73145 8.27975 4.73145H20.1075ZM8.27975 7.09698C7.96606 7.09698 7.66522 7.2216 7.44341 7.44341C7.2216 7.66522 7.09698 7.96606 7.09698 8.27975V30.7524H16.5591V15.3764C16.5591 14.4353 16.933 13.5328 17.5984 12.8673C18.2639 12.2019 19.1664 11.8281 20.1075 11.8281H21.2902V8.27975C21.2902 7.96606 21.1656 7.66522 20.9438 7.44341C20.722 7.2216 20.4211 7.09698 20.1075 7.09698H8.27975ZM20.1075 14.1936C19.7938 14.1936 19.4929 14.3182 19.2711 14.54C19.0493 14.7618 18.9247 15.0627 18.9247 15.3764V30.7524H21.2902V27.2041L21.3139 26.9675C21.3684 26.7004 21.5136 26.4603 21.7248 26.2878C21.936 26.1154 22.2003 26.0212 22.473 26.0213H27.2041L27.4406 26.045C27.7078 26.0995 27.9479 26.2447 28.1203 26.4559C28.2927 26.6671 28.3869 26.9314 28.3868 27.2041V30.7524H30.7524V15.3764C30.7524 15.0627 30.6278 14.7618 30.406 14.54C30.1841 14.3182 29.8833 14.1936 29.5696 14.1936H20.1075ZM23.6558 30.7524H26.0213V28.3868H23.6558V30.7524Z" fill="black"/>
+</svg>
+
                     <span class="text-xs font-bold tracking-widest text-brand-primary block mb-2 mt-2">PUBLIC ENTERPRISE</span>
                     <h3 class="text-2xl font-bold text-slate-900 mb-6 pb-6 border-b border-dashed border-slate-200">공기업</h3>
                     <ul class="space-y-3">
@@ -328,431 +403,449 @@
     </section>
 
     <!-- 2. 전문 서비스 영역 (6 Professional Services) -->
-    <section class="py-24 bg-white relative">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-si font-bold tracking-widest text-sm uppercase">Professional Service</span>
+    <section class="py-24 bg-brand-gray relative">
+        <div class="container py-24 mx-auto px-6 max-w-7xl">
+            <div class="text-center pb-5 mb-20 fade-in-up">
+                <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">Professional Service</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">SI 전문 서비스 영역</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">기획·설계부터 구축·통합·운영에 이르는 정보시스템 라이프사이클 전 과정에 걸쳐 전문화된 서비스 라인업을 보유하고 있습니다.</p>
+                <p class="text-slate-500 max-w-2xl mx-auto break-keep mt-5 text-lg leading-relaxed">기획·설계부터 구축·통합·운영에 이르는 정보시스템 라이프사이클 전 과정에 걸쳐 전문화된 서비스 라인업을 보유하고 있습니다.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Service 1 -->
-                <div class="si-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 01</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 transition-all">ISP / ISMP 컨설팅</h3>
+                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+                    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2004_6896)">
+<path d="M9.47119 11.1992V13.7812H5.20361C4.99402 13.7814 4.79323 13.8645 4.64502 14.0127C4.49681 14.1609 4.41368 14.3617 4.41357 14.5713V30.709L7.53662 28.249L7.54541 28.2432L7.85791 28.0137C7.97705 27.9367 8.13904 27.8525 8.32666 27.8525H22.8979C23.1077 27.8525 23.3092 27.7694 23.4575 27.6211C23.6058 27.4728 23.689 27.2713 23.689 27.0615V25.7705H26.271V27.1973H26.27C26.2843 27.6227 26.2121 28.0469 26.0571 28.4434C25.901 28.8426 25.6648 29.2056 25.3628 29.5098C25.0606 29.8141 24.6986 30.053 24.3003 30.2119C23.902 30.3708 23.475 30.4463 23.0464 30.4336H9.14795L3.85303 34.3301L3.85205 34.3311C3.66752 34.4645 3.45071 34.5476 3.22412 34.5703C2.9975 34.593 2.76837 34.5552 2.56104 34.4609L2.5542 34.457C2.33905 34.3515 2.1574 34.1882 2.02979 33.9854C1.90221 33.7825 1.83347 33.5482 1.83154 33.3086V14.5713C1.83165 13.677 2.18648 12.8189 2.81885 12.1865C3.45121 11.5542 4.30932 11.1993 5.20361 11.1992H9.47119Z" fill="#AE3B4D" stroke="#AE3B4D" stroke-width="0.5"/>
+<path d="M32.2744 3.91309L32.4375 3.92285C33.2514 3.98963 34.0157 4.34973 34.5859 4.93945C35.1942 5.56865 35.5345 6.41006 35.5342 7.28516V25.9375L35.5205 26.1191C35.4946 26.2983 35.4316 26.4709 35.334 26.625C35.2039 26.8304 35.0183 26.995 34.7988 27.0996L34.792 27.1025C34.5836 27.1949 34.3545 27.2309 34.1279 27.2061C33.9012 27.1811 33.6844 27.0956 33.501 26.96L33.4971 26.957L28.5879 23.1475H14.5713C13.677 23.1474 12.8189 22.7925 12.1865 22.1602C11.5542 21.5277 11.1992 20.6697 11.1992 19.7754V7.28516C11.1993 6.39087 11.5542 5.53276 12.1865 4.90039C12.8189 4.26802 13.677 3.91319 14.5713 3.91309H32.2744ZM14.5713 6.49512C14.3617 6.49522 14.1609 6.57835 14.0127 6.72656C13.8645 6.87478 13.7814 7.07556 13.7812 7.28516V19.7754C13.7812 19.9851 13.8644 20.1867 14.0127 20.335C14.1609 20.483 14.3618 20.5663 14.5713 20.5664H29.0293C29.2789 20.5672 29.5226 20.6399 29.7305 20.7754L29.8174 20.8369V20.8379L33.0566 23.3643V7.35645L33.0371 7.19531C33.0028 7.03708 32.926 6.88975 32.8135 6.77051C32.6648 6.61292 32.4636 6.5159 32.248 6.49512H14.5713Z" fill="#AE3B4D" stroke="#AE3B4D" stroke-width="0.5"/>
+</g>
+<defs>
+<clipPath id="clip0_2004_6896">
+<rect width="37.4697" height="37.4697" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 transition-all mt-2">ISP / ISMP 컨설팅</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">정보화전략계획(ISP) 및 정보시스템 마스터플랜(ISMP) 수립을 통해 발주기관의 정보화 로드맵과 예산 계획을 최적화합니다.</p>
                     <div class="bg-slate-50 p-4 rounded-xl mt-auto border border-slate-100">
-                        <strong class="text-xs text-brand-primary block mb-1">주요 산출물</strong>
-                        <span class="text-xs text-slate-700 font-medium">업무 현황분석서, To-Be 모델, 아키텍처 설계, 이행 로드맵, 예산 산정</span>
+                        <strong class="text-xs text-[#AE3B4D] block mb-1">주요 산출물</strong>
+                        <span class="text-xs text-slate-700 font-medium">업무 현황분석서, To-Be 모델, 아키텍처 설계, <br>이행 로드맵, 예산 산정</span>
                     </div>
                 </div>
 
                 <!-- Service 2 -->
-                <div class="si-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-100 flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 02</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 transition-all">시스템 신규구축 · 재구축</h3>
+                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M29.8982 2.59961H1.2998V23.3984H15.2974C15.1573 21.5764 15.5939 19.7564 16.5453 18.1961H3.89966V5.19686H27.2983V14.5953C28.252 14.9775 29.1318 15.5229 29.8982 16.2072V2.59961ZM3.89966 25.9983H15.8954C16.2775 26.952 16.823 27.8318 17.5073 28.5981H3.89966V25.9983Z" fill="#AE3B4D"/>
+<path d="M25.3489 17.3873V15.5986H22.7491V17.3873C21.834 17.6241 21.0008 18.1059 20.339 18.7809L18.7882 17.8852L17.4883 20.1367L19.0378 21.031C18.7847 21.9419 18.7847 22.9046 19.0378 23.8155L17.4883 24.7098L18.7882 26.9613L20.339 26.0656C21.0008 26.7406 21.834 27.2223 22.7491 27.4592V29.2479H25.3489V27.4592C26.264 27.2223 27.0972 26.7406 27.759 26.0656L29.3085 26.9613L30.6084 24.7098L29.0602 23.8155C29.3134 22.9046 29.3134 21.9419 29.0602 21.031L30.6084 20.1367L29.3085 17.8852L27.759 18.7796C27.0971 18.1051 26.2639 17.6238 25.3489 17.3873ZM21.8196 21.0843C22.0506 20.6993 22.3774 20.3807 22.7681 20.1595C23.1587 19.9383 23.6 19.8221 24.049 19.8221C24.498 19.8221 24.9393 19.9383 25.33 20.1595C25.7207 20.3807 26.0474 20.6993 26.2784 21.0843L26.3252 21.1662C26.5319 21.5393 26.6489 21.967 26.6489 22.4232C26.6489 22.8782 26.5319 23.3072 26.3252 23.6803L26.2771 23.7622C26.046 24.1469 25.7193 24.4652 25.3288 24.6862C24.9382 24.9072 24.4971 25.0234 24.0484 25.0234C23.5996 25.0234 23.1585 24.9072 22.768 24.6862C22.3774 24.4652 22.0507 24.1469 21.8196 23.7622L21.7715 23.6803C21.5596 23.2953 21.4486 22.8628 21.4492 22.4232C21.4486 21.9837 21.5596 21.5512 21.7715 21.1662L21.8196 21.0843Z" fill="#AE3B4D"/>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 transition-all mt-2">시스템 신규구축 · 재구축</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">전자정부 표준 프레임워크 기반 신규 정보시스템 개발과 노후 시스템의 전면 재구축을 수행합니다.</p>
                     <div class="bg-slate-50 p-4 rounded-xl mt-auto border border-slate-100">
-                        <strong class="text-xs text-brand-primary block mb-1">기술 스택</strong>
+                        <strong class="text-xs text-[#AE3B4D] block mb-1">기술 스택</strong>
                         <span class="text-xs text-slate-700 font-medium">eGov Framework, Spring, Java, MSA, RESTful API, React/Vue</span>
                     </div>
                 </div>
 
                 <!-- Service 3 -->
-                <div class="si-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-200 flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 03</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 transition-all">시스템 통합 · 연계</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">이기종 시스템 간 데이터·프로세스 통합, EAI/ESB 기반 연계 아키텍처 설계와 대외 표준연계 구현을 지원합니다.</p>
+                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+<svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2004_6903)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.4048 8.77717C15.5435 8.52037 15.7498 8.30636 16.0013 8.15822C16.2528 8.01009 16.54 7.93346 16.8319 7.93662L20.0066 7.98499C20.2977 7.99138 20.5816 8.07694 20.8277 8.23249C21.0738 8.38804 21.2729 8.6077 21.4035 8.86787L22.6734 11.4198L24.9169 11.2293C25.2042 11.2065 25.4923 11.2615 25.7509 11.3887C26.0095 11.5159 26.229 11.7105 26.3864 11.9519L27.9888 14.4373C28.1609 14.7049 28.2486 15.0181 28.2406 15.3362C28.2325 15.6543 28.129 15.9626 27.9435 16.2212L26.7643 17.872L28.0191 19.5289C28.4091 20.043 28.4484 20.7444 28.1158 21.3008L26.604 23.8345C26.4538 24.083 26.2388 24.286 25.9821 24.4218C25.7254 24.5576 25.4367 24.6211 25.1467 24.6055L22.7732 24.4604L21.3128 27.4507C21.1806 27.7165 20.9772 27.9404 20.7252 28.0973C20.4732 28.2543 20.1826 28.3382 19.8857 28.3396H16.6142C16.3178 28.3376 16.0278 28.2535 15.7764 28.0965C15.525 27.9396 15.3221 27.716 15.1901 27.4507L13.8174 24.6418L11.2776 24.8716C10.9849 24.8962 10.691 24.8398 10.4281 24.7086C10.1652 24.5774 9.94341 24.3765 9.78701 24.1278L8.1815 21.5426C8.01121 21.2683 7.92866 20.9485 7.94487 20.6259C7.96108 20.3034 8.07527 19.9935 8.2722 19.7376L9.72351 17.8478L8.55642 16.2181C8.37138 15.9593 8.26841 15.6508 8.26087 15.3327C8.25332 15.0146 8.34154 14.7016 8.51409 14.4342L10.1166 11.9489C10.2736 11.7079 10.4927 11.5137 10.7507 11.3865C11.0087 11.2594 11.2962 11.204 11.583 11.2263L13.9928 11.4319L15.4048 8.77717ZM17.2129 10.2103L15.7857 12.8953C15.6384 13.1687 15.4148 13.3934 15.1421 13.5421C14.8694 13.6908 14.5594 13.757 14.2498 13.7328L11.8007 13.5242L10.6699 15.2778L11.8612 16.9408C12.0593 17.2174 12.1634 17.5504 12.1579 17.8906C12.1525 18.2309 12.0379 18.5604 11.8309 18.8305L10.3554 20.7474L11.4923 22.5797L14.0805 22.3439C14.4012 22.3142 14.7233 22.3827 15.0041 22.5404C15.2849 22.6981 15.5112 22.9375 15.6527 23.2268L17.0405 26.0719H19.4594L20.9349 23.0574C21.0743 22.7775 21.2925 22.5444 21.5628 22.387C21.833 22.2296 22.1434 22.1547 22.4557 22.1715L24.8685 22.3167L25.9328 20.5328L24.6508 18.8396C24.4469 18.5696 24.3346 18.2415 24.3302 17.9032C24.3259 17.5649 24.4297 17.234 24.6266 16.9589L25.833 15.2778L24.7022 13.5242L22.4043 13.7177C22.0867 13.7447 21.7684 13.6756 21.4906 13.5192C21.2129 13.3628 20.9887 13.1264 20.8472 12.8408L19.5561 10.2466L17.2129 10.2103Z" fill="#AE3B4D"/>
+<path d="M31.0883 22.3734C30.1711 25.2048 28.3508 27.6573 25.9064 29.3552C23.4619 31.0531 20.5282 31.9026 17.5547 31.7736C14.5813 31.6446 11.7321 30.5442 9.44392 28.6409C7.15572 26.7377 5.55468 24.1367 4.88617 21.2365L7.45922 20.7286L2.56105 15.6611L-0.00292969 22.2131L2.7092 21.681C3.46611 25.0855 5.32318 28.146 7.99345 30.3895C10.6637 32.633 13.9985 33.9346 17.4826 34.0932C20.9666 34.2519 24.4059 33.2587 27.269 31.2671C30.1321 29.2755 32.2596 26.3965 33.3227 23.0748L31.0883 22.3734ZM33.616 14.6935C32.8587 11.2891 31.0014 8.22891 28.3309 5.98572C25.6604 3.74253 22.3255 2.44125 18.8415 2.28297C15.3575 2.12468 11.9183 3.1182 9.05546 5.11C6.19258 7.1018 4.06536 9.981 3.00249 13.3027L5.15829 14.0042C6.0752 11.1727 7.89522 8.71999 10.3395 7.02188C12.7837 5.32377 15.7173 4.47393 18.6907 4.6026C21.6642 4.73127 24.5134 5.83134 26.8018 7.73425C29.0902 9.63715 30.6916 12.2379 31.3605 15.138L28.7874 15.649L33.6856 20.7044L36.2798 14.1614L33.616 14.6935Z" fill="#AE3B4D"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M18.1413 17.0069C17.8405 17.0069 17.5521 17.1264 17.3395 17.339C17.1269 17.5517 17.0074 17.8401 17.0074 18.1408C17.0074 18.4415 17.1269 18.7299 17.3395 18.9425C17.5521 19.1551 17.8405 19.2746 18.1413 19.2746C18.442 19.2746 18.7304 19.1551 18.943 18.9425C19.1556 18.7299 19.2751 18.4415 19.2751 18.1408C19.2751 17.8401 19.1556 17.5517 18.943 17.339C18.7304 17.1264 18.442 17.0069 18.1413 17.0069ZM14.7397 18.1408C14.7397 17.2386 15.0981 16.3734 15.736 15.7355C16.3739 15.0976 17.2391 14.7393 18.1413 14.7393C19.0434 14.7393 19.9086 15.0976 20.5465 15.7355C21.1844 16.3734 21.5428 17.2386 21.5428 18.1408C21.5428 19.0429 21.1844 19.9081 20.5465 20.546C19.9086 21.1839 19.0434 21.5423 18.1413 21.5423C17.2391 21.5423 16.3739 21.1839 15.736 20.546C15.0981 19.9081 14.7397 19.0429 14.7397 18.1408Z" fill="#AE3B4D"/>
+</g>
+<defs>
+<clipPath id="clip0_2004_6903">
+<rect width="36.2827" height="36.2827" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 transition-all mt-2">시스템 통합 · 연계</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">이기종 시스템 간 데이터·프로세스 통합, <br>EAI/ESB 기반 연계 아키텍처 설계와 대외 표준연계 구현을 지원합니다.</p>
                     <div class="bg-slate-50 p-4 rounded-xl mt-auto border border-slate-100">
-                        <strong class="text-xs text-brand-primary block mb-1">연계 방식</strong>
-                        <span class="text-xs text-slate-700 font-medium">EAI · ESB · API Gateway · MQ · 행정정보공동이용 · 표준연계</span>
+                        <strong class="text-xs text-[#AE3B4D] block mb-1">연계 방식</strong>
+                        <span class="text-xs text-slate-700 font-medium">EAI · ESB · API Gateway · MQ · 행정정보공동이용 · <br>표준연계</span>
                     </div>
                 </div>
 
                 <!-- Service 4 -->
-                <div class="si-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 04</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 transition-all">고도화 · 유지관리</h3>
+                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.08643 1.81738V27.4004H14.9097V29.668H3.93604C3.37444 29.6679 2.83611 29.4449 2.43896 29.0479C2.04187 28.6508 1.81797 28.1123 1.81787 27.5508V1.81738H4.08643ZM29.6685 3.78613V10.9736H27.4009V7.65723L19.4976 15.5605C19.285 15.773 18.9963 15.8925 18.6958 15.8926C18.3951 15.8926 18.1067 15.7731 17.894 15.5605L13.7749 11.4424L7.40186 17.8174L7.29541 17.9229L7.18896 17.8174L5.79834 16.4258L5.69189 16.3193L5.79834 16.2139L12.9741 9.03809C13.1868 8.8255 13.4752 8.70605 13.7759 8.70605C14.0389 8.70611 14.2929 8.79665 14.4946 8.96191L14.5776 9.03809L18.6948 13.1553L25.7974 6.05371H22.481V3.78613H29.6685Z" fill="#AE3B4D" stroke="#AE3B4D" stroke-width="0.3"/>
+<path d="M25.7852 20.7695C25.2185 20.5349 24.5947 20.4741 23.9932 20.5938C23.3916 20.7135 22.839 21.0087 22.4053 21.4424C21.9715 21.8761 21.6764 22.4287 21.5566 23.0303C21.437 23.6318 21.4978 24.2556 21.7324 24.8223C21.9672 25.389 22.365 25.874 22.875 26.2148C23.3213 26.513 23.8364 26.69 24.3691 26.7295L24.5986 26.7373C25.421 26.7365 26.2095 26.4096 26.791 25.8281C27.3725 25.2466 27.6994 24.4581 27.7002 23.6357L27.6924 23.4062C27.6529 22.8735 27.4759 22.3584 27.1777 21.9121C26.8369 21.4021 26.3519 21.0043 25.7852 20.7695ZM23.7646 28.334L23.6455 28.3096C23.0486 28.1858 22.4803 27.9488 21.9727 27.6113L21.8701 27.543L21.7842 27.6299L20.4229 28.9893L19.2441 27.8105L20.6914 26.3633L20.623 26.2617C20.2856 25.754 20.0486 25.1858 19.9248 24.5889L19.9004 24.4697H17.8613V22.8018H19.9004L19.9248 22.6826C20.0486 22.0857 20.2856 21.5174 20.623 21.0098L20.6914 20.9072L20.6045 20.8213L19.2441 19.46L20.4229 18.2812L21.7842 19.6416L21.8701 19.7285L21.9727 19.6602C22.4803 19.3227 23.0486 19.0857 23.6455 18.9619L23.7646 18.9375V16.8984H25.4326V18.9375L25.5518 18.9619C26.1487 19.0857 26.7169 19.3227 27.2246 19.6602L27.3262 19.7285L28.7734 18.2812L29.9521 19.46L28.5928 20.8213L28.5059 20.9072L28.5742 21.0098C28.9117 21.5174 29.1487 22.0857 29.2725 22.6826L29.2969 22.8018H31.3359V24.4697H29.2969L29.2725 24.5889C29.1487 25.1858 28.9117 25.754 28.5742 26.2617L28.5059 26.3633L29.9521 27.8096L28.7725 28.9893L27.3262 27.543L27.2246 27.6113C26.7169 27.9488 26.1487 28.1858 25.5518 28.3096L25.4326 28.334V30.373H23.7646V28.334Z" fill="#AE3B4D" stroke="#AE3B4D" stroke-width="0.3"/>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 transition-all mt-2">고도화 · 유지관리</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">운영 중인 정보시스템의 기능 개선, 성능 최적화, 보안 강화를 통해 안정적 서비스 지속성을 보장합니다.</p>
                     <div class="bg-slate-50 p-4 rounded-xl mt-auto border border-slate-100">
-                        <strong class="text-xs text-brand-primary block mb-1">관리 범위</strong>
-                        <span class="text-xs text-slate-700 font-medium">장애대응, 성능튜닝, 기능개선, 보안패치, 사용자지원(SLA 준수)</span>
+                        <strong class="text-xs text-[#AE3B4D] block mb-1">관리 범위</strong>
+                        <span class="text-xs text-slate-700 font-medium">장애대응, 성능튜닝, 기능개선, 보안패치, <br>사용자지원(SLA 준수)</span>
                     </div>
                 </div>
 
                 <!-- Service 5 -->
-                <div class="si-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-100 flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 05</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 transition-all">클라우드 전환 · G-Cloud</h3>
+                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+<svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.5835 18.7297C2.5835 19.493 2.73384 20.2488 3.02595 20.954C3.31805 21.6592 3.7462 22.3 4.28594 22.8398C5.37599 23.9298 6.85443 24.5422 8.396 24.5422H23.896C25.0404 24.5443 26.1429 24.1122 26.9813 23.3333C27.8197 22.5544 28.3314 21.4865 28.4134 20.3451C28.4953 19.2036 28.1413 18.0736 27.4228 17.1829C26.7043 16.2922 25.6748 15.7072 24.5418 15.5457C24.5544 13.3483 23.7664 11.2215 22.3249 9.56286C20.8835 7.90422 18.8873 6.8273 16.7096 6.5334C14.5319 6.2395 12.3216 6.74875 10.4921 7.96594C8.66251 9.18313 7.33884 11.025 6.7685 13.1471C5.56073 13.4994 4.49985 14.234 3.74522 15.2406C2.99059 16.2473 2.58294 17.4716 2.5835 18.7297Z" stroke="#AE3B4D" stroke-width="2.5" stroke-linejoin="round"/>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 transition-all mt-2">클라우드 전환 · G-Cloud</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">공공부문 클라우드 네이티브 아키텍처 설계, 행정·공공기관 정보자원의 G-Cloud 이관 및 최적화를 수행합니다.</p>
                     <div class="bg-slate-50 p-4 rounded-xl mt-auto border border-slate-100">
-                        <strong class="text-xs text-brand-primary block mb-1">대응 환경</strong>
-                        <span class="text-xs text-slate-700 font-medium">공공/민간 클라우드, CSAP 인증 클라우드, 하이브리드/멀티 클라우드</span>
+                        <strong class="text-xs text-[#AE3B4D] block mb-1">대응 환경</strong>
+                        <span class="text-xs text-slate-700 font-medium">공공/민간 클라우드, CSAP 인증 클라우드, <br>하이브리드/멀티 클라우드</span>
                     </div>
                 </div>
 
                 <!-- Service 6 -->
-                <div class="si-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-200 flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 06</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 transition-all">감리 대응 · 사업관리(PMO)</h3>
+                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+<svg width="32" height="39" viewBox="0 0 32 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.4463 19H11.4463V21H27.4463V19H24.4463V13C24.4463 10.24 22.2063 8 19.4463 8C16.6863 8 14.4463 10.24 14.4463 13V19ZM16.4463 13C16.4463 11.35 17.7963 10 19.4463 10C21.0963 10 22.4463 11.35 22.4463 13V19H16.4463V13ZM20.4463 6V3H18.4463V6H20.4463ZM26.4463 11V13H29.4463V11H26.4463ZM12.4463 13V11H9.44629V13H12.4463ZM25.1063 7.76L26.1663 6.7L27.2263 5.64L26.5163 4.93L25.8063 4.22L24.7463 5.28L23.6863 6.34L24.3963 7.05L25.1063 7.76ZM13.7863 7.76L14.4963 7.05L15.2063 6.34L14.1463 5.28L13.0863 4.22L12.3763 4.93L11.6663 5.64L12.7263 6.7L13.7863 7.76Z" fill="#AE3B4D"/>
+<path d="M24.2926 26.8784C23.9786 26.6368 23.6132 26.4709 23.2247 26.3935C22.8362 26.3162 22.435 26.3294 22.0525 26.4323L17.6396 27.4469C17.7423 27.0132 17.7455 26.5619 17.6489 26.1268C17.5524 25.6917 17.3586 25.2841 17.0821 24.9345C16.8056 24.585 16.4536 24.3026 16.0524 24.1084C15.6512 23.9143 15.2113 23.8134 14.7656 23.8135H9.48586C9.04247 23.8124 8.60325 23.8991 8.19358 24.0688C7.78392 24.2384 7.41193 24.4875 7.0991 24.8017L4.7134 27.1885H1.6875C1.23995 27.1885 0.810725 27.3663 0.494257 27.6827C0.17779 27.9992 0 28.4284 0 28.876L0 33.0947C0 33.5423 0.17779 33.9715 0.494257 34.288C0.810725 34.6044 1.23995 34.7822 1.6875 34.7822H12.6562C12.7252 34.7822 12.7939 34.7737 12.8609 34.7569L19.6109 33.0694C19.6542 33.059 19.6965 33.0449 19.7374 33.0272L23.8359 31.2828L23.8823 31.2617C24.2763 31.0648 24.6137 30.7709 24.8627 30.4076C25.1117 30.0443 25.2642 29.6235 25.3056 29.185C25.3471 28.7465 25.2762 28.3047 25.0997 27.9012C24.9233 27.4976 24.6469 27.1457 24.2968 26.8784H24.2926ZM23.143 29.7419L19.1352 31.4484L12.5508 33.0947H5.90625V28.3813L8.29301 25.9956C8.44914 25.8383 8.635 25.7135 8.83978 25.6286C9.04456 25.5436 9.26417 25.5003 9.48586 25.501H14.7656C15.1013 25.501 15.4232 25.6343 15.6606 25.8717C15.8979 26.109 16.0312 26.4309 16.0312 26.7666C16.0312 27.1023 15.8979 27.4242 15.6606 27.6615C15.4232 27.8989 15.1013 28.0322 14.7656 28.0322H11.8125C11.5887 28.0322 11.3741 28.1211 11.2159 28.2794C11.0576 28.4376 10.9687 28.6522 10.9687 28.876C10.9687 29.0998 11.0576 29.3144 11.2159 29.4726C11.3741 29.6308 11.5887 29.7197 11.8125 29.7197H15.1875C15.251 29.7196 15.3143 29.7125 15.3763 29.6986L22.4427 28.0734L22.4754 28.0649C22.6911 28.005 22.9213 28.0271 23.1218 28.1267C23.3223 28.2264 23.4788 28.3967 23.5613 28.6048C23.6437 28.8129 23.6463 29.0442 23.5685 29.2541C23.4907 29.464 23.338 29.6378 23.1398 29.7419H23.143Z" fill="#AE3B4D"/>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 transition-all mt-2">감리 대응 · 사업관리(PMO)</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">정보시스템 감리 대응, PMO 서비스, 사업관리 체계 운영으로 사업의 성공적 이행을 보장합니다.</p>
                     <div class="bg-slate-50 p-4 rounded-xl mt-auto border border-slate-100">
-                        <strong class="text-xs text-brand-primary block mb-1">대응 표준</strong>
-                        <span class="text-xs text-slate-700 font-medium">정보시스템 감리기준, 소프트웨어 사업관리지침, WBS 기반 관리</span>
+                        <strong class="text-xs text-[#AE3B4D] block mb-1">대응 표준</strong>
+                        <span class="text-xs text-slate-700 font-medium">정보시스템 감리기준, 소프트웨어 사업관리지침, <br>WBS 기반 관리</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. 공공정보화 사업 수행 방법론 (Methodology) -->
-    <section class="py-24 bg-slate-50 relative overflow-hidden border-t border-slate-200">
-        <div class="absolute top-1/2 left-0 w-full h-[400px] bg-blue-100/40 rounded-full blur-[100px] -translate-y-1/2 -z-10"></div>
-        <div class="container mx-auto px-6 max-w-7xl relative z-10">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-si font-bold tracking-widest text-sm uppercase">Methodology</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">공공정보화 사업 수행 방법론</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">전자정부 표준 프레임워크와 정보시스템 감리기준을 완벽히 준수하는 6단계 SDLC 방법론으로, 예측 가능하고 통제된 사업 이행을 보장합니다.</p>
-            </div>
-
-            <!-- 6 Phases -->
-            <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 relative fade-in-up delay-100">
-                <!-- Data Stream Animation Line (Desktop Only) -->
-                <div class="hidden lg:block data-stream rounded-full"></div>
-                
-                <!-- Phase 1 -->
-                <div class="bg-white border-t-4 border-blue-400 p-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                    <div class="text-xs font-bold text-blue-500 tracking-widest mb-2 border-b border-dashed border-blue-200 pb-2">PHASE 1</div>
-                    <h4 class="text-base font-bold text-slate-900 mb-2">착수 · 계획</h4>
-                    <p class="text-xs text-slate-600 break-keep">착수보고, WBS 수립, 조직 구성, 위험관리 계획</p>
-                </div>
-                <!-- Phase 2 -->
-                <div class="bg-white border-t-4 border-blue-500 p-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                    <div class="text-xs font-bold text-blue-600 tracking-widest mb-2 border-b border-dashed border-blue-200 pb-2">PHASE 2</div>
-                    <h4 class="text-base font-bold text-slate-900 mb-2">분석</h4>
-                    <p class="text-xs text-slate-600 break-keep">요구사항 분석, 업무 분석, To-Be 정의, 아키텍처 방향</p>
-                </div>
-                <!-- Phase 3 -->
-                <div class="bg-white border-t-4 border-indigo-500 p-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                    <div class="text-xs font-bold text-indigo-500 tracking-widest mb-2 border-b border-dashed border-indigo-200 pb-2">PHASE 3</div>
-                    <h4 class="text-base font-bold text-slate-900 mb-2">설계</h4>
-                    <p class="text-xs text-slate-600 break-keep">시스템·DB·UI 설계, 인터페이스 정의, 보안 설계</p>
-                </div>
-                <!-- Phase 4 -->
-                <div class="bg-white border-t-4 border-indigo-600 p-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                    <div class="text-xs font-bold text-indigo-600 tracking-widest mb-2 border-b border-dashed border-indigo-200 pb-2">PHASE 4</div>
-                    <h4 class="text-base font-bold text-slate-900 mb-2">구현</h4>
-                    <p class="text-xs text-slate-600 break-keep">개발, 단위테스트, 코드리뷰, 보안점검</p>
-                </div>
-                <!-- Phase 5 -->
-                <div class="bg-white border-t-4 border-brand-primary p-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                    <div class="text-xs font-bold text-brand-primary tracking-widest mb-2 border-b border-dashed border-blue-200 pb-2">PHASE 5</div>
-                    <h4 class="text-base font-bold text-slate-900 mb-2">시험 · 이행</h4>
-                    <p class="text-xs text-slate-600 break-keep">통합테스트, 사용자 인수, 데이터 이관, 오픈</p>
-                </div>
-                <!-- Phase 6 -->
-                <div class="bg-white border-t-4 border-brand-dark p-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                    <div class="text-xs font-bold text-brand-dark tracking-widest mb-2 border-b border-dashed border-slate-200 pb-2">PHASE 6</div>
-                    <h4 class="text-base font-bold text-slate-900 mb-2">안정화</h4>
-                    <p class="text-xs text-slate-600 break-keep">운영 이관, 하자보수, 성능모니터링, 사용자 교육</p>
-                </div>
-            </div>
-
-            <!-- 4 Standards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 fade-in-up delay-200">
-                <div class="bg-white border border-slate-200 p-6 rounded-xl text-center shadow-sm hover:border-brand-primary transition-colors">
-                    <strong class="block text-brand-dark font-bold text-sm mb-2">전자정부 프레임워크</strong>
-                    <span class="text-xs text-slate-600 font-medium">eGov Framework 표준 준수 개발</span>
-                </div>
-                <div class="bg-white border border-slate-200 p-6 rounded-xl text-center shadow-sm hover:border-brand-primary transition-colors">
-                    <strong class="block text-brand-dark font-bold text-sm mb-2">정보시스템 감리기준</strong>
-                    <span class="text-xs text-slate-600 font-medium">3단계 감리(요구정의·설계·종료) 대응</span>
-                </div>
-                <div class="bg-white border border-slate-200 p-6 rounded-xl text-center shadow-sm hover:border-brand-primary transition-colors">
-                    <strong class="block text-brand-dark font-bold text-sm mb-2">SW사업관리지침</strong>
-                    <span class="text-xs text-slate-600 font-medium">공공 SW 사업 표준관리 준수</span>
-                </div>
-                <div class="bg-white border border-slate-200 p-6 rounded-xl text-center shadow-sm hover:border-brand-primary transition-colors">
-                    <strong class="block text-brand-dark font-bold text-sm mb-2">ISMS-P · CSAP</strong>
-                    <span class="text-xs text-slate-600 font-medium">정보보호 · 클라우드 보안 인증</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. 품질 및 보안 관리 체계 (Quality & Security) -->
-    <section class="py-24 bg-brand-gray border-t border-slate-200">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-si font-bold tracking-widest text-sm uppercase">Quality & Security</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">품질 및 보안 관리 체계</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">공공정보화 사업의 특수성을 반영한 이중 관리 체계로 사업 품질과 정보보안을 동시에 확보합니다.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Quality Management -->
-                <div class="bg-white border border-slate-200 border-l-4 border-l-brand-dark rounded-r-2xl p-8 shadow-md hover:shadow-lg transition-shadow fade-in-up">
-                    <div class="w-14 h-14 bg-slate-100 text-brand-dark rounded-xl flex items-center justify-center text-3xl font-black mb-6"><i class="ph-bold ph-medal"></i></div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-1">품질관리 체계</h3>
-                    <span class="text-xs font-bold text-brand-primary tracking-widest block mb-8">QUALITY MANAGEMENT</span>
-                    
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                            <i class="ph-bold ph-check text-brand-primary mt-1 text-lg shrink-0"></i>
-                            <div><strong class="text-slate-900 block mb-1">PMO 사업관리</strong><span class="text-sm text-slate-600 break-keep">전담 PM/PMO 조직에 의한 체계적 사업관리</span></div>
-                        </li>
-                        <li class="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                            <i class="ph-bold ph-check text-brand-primary mt-1 text-lg shrink-0"></i>
-                            <div><strong class="text-slate-900 block mb-1">단계별 품질검토</strong><span class="text-sm text-slate-600 break-keep">WBS 기반 산출물 품질점검 및 형상관리</span></div>
-                        </li>
-                        <li class="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                            <i class="ph-bold ph-check text-brand-primary mt-1 text-lg shrink-0"></i>
-                            <div><strong class="text-slate-900 block mb-1">독립 QA 조직</strong><span class="text-sm text-slate-600 break-keep">사업팀과 분리된 독립 품질보증 활동</span></div>
-                        </li>
-                        <li class="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                            <i class="ph-bold ph-check text-brand-primary mt-1 text-lg shrink-0"></i>
-                            <div><strong class="text-slate-900 block mb-1">감리 대응 체계</strong><span class="text-sm text-slate-600 break-keep">3단계 정보시스템 감리 완벽 대응</span></div>
-                        </li>
-                        <li class="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                            <i class="ph-bold ph-check text-brand-primary mt-1 text-lg shrink-0"></i>
-                            <div><strong class="text-slate-900 block mb-1">지속적 개선</strong><span class="text-sm text-slate-600 break-keep">사업 종료 후 Lessons Learned 축적·활용</span></div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Security Management -->
-                <div class="bg-white border border-slate-200 border-l-4 border-l-cyan-500 rounded-r-2xl p-8 shadow-md hover:shadow-lg transition-shadow fade-in-up delay-100">
-                    <div class="w-14 h-14 bg-cyan-50 text-cyan-600 rounded-xl flex items-center justify-center text-3xl font-black mb-6"><i class="ph-bold ph-shield-check"></i></div>
-                    <h3 class="text-2xl font-bold text-slate-900 mb-1">보안관리 체계</h3>
-                    <span class="text-xs font-bold text-cyan-500 tracking-widest block mb-8">SECURITY MANAGEMENT</span>
-                    
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                            <i class="ph-bold ph-check text-cyan-500 mt-1 text-lg shrink-0"></i>
-                            <div><strong class="text-slate-900 block mb-1">보안 SDLC</strong><span class="text-sm text-slate-600 break-keep">요구분석 단계부터 보안 요구사항 통합 관리</span></div>
-                        </li>
-                        <li class="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                            <i class="ph-bold ph-check text-cyan-500 mt-1 text-lg shrink-0"></i>
-                            <div><strong class="text-slate-900 block mb-1">망분리 대응</strong><span class="text-sm text-slate-600 break-keep">업무망·인터넷망 분리 환경 개발 경험 보유</span></div>
-                        </li>
-                        <li class="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                            <i class="ph-bold ph-check text-cyan-500 mt-1 text-lg shrink-0"></i>
-                            <div><strong class="text-slate-900 block mb-1">개인정보 보호</strong><span class="text-sm text-slate-600 break-keep">개인정보 영향평가(PIA) 대응 및 비식별화 적용</span></div>
-                        </li>
-                        <li class="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                            <i class="ph-bold ph-check text-cyan-500 mt-1 text-lg shrink-0"></i>
-                            <div><strong class="text-slate-900 block mb-1">보안 취약점 점검</strong><span class="text-sm text-slate-600 break-keep">시큐어코딩, 웹취약점, 소스코드 정적분석</span></div>
-                        </li>
-                        <li class="flex items-start gap-3 pb-4 border-b border-slate-100 last:border-0 last:pb-0">
-                            <i class="ph-bold ph-check text-cyan-500 mt-1 text-lg shrink-0"></i>
-                            <div><strong class="text-slate-900 block mb-1">인증 준수</strong><span class="text-sm text-slate-600 break-keep">ISMS-P · CSAP · 국가정보원 보안 요구사항 준수</span></div>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 5. 주요 공공정보화 사업 실적 (Project References) -->
-    <section class="py-24 bg-white relative">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="text-center mb-12 fade-in-up">
-                <span class="text-gradient-si font-bold tracking-widest text-sm uppercase">Project Reference</span>
+    <section class="py-24 bg-white relative border-t border-slate-200">
+        <div class="container py-24 mx-auto px-6 max-w-7xl relative">
+            <div class="text-center pb-5 mb-20 fade-in-up">
+                <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">Project Reference</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">주요 공공정보화 사업 실적</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">중앙부처 · 공공기관 · 국방 · 공기업 등 공공부문 전반에 걸친 정보시스템 통합 구축 및 운영 사업 수행 경험을 축적해왔습니다.</p>
+                <p class="text-slate-500 max-w-2xl mx-auto break-keep mt-5 text-lg leading-relaxed">중앙부처 · 공공기관 · 국방 · 공기업 등 공공부문 전반에 걸친 정보시스템 통합 구축 및 운영 사업 수행 경험을 축적해왔습니다.</p>
             </div>
+            
+            <div class="flex gap-2 custom-btns justify-between absolute top-2/3 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[calc(100%+150px)]">
+                <button id="portfolio-prev"
+                    class="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-500 hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-colors">
+                    <i class="ph-bold ph-arrow-left"></i>
+                </button>
 
-            <!-- 카테고리 필터 (디자인용) -->
-            <div class="flex justify-center flex-wrap gap-3 mb-16 fade-in-up delay-100">
-                <span class="px-6 py-2 bg-brand-dark text-white rounded-full text-sm font-bold shadow-md cursor-default">전체</span>
-                <span class="px-6 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-medium hover:border-brand-primary hover:text-brand-primary cursor-pointer transition-colors">중앙부처</span>
-                <span class="px-6 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-medium hover:border-brand-primary hover:text-brand-primary cursor-pointer transition-colors">공공기관</span>
-                <span class="px-6 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-medium hover:border-brand-primary hover:text-brand-primary cursor-pointer transition-colors">국방</span>
-                <span class="px-6 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-medium hover:border-brand-primary hover:text-brand-primary cursor-pointer transition-colors">공기업</span>
+                <button id="portfolio-next"
+                    class="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-500 hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-colors">
+                    <i class="ph-bold ph-arrow-right"></i>
+                </button>
             </div>
-
-            <!-- 6 Reference Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                <!-- Ref 1: 중앙부처 -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-cyan-500 text-white text-[11px] font-bold px-3 py-1 rounded tracking-wider">중앙부처</span>
-                        <span class="text-white/80 text-sm font-medium">2024 - 2025</span>
+            <!-- Horizontal Slider -->
+            <div id="portfolio-wrapper" class="overflow-hidden mt-10 fade-in-up delay-100">
+                <div id="portfolio-slider" class="flex gap-8 w-max h-[300px]">
+                    <!-- Item 1 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si1.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo17.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">산림청</h3>
+                                <p class="mt-2">AI 산림행정업무시스템(e-푸른샘) 구축(3차)</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯부 대국민 통합민원 서비스 시스템 재구축<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 중앙부처 (예시)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            노후화된 대국민 민원 시스템을 MSA 아키텍처 기반으로 전면 재구축. 전자정부 프레임워크 최신 버전 적용, 반응형 UI 구현, 모바일 서비스 통합 개발 수행.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">약 OO억원</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">약 18개월</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">eGov Framework</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">MSA</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">Spring Boot</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">React</span>
-                        </div>
+                    <!-- Item 2 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si2.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo18.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">관세청</h3>
+                                <p class="mt-2">생성형 AI기반 개인통관 종합 상담 시스템</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Ref 2: 공공기관 -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up delay-100">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-blue-500 text-white text-[11px] font-bold px-3 py-1 rounded tracking-wider">공공기관</span>
-                        <span class="text-white/80 text-sm font-medium">2023 - 2024</span>
+                    <!-- Item 3 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si3.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo19.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">관세청</h3>
+                                <p class="mt-2">전자통관시스템 전산장비 전면교체 및 전환사업</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯공단 통합업무 포털 및 지식관리시스템 구축<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 공공기관 (예시)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            내부 업무 시스템 12종을 SSO 기반 통합 포털로 재편, 지식관리시스템 신규 구축. 사용자 경험 개선 및 업무 프로세스 자동화를 통한 생산성 향상 지원.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">약 OO억원</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">약 14개월</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">SSO</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">KMS</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">EAI</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">Portal</span>
-                        </div>
+                    <!-- Item 4 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si4.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo20.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">강원도 홍천군</h3>
+                                <p class="mt-2">강원도 학교급식 통합운영시스템 운영관리용역</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Ref 3: 국방 -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-[#2E5C8A] text-white text-[11px] font-bold px-3 py-1 rounded tracking-wider">국방</span>
-                        <span class="text-white/80 text-sm font-medium">2023 - 2024</span>
+                    <!-- Item 5 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si5.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo21.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">중소벤처기업부</h3>
+                                <p class="mt-2">중소벤처기업부 업무포털 기능개선</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯◯ 국방 지식관리 정보체계 고도화<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 국방부문 기관 (예시)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            국방 폐쇄망 환경 내 지식관리체계 고도화. 고등급 보안 요구사항 준수 하에 검색·분류·협업 기능 강화 및 사용자 편의성 개선을 위한 UX 재설계 수행.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">약 OO억원</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">약 12개월</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">폐쇄망 개발</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">국방 표준</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">보안 SDLC</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">KMS</span>
-                        </div>
+                    <!-- Item 6 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si6.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo22.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">(재)스마트팜 연구개발사업단</h3>
+                                <p class="mt-2">스마트팜 R&D 빅데이터 플랫폼 유지보수 및 고도화</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Ref 4: 공기업 -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up delay-100">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-brand-accent text-brand-dark text-[11px] font-black px-3 py-1 rounded tracking-wider">공기업</span>
-                        <span class="text-white/80 text-sm font-medium">2024 - 2025</span>
+                    <!-- Item 7 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si7.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo23.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">질병관리청</h3>
+                                <p class="mt-2">방역통합정보시스템 및 감염병 빅데이터 플랫폼 구축 2차</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯공사 차세대 기간계 시스템 클라우드 전환<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 공기업 (예시)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            노후 기간계 시스템을 클라우드 네이티브 아키텍처로 전환. CSAP 인증 클라우드 기반의 컨테이너 환경 구축, 데이터 마이그레이션, 무중단 이관 절차 수행.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">약 OO억원</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">약 20개월</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">Cloud Native</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">Kubernetes</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">CSAP</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">MSA</span>
-                        </div>
+                    <!-- Item 8 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si8.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo24.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">관세청</h3>
+                                <p class="mt-2">우편물 사전전자 정보와 X-Ray 판독영상 동시구현 시스템 구축</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Ref 5: 중앙부처 (ISP) -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-cyan-500 text-white text-[11px] font-bold px-3 py-1 rounded tracking-wider">중앙부처</span>
-                        <span class="text-white/80 text-sm font-medium">2023</span>
+                    <!-- Item 9 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si9.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo25.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">축산물질평가원</h3>
+                                <p class="mt-2">축산물도매시장 온라인 경매 플랫폼 구축</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯청 행정업무 지원시스템 ISP 수립<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 중앙부처 소속기관 (예시)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            향후 5년간의 정보화 로드맵 수립을 위한 ISP 사업. 업무 현황 진단, To-Be 아키텍처 설계, 단계별 이행계획 및 예산 산정 등 종합 컨설팅 수행.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">약 OO억원</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">약 8개월</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">ISP</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">EA</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">TOGAF</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">로드맵</span>
-                        </div>
+                    <!-- Item 10 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si10.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo26.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">통계청</h3>
+                                <p class="mt-2">2022년 차세대 나라통계 시스템 구축</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Ref 6: 공공기관 (SM 연계) -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up delay-100">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-blue-500 text-white text-[11px] font-bold px-3 py-1 rounded tracking-wider">공공기관</span>
-                        <span class="text-white/80 text-sm font-medium">2022 - 2024</span>
+                    <!-- Item 11 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si11.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo27.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">산림청</h3>
+                                <p class="mt-2">ICT 기반 스마트 산림재해 대응체계 구축</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯원 정보시스템 통합 운영 · 유지관리<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 공공기관 (예시)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            기관 내 20여 개 정보시스템에 대한 통합 운영·유지관리 서비스 수행. SLA 기반 서비스 관리, 장애 대응, 성능 최적화, 보안 취약점 조치 등 전반적 운영 지원.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">약 OO억원 (3개년)</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">약 36개월</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">유지관리</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">SLA</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">운영</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">헬프데스크</span>
-                        </div>
+                    <!-- Item 12 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si12.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo28.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">한국산업기술 평가관리원</h3>
+                                <p class="mt-2">KEIT 스마트 RCMS 고도화 사업</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 13 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si13.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo29.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">한국전기 안전공사</h3>
+                                <p class="mt-2">자금본사 집중지출 및 관리시스템 구축</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 14 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si14.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo30.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">한국조폐공사</h3>
+                                <p class="mt-2">모바일 신분증 구축 및 확대</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 15 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si15.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo31.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">국가기록원</h3>
+                                <p class="mt-2">행정정보데이터세트 기록관리시스템 구축 개발</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 16 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si16.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo32.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">행정안전부</h3>
+                                <p class="mt-2">정부기능분류시스템 클라우드 전환 재구축 사업</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 17 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si16.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo33.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">조달청</h3>
+                                <p class="mt-2">국유재산조사 관리시스템 3차 고도화 사업</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 18 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si16.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo34.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">인사혁신처</h3>
+                                <p class="mt-2">공직윤리종합 정보시스템 구축</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 19 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si16.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo35.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">국민권익위원회</h3>
+                                <p class="mt-2">국민신문고 시스템 기능고도화 사업</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 20 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_si16.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo36.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">과학기술 정책연구원</h3>
+                                <p class="mt-2">통합정보시스템 고도화</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <!-- 안내 박스 -->
-            <div class="bg-yellow-50 border border-brand-accent p-6 rounded-xl fade-in-up delay-200">
-                <div class="flex items-start gap-3 text-sm text-slate-800 leading-relaxed">
-                    <i class="ph-fill ph-info text-brand-accent text-xl shrink-0 mt-0.5"></i>
-                    <p class="break-keep">
-                        <strong class="font-bold text-slate-900 mr-1">※ 안내</strong>
-                        본 페이지에 게재된 사업 실적 6건은 실제 수행 실적이 아닌 <span class="bg-brand-accent text-white text-[10px] px-1.5 py-0.5 rounded font-bold mx-1">AI추론정보</span>로 생성된 예시 콘텐츠입니다. 실제 게시 전에는 (주)아이웨이브의 실제 사업 수행 실적으로 대체하여야 하며, 발주처·사업명·규모·기간 등은 실제 정보로 반드시 갱신해 주시기 바랍니다. 국방 부문 실적의 경우 공개 가능 범위 및 보안규정 확인이 필요합니다.
-                    </p>
-                </div>
-            </div>
-
         </div>
     </section>
-
-    <!-- 6. 하단 공통 콜투액션 (CTA) -->
-    <!-- <section id="contact" class="bg-brand-dark py-24 relative overflow-hidden">
-        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-primary/20 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 z-0"></div>
-        <div class="container mx-auto px-6 max-w-4xl text-center fade-in-up relative z-10">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">SI 사업 문의 및 상담</h2>
-            <p class="text-slate-400 text-lg mb-12 break-keep">공공정보화 SI 사업 도입을 검토하고 계신다면, 아이웨이브 SI사업본부로 문의해 주십시오.</p>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#contact" class="w-full sm:w-auto px-10 py-4 bg-cyan-500 text-white font-bold rounded-xl hover:bg-white hover:text-brand-dark transition-colors shadow-lg flex items-center justify-center gap-2 text-lg">
-                    사업 문의하기 <i class="ph-bold ph-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </section> -->
 
     <!-- Sub Footer -->
     <footer class="bg-[#06152F] text-white/60 py-8 text-sm text-center">
@@ -795,6 +888,90 @@
             scrollToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+
+            // Portfolio Slider Auto
+            // ================================
+            // Portfolio Infinite Slider
+            // ================================
+
+            const wrapper = document.getElementById("portfolio-wrapper");
+            const slider = document.getElementById("portfolio-slider");
+            const prevBtn = document.getElementById("portfolio-prev");
+            const nextBtn = document.getElementById("portfolio-next");
+
+            // 카드 복제 (무한 루프)
+            slider.innerHTML += slider.innerHTML;
+
+            let currentX = 0;
+            let autoSpeed = 1.5; // 숫자가 클수록 빨라짐
+            let paused = false;
+
+            // 카드 너비 계산 (반응형 대응)
+            function getCardWidth() {
+                const card = slider.querySelector(".portfolio-card");
+                return card.offsetWidth + 32; // gap-8 = 32px
+            }
+
+            // 자동 이동
+            function animate() {
+
+                if (!paused) {
+
+                    currentX -= autoSpeed;
+
+                    // 절반을 지나면 처음 위치로
+                    if (Math.abs(currentX) >= slider.scrollWidth / 2) {
+                        currentX = 0;
+                    }
+
+                    slider.style.transform = `translateX(${currentX}px)`;
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            // 마우스 올리면 정지
+            wrapper.addEventListener("mouseenter", () => {
+                paused = true;
+            });
+
+            // 마우스 나가면 재시작
+            wrapper.addEventListener("mouseleave", () => {
+                paused = false;
+            });
+
+            // 화살표 이동
+            function moveSlide(direction) {
+
+                paused = true;
+
+                currentX += direction * getCardWidth();
+
+                // 무한 루프 보정
+                if (currentX > 0) {
+                    currentX -= slider.scrollWidth / 2;
+                }
+
+                if (Math.abs(currentX) >= slider.scrollWidth / 2) {
+                    currentX = 0;
+                }
+
+                slider.style.transition = "transform .45s ease";
+                slider.style.transform = `translateX(${currentX}px)`;
+
+                setTimeout(() => {
+                    slider.style.transition = "none";
+                    paused = false;
+                }, 450);
+            }
+
+            // 버튼 이벤트
+            nextBtn.addEventListener("click", () => moveSlide(-1));
+            prevBtn.addEventListener("click", () => moveSlide(1));
+
+            // 시작
+            slider.style.transition = "none";
+            animate();
         });
     </script>
 </body>

@@ -21,10 +21,10 @@
                     },
                     colors: {
                         brand: {
-                            dark: '#0f172a',    // 딥 네이비
+                            dark: '#121f41',    // 딥 네이비
                             primary: '#1e3a8a', // 메인 블루
                             light: '#3b82f6',   // 밝은 블루
-                            accent: '#fbbf24',  // 포인트 옐로우
+                            accent: '#ae3b4d',  // 포인트 옐로우
                             gray: '#f8fafc'     // 배경 연회색
                         }
                     }
@@ -122,63 +122,74 @@
 <body class="text-slate-800 bg-white antialiased">
 
     <!-- Header (GNB) -->
-    <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 subpage-header text-white">
-        <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
-            <!-- Logo -->
-            <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
-                <i class="ph-fill ph-waves text-brand-accent text-3xl"></i>
-                iWave
-            </a>
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex gap-8 font-medium h-full">
-                <!-- 회사소개 -->
-                <div class="relative group flex items-center h-full">
-                    <a href="introduce_1.html" class="hover:text-brand-accent transition-colors flex items-center h-full">회사소개</a>
-                    <div class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
-                        <a href="introduce_1.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">회사개요</a>
-                        <a href="introduce_ceo.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">대표인사말</a>
-                        <a href="introduce_history.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">연혁</a>
-                        <a href="introduce_awards.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인증 및 수상</a>
-                        <a href="introduce_location.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">오시는길</a>
-                    </div>
-                </div>
-                
-                <!-- 사업분야 (활성화) -->
-                <div class="relative group flex items-center h-full">
-                    <a href="biz_ai.html#business" class="text-brand-accent flex items-center h-full border-b-2 border-brand-accent">사업분야</a>
-                    <div class="absolute top-full left-0 w-56 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
-                        <a href="#" class="block px-5 py-2.5 text-sm bg-slate-50 text-brand-primary font-bold transition-colors">AI사업</a>
-                        <a href="biz_si.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템통합(SI)</a>
-                        <a href="biz_sm.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템운영유지관리(SM)</a>
-                    </div>
-                </div>
-
-                <!-- 주요실적 -->
-                <div class="flex items-center h-full">
-                    <a href="reference.html" class="hover:text-brand-accent transition-colors flex items-center h-full">주요실적</a>
-                </div>
-                
-                <!-- 채용정보 -->
-                <div class="relative group flex items-center h-full">
-                    <a href="recruit_1.html" class="hover:text-brand-accent transition-colors flex items-center h-full">채용정보</a>
-                    <div class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
-                        <a href="recruit_1.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인재상</a>
-                        <a href="recruit_2.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">채용절차</a>
-                    </div>
-                </div>
-            </nav>
-            <!-- CTA Button -->
-            <div class="hidden md:block">
-                <a href="#contact" class="px-5 py-2.5 rounded-full bg-brand-accent text-brand-dark font-bold text-sm hover:bg-yellow-300 transition-colors shadow-lg">
-                    문의하기
+    <header id="header"
+            class="fixed w-full top-0 z-[100] transition-all duration-300 bg-brand-dark/60 text-white border-b border-white/10">
+            <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
+                    <img src="./images/logo.png" alt="iWave Logo" class="Head_logo w-52 ">
+                    <!-- <i class="ph-fill ph-waves text-brand-accent text-3xl"></i>
+                    iWave -->
                 </a>
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex gap-28 font-medium h-full">
+                    <!-- 회사소개 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="introduce_1.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">회사소개</a>
+                        <div
+                            class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                            <a href="introduce_1.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">회사개요</a>
+                            <a href="introduce_ceo.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">대표인사말</a>
+                            <a href="introduce_history.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">연혁</a>
+                            <a href="introduce_awards.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인증
+                                및 수상</a>
+                            <a href="introduce_location.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">오시는길</a>
+                        </div>
+                    </div>
+                    <!-- 사업분야 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="biz_ai.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">사업분야</a>
+                        <div
+                            class="absolute top-full left-0 w-56 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                            <a href="biz_ai.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">AI사업</a>
+                            <a href="biz_si.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템통합(SI)</a>
+                            <a href="biz_sm.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템운영유지관리(SM)</a>
+                        </div>
+                    </div>
+                    <!-- 주요실적 -->
+                    <div class="flex items-center h-full">
+                        <a href="reference.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">주요실적</a>
+                    </div>
+                    <!-- 채용정보 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="recruit_1.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">채용정보</a>
+                    </div>
+                </nav>
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact"
+                        class="text-white px-3 py-1.5 rounded-full bg-brand-dark/20 text-brand-dark  border font-bold text-xs hover:bg-brand-accent transition-colors shadow-lg">
+                        문의하기
+                    </a>
+                </div>
+                <!-- Mobile Menu Toggle -->
+                <button class="md:hidden text-2xl" aria-label="Menu">
+                    <i class="ph ph-list"></i>
+                </button>
             </div>
-            <!-- Mobile Menu Toggle -->
-            <button class="md:hidden text-2xl" aria-label="Menu">
-                <i class="ph ph-list"></i>
-            </button>
-        </div>
-    </header>
+        </header>
 
     <!-- Subpage Hero Section -->
     <section class="relative pt-32 pb-20 bg-[#070b14] overflow-hidden ai-grid-bg">
@@ -209,16 +220,15 @@
         <div class="container mx-auto px-6 max-w-7xl relative z-10 text-center md:text-left">
             <!-- Breadcrumbs -->
             <div class="flex items-center justify-center md:justify-start gap-2 text-sm text-slate-400 mb-6 fade-in-up">
-                <a href="index.html" class="hover:text-cyan-400 transition-colors"><i class="ph-fill ph-house"></i></a>
+                <a href="index.html" class="hover:text-brand-accent transition-colors"><i class="ph-fill ph-house"></i></a>
                 <i class="ph-bold ph-caret-right text-xs"></i>
                 <span>사업분야</span>
                 <i class="ph-bold ph-caret-right text-xs"></i>
-                <span class="text-cyan-400 font-medium">AI 사업</span>
+                <span class="text-white font-medium">AI 사업</span>
             </div>
-            
-            <h1 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight fade-in-up delay-100 tracking-tight">
+            <h1 class="text-3xl md:text-5xl font-black text-white mb-12 md:leading-[1.2] fade-in-up delay-100 tracking-tight">
                 비즈니스의 새로운 차원,<br>
-                <span class="text-gradient-ai">아이웨이브 생성형 AI</span> 서비스
+                아이웨이브 생성형 AI 서비스
             </h1>
             <p class="text-slate-300 text-lg md:text-xl max-w-3xl leading-relaxed fade-in-up delay-200 break-keep font-light">
                 아이웨이브는 단순한 기술 도입을 넘어, 공공 및 기업 환경에 최적화된 생성형 AI 기술을 통해 성공적인 인공지능 전환(AX)을 실현합니다. 전략 수립부터 데이터 관리, 강력한 보안까지 가장 신뢰할 수 있는 AI 혁신 로드맵을 제시합니다.
@@ -239,198 +249,133 @@
 
     <!-- 1. 핵심 요소기술 (Core Technology) -->
     <section class="py-24 bg-white relative">
-        <div class="container mx-auto px-6 max-w-7xl">
+        <div class="container py-24 mx-auto px-6 max-w-7xl">
             <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-ai font-bold tracking-widest text-sm uppercase">Core Technology</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">공공정보화 AI 사업의 핵심 요소기술</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">공공기관의 정보보안 원칙과 개인정보 보호 규정을 준수하면서, 대국민 서비스 품질을 혁신하기 위한 6대 핵심 요소기술을 통합적으로 제공합니다.</p>
+                <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">Core Technology</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-4">공공정보화 AI 사업의 핵심 요소기술</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto break-keep mt-5 text-lg leading-relaxed">공공기관의 정보보안 원칙과 개인정보 보호 규정을 준수하면서, 대국민 서비스 품질을 혁신하기 위한 6대 핵심 요소기술을 통합적으로 제공합니다.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Tech 01 -->
-                <div class="ai-glow-box bg-white rounded-3xl p-8 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up flex flex-col h-full">
+                <div class="bg-white rounded-3xl p-8 shadow-md group fade-in-up flex flex-col h-full">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 text-white flex items-center justify-center text-2xl shadow-lg">
                             <i class="ph-fill ph-brain"></i>
                         </div>
                         <div class="text-sm text-cyan-500 font-bold tracking-widest">TECH 01</div>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-600 transition-all">생성형 AI · 초거대 언어모델</h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">생성형 AI · 초거대 언어모델</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">공공 도메인 특화 프롬프트 엔지니어링, sLLM 파인튜닝, LLMOps 기반 안정적 운영 환경을 통해 대국민 서비스 및 내부 업무 자동화를 지원합니다.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">GPT · Claude</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">sLLM</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-blue-50 group-hover:text-blue-600 transition-colors">LLMOps</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">GPT · Claude</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">sLLM</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">LLMOps</span>
                     </div>
                 </div>
 
                 <!-- Tech 02 -->
-                <div class="ai-glow-box bg-white rounded-3xl p-8 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-100 flex flex-col h-full">
+                <div class="bg-white rounded-3xl p-8 shadow-md group fade-in-up delay-100 flex flex-col h-full">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center text-2xl shadow-lg">
                             <i class="ph-fill ph-magnifying-glass-plus"></i>
                         </div>
                         <div class="text-sm text-blue-500 font-bold tracking-widest">TECH 02</div>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-indigo-600 transition-all">RAG · 지식검색 증강</h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">RAG · 지식검색 증강</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">법령·규정·매뉴얼 등 공공 문서 자산을 벡터DB로 인덱싱하여, 근거 기반의 신뢰도 높은 답변을 실시간 제공하는 검색증강생성 아키텍처를 구축합니다.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">Vector DB</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">Embedding</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">Semantic Search</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">Vector DB</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">Embedding</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">Semantic Search</span>
                     </div>
                 </div>
 
                 <!-- Tech 03 -->
-                <div class="ai-glow-box bg-white rounded-3xl p-8 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-200 flex flex-col h-full">
+                <div class="bg-white rounded-3xl p-8 shadow-md group fade-in-up delay-200 flex flex-col h-full">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex items-center justify-center text-2xl shadow-lg">
                             <i class="ph-fill ph-graph"></i>
                         </div>
                         <div class="text-sm text-indigo-500 font-bold tracking-widest">TECH 03</div>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-indigo-500 group-hover:to-purple-600 transition-all">온톨로지 · 지식그래프</h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">온톨로지 · 지식그래프</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">OWL/RDF 기반 지식 체계화, SPARQL 질의 엔진, LOD 연계를 통해 법령·행정규칙·공공 데이터의 의미 기반 통합과 논리적 추론을 실현합니다.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-purple-50 group-hover:text-purple-600 transition-colors">OWL/RDF</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-purple-50 group-hover:text-purple-600 transition-colors">SPARQL</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-purple-50 group-hover:text-purple-600 transition-colors">LOD</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">OWL/RDF</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">SPARQL</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">LOD</span>
                     </div>
                 </div>
 
                 <!-- Tech 04 -->
-                <div class="ai-glow-box bg-white rounded-3xl p-8 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up flex flex-col h-full">
+                <div class="bg-white rounded-3xl p-8 shadow-md group fade-in-up flex flex-col h-full">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 text-white flex items-center justify-center text-2xl shadow-lg">
                             <i class="ph-fill ph-robot"></i>
                         </div>
                         <div class="text-sm text-purple-500 font-bold tracking-widest">TECH 04</div>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-600 transition-all">AI 에이전트 · 자동화</h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">AI 에이전트 · 자동화</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">Multi-Agent 협업 구조와 RPA·BPA 통합을 통해, 민원 처리·문서 검토·의사결정 지원 등 복합 업무의 자율적 수행 체계를 구현합니다.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-pink-50 group-hover:text-pink-600 transition-colors">Multi-Agent</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-pink-50 group-hover:text-pink-600 transition-colors">RPA · BPA</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-pink-50 group-hover:text-pink-600 transition-colors">Workflow</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">Multi-Agent</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">RPA · BPA</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">Workflow</span>
                     </div>
                 </div>
 
                 <!-- Tech 05 -->
-                <div class="ai-glow-box bg-white rounded-3xl p-8 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-100 flex flex-col h-full">
+                <div class="bg-white rounded-3xl p-8 shadow-md group fade-in-up delay-100 flex flex-col h-full">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 text-white flex items-center justify-center text-2xl shadow-lg">
                             <i class="ph-fill ph-database"></i>
                         </div>
                         <div class="text-sm text-pink-500 font-bold tracking-widest">TECH 05</div>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-pink-500 group-hover:to-rose-500 transition-all">MLOps · 데이터 파이프라인</h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">MLOps · 데이터 파이프라인</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">데이터 수집–전처리–학습–배포–모니터링의 전주기 자동화 체계와 모델 거버넌스로 지속가능한 AI 서비스 운영 기반을 마련합니다.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-rose-50 group-hover:text-rose-500 transition-colors">Kubeflow</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-rose-50 group-hover:text-rose-500 transition-colors">MLflow</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-rose-50 group-hover:text-rose-500 transition-colors">Data Pipeline</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">Kubeflow</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">MLflow</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">Data Pipeline</span>
                     </div>
                 </div>
 
                 <!-- Tech 06 -->
-                <div class="ai-glow-box bg-white rounded-3xl p-8 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-200 flex flex-col h-full">
+                <div class="bg-white rounded-3xl p-8 shadow-md group fade-in-up delay-200 flex flex-col h-full">
                     <div class="flex items-center gap-4 mb-5">
                         <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-orange-400 text-white flex items-center justify-center text-2xl shadow-lg">
                             <i class="ph-fill ph-shield-check"></i>
                         </div>
                         <div class="text-sm text-rose-500 font-bold tracking-widest">TECH 06</div>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-rose-500 group-hover:to-orange-400 transition-all">AI 보안 · 신뢰성(XAI)</h3>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">AI 보안 · 신뢰성(XAI)</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">망분리 환경 최적화, 개인정보 비식별화, 프롬프트 필터링, 설명가능AI(XAI) 적용으로 공공부문에 요구되는 신뢰성·투명성·감사적합성을 확보합니다.</p>
                     <div class="flex flex-wrap gap-2 mt-auto">
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-orange-50 group-hover:text-orange-500 transition-colors">XAI</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-orange-50 group-hover:text-orange-500 transition-colors">De-identification</span>
-                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md group-hover:bg-orange-50 group-hover:text-orange-500 transition-colors">Prompt Filter</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">XAI</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">De-identification</span>
+                        <span class="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-md">Prompt Filter</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 2. AI 시스템 구축방법론 (Methodology) -->
-    <section class="py-24 bg-slate-50 relative overflow-hidden">
-        <div class="absolute top-1/2 left-0 w-full h-[500px] bg-cyan-100/30 rounded-full blur-[120px] -translate-y-1/2 -z-10"></div>
-        <div class="container mx-auto px-6 max-w-7xl relative z-10">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-ai font-bold tracking-widest text-sm uppercase">Methodology</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">아이웨이브 AI 시스템 구축방법론</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">공공정보화 사업의 절차적 요구사항과 정보시스템 감리 기준에 부합하는 5단계 구축방법론으로, 사업의 예측 가능성과 성공적 이행을 보장합니다.</p>
-            </div>
-
-            <!-- 5 Steps -->
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-6 relative fade-in-up delay-100">
-                <!-- Data Stream Animation Line (Desktop Only) -->
-                <div class="hidden md:block data-stream rounded-full"></div>
-                
-                <!-- Step 01 -->
-                <div class="bg-white border-t-4 border-cyan-400 p-6 md:px-4 lg:px-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 text-white font-black flex items-center justify-center mx-auto mb-4 text-xl shadow-lg ring-4 ring-white group-hover:scale-110 transition-transform">01</div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-cyan-500 transition-colors">진단 · 분석</h4>
-                    <p class="text-sm text-slate-600 break-keep leading-relaxed">RFP 분석, 업무 현황 진단, Use Case 발굴, 데이터 준비도 평가</p>
-                </div>
-                <!-- Step 02 -->
-                <div class="bg-white border-t-4 border-blue-500 p-6 md:px-4 lg:px-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 text-white font-black flex items-center justify-center mx-auto mb-4 text-xl shadow-lg ring-4 ring-white group-hover:scale-110 transition-transform">02</div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-blue-500 transition-colors">설계 · PoC</h4>
-                    <p class="text-sm text-slate-600 break-keep leading-relaxed">AI 아키텍처 설계, 개념검증(PoC), ROI 산출, 보안성 검토</p>
-                </div>
-                <!-- Step 03 -->
-                <div class="bg-white border-t-4 border-indigo-500 p-6 md:px-4 lg:px-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 text-white font-black flex items-center justify-center mx-auto mb-4 text-xl shadow-lg ring-4 ring-white group-hover:scale-110 transition-transform">03</div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-indigo-500 transition-colors">플랫폼 구축</h4>
-                    <p class="text-sm text-slate-600 break-keep leading-relaxed">인프라 · 플랫폼 구축, 데이터 파이프라인, 모델 학습·튜닝</p>
-                </div>
-                <!-- Step 04 -->
-                <div class="bg-white border-t-4 border-purple-500 p-6 md:px-4 lg:px-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-white font-black flex items-center justify-center mx-auto mb-4 text-xl shadow-lg ring-4 ring-white group-hover:scale-110 transition-transform">04</div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-purple-500 transition-colors">통합 · 검증</h4>
-                    <p class="text-sm text-slate-600 break-keep leading-relaxed">기존 시스템 연계, 통합 테스트, 감리 대응, 사용자 검수</p>
-                </div>
-                <!-- Step 05 -->
-                <div class="bg-white border-t-4 border-pink-500 p-6 md:px-4 lg:px-6 text-center rounded-b-xl shadow-md relative group hover:-translate-y-2 transition-transform duration-300">
-                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-rose-500 text-white font-black flex items-center justify-center mx-auto mb-4 text-xl shadow-lg ring-4 ring-white group-hover:scale-110 transition-transform">05</div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-pink-500 transition-colors">운영 · 고도화</h4>
-                    <p class="text-sm text-slate-600 break-keep leading-relaxed">변화관리, 모니터링, 지속 학습, 성능 개선 및 확산</p>
-                </div>
-            </div>
-
-            <!-- Support Details -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 fade-in-up delay-200">
-                <div class="bg-white border border-slate-200 border-l-4 border-l-brand-dark p-6 rounded-r-xl shadow-sm">
-                    <strong class="block text-brand-dark font-bold text-lg mb-2">공공사업 표준 준수</strong>
-                    <span class="text-slate-600 text-sm leading-relaxed block break-keep">정보시스템 감리기준, ISMS-P, 전자정부 프레임워크 완전 준수</span>
-                </div>
-                <div class="bg-white border border-slate-200 border-l-4 border-l-brand-dark p-6 rounded-r-xl shadow-sm">
-                    <strong class="block text-brand-dark font-bold text-lg mb-2">데이터 거버넌스</strong>
-                    <span class="text-slate-600 text-sm leading-relaxed block break-keep">공공데이터 개방·품질 관리 표준, 개인정보 비식별화 절차 적용</span>
-                </div>
-                <div class="bg-white border border-slate-200 border-l-4 border-l-brand-dark p-6 rounded-r-xl shadow-sm">
-                    <strong class="block text-brand-dark font-bold text-lg mb-2">변화관리 프로그램</strong>
-                    <span class="text-slate-600 text-sm leading-relaxed block break-keep">공무원 대상 AI 리터러시 교육, 업무 정착 지원 체계 병행 제공</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- 3. FabriX & 파트너십 -->
-    <section class="py-24 bg-gradient-to-b from-white to-slate-50 relative border-t border-slate-200">
-        <div class="container mx-auto px-6 max-w-7xl">
+    <section class="py-24 bg-brand-gray from-white to-slate-50 relative border-t border-slate-200">
+        <div class="container py-24 mx-auto px-6 max-w-7xl">
             <div class="text-center mb-16 fade-in-up">
                 <div class="flex justify-center mb-6">
-                    <span class="bg-gradient-to-r from-yellow-100 to-yellow-50 text-yellow-700 border border-yellow-300 px-6 py-2 rounded-full text-sm font-bold tracking-widest shadow-sm">◆ OFFICIAL PARTNER ◆</span>
+                    <span class="bg-brand-accent text-white px-8 py-2 mb-8 rounded-full text-sm tracking-widest shadow-sm">OFFICIAL PARTNER</span>
                 </div>
-                <span class="text-gradient-ai font-bold tracking-widest text-sm uppercase">AI Platform</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">삼성SDS FabriX 공식 파트너</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">(주)아이웨이브는 국내 최대 규모의 기업용 생성형 AI 플랫폼 <strong>삼성SDS FabriX</strong>의 공식 파트너로서, 공공기관 맞춤형 AI 서비스 구축·공급·운영을 원스톱으로 지원합니다.</p>
+                <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">AI Platform</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-4">삼성SDS FabriX 공식 파트너</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto break-keep mt-5 text-base leading-relaxed">(주)아이웨이브는 국내 최대 규모의 기업용 생성형 AI 플랫폼 <strong class="text-brand-accent">삼성SDS FabriX</strong>의 공식 파트너로서, 공공기관 맞춤형 AI 서비스 구축·공급·운영을 원스톱으로 지원합니다.</p>
             </div>
 
             <!-- FabriX 소개 -->
-            <div class="bg-white rounded-2xl p-10 md:p-14 shadow-lg border border-slate-100 mb-12 fade-in-up delay-100">
+            <div class="bg-white rounded-2xl p-10 md:p-14 border border-slate-100 mb-12 fade-in-up delay-100">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-8 border-b border-slate-100 mb-8 gap-4">
                     <div class="text-4xl font-black text-slate-900 tracking-tighter">Fabri<em class="not-italic text-brand-primary">X</em></div>
                     <div class="text-left md:text-right text-sm text-slate-500">
@@ -443,31 +388,24 @@
                 </p>
             </div>
 
-            <!-- FabriX 플랫폼 아키텍처 이미지 추가 -->
-            <div class="flex justify-center mb-16 fade-in-up delay-150">
-                <div class="w-full max-w-5xl rounded-2xl overflow-hidden shadow-xl border border-slate-200">
-                    <img src="images/biz/fabrix_platform.png" alt="삼성SDS FabriX 플랫폼 아키텍처" class="w-full h-auto object-cover">
-                </div>
-            </div>
-
             <!-- FabriX 4대 특징 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16 fade-in-up delay-200">
-                <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm hover:shadow-md transition-shadow">
+                <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm">
                     <div class="w-14 h-14 bg-brand-primary/10 text-brand-primary rounded-xl flex items-center justify-center text-3xl font-black mx-auto mb-6"><i class="ph-fill ph-plugs-connected"></i></div>
                     <h4 class="text-lg font-bold text-slate-900 mb-3">끊김없는 연결</h4>
                     <p class="text-sm text-slate-600 leading-relaxed break-keep">기업 내·외부 시스템, 데이터, 지식자산을 하나의 카탈로그로 통합</p>
                 </div>
-                <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm hover:shadow-md transition-shadow">
+                <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm">
                     <div class="w-14 h-14 bg-brand-primary/10 text-brand-primary rounded-xl flex items-center justify-center text-3xl font-black mx-auto mb-6"><i class="ph-fill ph-shield-check"></i></div>
                     <h4 class="text-lg font-bold text-slate-900 mb-3">강력한 보안</h4>
                     <p class="text-sm text-slate-600 leading-relaxed break-keep">SCP 기반 프라이빗 클라우드, 인증·권한 관리, 프롬프트 필터링</p>
                 </div>
-                <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm hover:shadow-md transition-shadow">
+                <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm">
                     <div class="w-14 h-14 bg-brand-primary/10 text-brand-primary rounded-xl flex items-center justify-center text-3xl font-black mx-auto mb-6"><i class="ph-fill ph-sliders"></i></div>
                     <h4 class="text-lg font-bold text-slate-900 mb-3">LLM 자유선택</h4>
                     <p class="text-sm text-slate-600 leading-relaxed break-keep">다양한 LLM을 상황별 최적 선택 가능한 유연한 LLMOps 환경</p>
                 </div>
-                <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm hover:shadow-md transition-shadow">
+                <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm">
                     <div class="w-14 h-14 bg-brand-primary/10 text-brand-primary rounded-xl flex items-center justify-center text-3xl font-black mx-auto mb-6"><i class="ph-fill ph-robot"></i></div>
                     <h4 class="text-lg font-bold text-slate-900 mb-3">AI Agent Studio</h4>
                     <p class="text-sm text-slate-600 leading-relaxed break-keep">Low-Code 기반 맞춤형 AI Agent 개발 및 협업 환경 제공</p>
@@ -475,34 +413,34 @@
             </div>
 
             <!-- 파트너십 강조 배너 -->
-            <div class="bg-brand-dark text-white rounded-3xl p-10 md:p-14 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative overflow-hidden fade-in-up delay-300 shadow-2xl">
-                <div class="absolute -top-20 -right-20 w-80 h-80 bg-brand-accent/20 rounded-full blur-[80px]"></div>
-                <div class="relative z-10">
-                    <span class="inline-block bg-brand-accent text-brand-dark px-4 py-1.5 rounded font-black tracking-widest text-xs mb-6">▶ IWAVE × SAMSUNG SDS</span>
-                    <h3 class="text-3xl md:text-4xl font-black leading-snug mb-6 break-keep">
-                        (주)아이웨이브는 <em class="not-italic text-brand-accent">FabriX 공식 파트너</em>로서<br>
+            <div class="mt-24 p-10 md:p-14 grid grid-cols-1 gap-12 items-center relative overflow-hidden fade-in-up delay-300">
+                <div class="relative z-10 mt-24 mb-10 text-center">
+                    <span class="inline-block bg-white text-brand-accent border border-brand-accent px-8 py-2 rounded-full font-black tracking-widest text-xs mb-8">iWAVE × SAMSUNG SDS</span>
+                    <h3 class="text-3xl md:text-4xl font-bold mb-8 break-keep md:leading-[1.3]">
+                        (주)아이웨이브는 <em class="not-italic">FabriX 공식 파트너</em>로서<br>
                         공공부문 도입·구축·운영을 지원합니다.
                     </h3>
-                    <p class="text-slate-300 text-sm md:text-base leading-relaxed break-keep">
-                        삼성SDS의 검증된 플랫폼 기술력과 아이웨이브의 공공정보화 사업 수행 역량이 결합하여, 정부 및 공공기관 고객이 안심하고 도입할 수 있는 최고 수준의 AI 서비스 환경을 제공합니다.
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed break-keep">
+                        삼성SDS의 검증된 플랫폼 기술력과 아이웨이브의 공공정보화 사업 수행 역량이 결합하여, <Br>정부 및 공공기관 고객이 안심하고 도입할 수 있는 최고 수준의 AI 서비스 환경을 제공합니다.
                     </p>
                 </div>
-                <div class="relative z-10 grid grid-cols-2 gap-4 md:gap-6">
-                    <div class="bg-white/10 border border-white/20 rounded-2xl p-6 backdrop-blur-sm">
-                        <strong class="block text-brand-accent text-2xl md:text-3xl font-black mb-2">공식</strong>
-                        <span class="text-sm md:text-base text-white/90 leading-snug break-keep block">삼성SDS FabriX<br>파트너 인증</span>
+                <div class="mt-20 mb-24 max-w-[80%] mx-auto"><img src="images/biz/biz_ai_sds.png" alt=""></div>
+                <div class="relative z-10 grid grid-cols-4 gap-4 md:gap-6 text-center mt-5">
+                    <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm">
+                        <strong class="block text-slate-600 text-2xl md:text-3xl font-black mb-4">공식</strong>
+                        <span class="text-sm md:text-base text-neutral-700 leading-snug break-keep block">삼성SDS FabriX<br>파트너 인증</span>
                     </div>
-                    <div class="bg-white/10 border border-white/20 rounded-2xl p-6 backdrop-blur-sm">
-                        <strong class="block text-brand-accent text-2xl md:text-3xl font-black mb-2">전담</strong>
-                        <span class="text-sm md:text-base text-white/90 leading-snug break-keep block">공공부문 특화<br>전담 컨설팅 조직</span>
+                    <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm">
+                        <strong class="block text-slate-600 text-2xl md:text-3xl font-black mb-4">전담</strong>
+                        <span class="text-sm md:text-base text-neutral-700 leading-snug break-keep block">공공부문 특화<br>전담 컨설팅 조직</span>
                     </div>
-                    <div class="bg-white/10 border border-white/20 rounded-2xl p-6 backdrop-blur-sm">
-                        <strong class="block text-brand-accent text-2xl md:text-3xl font-black mb-2">협업</strong>
-                        <span class="text-sm md:text-base text-white/90 leading-snug break-keep block">삼성SDS 기술진과의<br>공동 사업 수행</span>
+                    <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm">
+                        <strong class="block text-slate-600 text-2xl md:text-3xl font-black mb-4">협업</strong>
+                        <span class="text-sm md:text-base text-neutral-700 leading-snug break-keep block">삼성SDS 기술진과의<br>공동 사업 수행</span>
                     </div>
-                    <div class="bg-white/10 border border-white/20 rounded-2xl p-6 backdrop-blur-sm">
-                        <strong class="block text-brand-accent text-2xl md:text-3xl font-black mb-2">지속</strong>
-                        <span class="text-sm md:text-base text-white/90 leading-snug break-keep block">도입 후 운영·<br>고도화 지속 지원</span>
+                    <div class="bg-white border border-slate-100 rounded-xl p-8 text-center shadow-sm">
+                        <strong class="block text-slate-600 text-2xl md:text-3xl font-black mb-4">지속</strong>
+                        <span class="text-sm md:text-base text-neutral-700 leading-snug break-keep block">도입 후 운영·<br>고도화 지속 지원</span>
                     </div>
                 </div>
             </div>
@@ -514,52 +452,16 @@
         <!-- 배경 장식 -->
         <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-primary/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
 
-        <div class="container mx-auto px-6 max-w-7xl relative z-10">
+        <div class="container py-24 mx-auto px-6 max-w-7xl relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 fade-in-up">
                 <div>
-                    <span class="text-brand-accent font-bold tracking-widest text-sm uppercase">Key References & Capability</span>
-                    <h2 class="text-3xl md:text-4xl font-bold mt-2">공공 IT 혁신을 이끄는<br>아이웨이브의 AI 프로젝트</h2>
-                </div>
-                <!-- 슬라이더 컨트롤 버튼 -->
-                <div class="mt-6 md:mt-0 flex gap-3">
-                    <button id="slider-prev" class="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-brand-dark transition-colors backdrop-blur-sm">
-                        <i class="ph-bold ph-arrow-left"></i>
-                    </button>
-                    <button id="slider-next" class="w-12 h-12 rounded-full border border-white/30 flex items-center justify-center text-white hover:bg-white hover:text-brand-dark transition-colors backdrop-blur-sm">
-                        <i class="ph-bold ph-arrow-right"></i>
-                    </button>
+                    <span class="text-white font-bold tracking-widest text-sm uppercase">Key References & Capability</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mt-4">공공 IT 혁신을 이끄는<br>아이웨이브의 AI 프로젝트</h2>
                 </div>
             </div>
 
             <!-- 가로 슬라이더 영역 -->
             <div id="ai-portfolio-slider" class="flex gap-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 fade-in-up delay-100 -mx-6 px-6 scroll-smooth">
-                
-                <!-- Highlight Card 🥇 범정부 초거대 AI -->
-                <div class="snap-start shrink-0 w-[85vw] sm:w-[400px] relative group cursor-pointer">
-                    <!-- 하이라이트 후광 효과 -->
-                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-accent to-yellow-500 rounded-3xl blur opacity-30 group-hover:opacity-70 transition duration-500"></div>
-                    
-                    <div class="relative bg-[#111827] rounded-3xl h-full border border-white/10 p-8 flex flex-col justify-between overflow-hidden">
-                        <div class="absolute top-0 right-0 bg-brand-accent text-brand-dark text-xs font-black px-4 py-2 rounded-bl-xl z-10 shadow-lg">
-                            BEST REFERENCE 🥇
-                        </div>
-                        
-                        <div>
-                            <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-8 border border-white/10">
-                                <i class="ph-fill ph-buildings text-4xl text-brand-accent"></i>
-                            </div>
-                            <span class="text-brand-accent font-bold text-sm tracking-wider mb-2 block">수행 완료</span>
-                            <h3 class="text-2xl font-bold mb-4 leading-tight">범정부 초거대 AI<br>공통기반 수행</h3>
-                            <p class="text-slate-400 text-sm leading-relaxed break-keep line-clamp-4">
-                                범정부 차원의 초거대 AI 공통기반 프로젝트를 성공적으로 수행하며, 국가적 규모의 AI 인프라 구축 및 적용에 대한 아이웨이브만의 독보적인 기술력과 노하우를 입증했습니다.
-                            </p>
-                        </div>
-                        <div class="mt-8 pt-6 border-t border-white/10 flex justify-between items-center text-sm font-medium">
-                            <span class="text-slate-300">자세히 보기</span>
-                            <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Reference 2: 관세청 -->
                 <div class="snap-start shrink-0 w-[85vw] sm:w-[400px] group cursor-pointer">
@@ -573,10 +475,6 @@
                             <p class="text-slate-400 text-sm leading-relaxed break-keep line-clamp-4">
                                 대국민 통관 서비스의 혁신을 위해 생성형 AI 기술을 접목, 24시간 정확하고 친절한 지능형 종합 상담 환경을 성공적으로 구현하였습니다.
                             </p>
-                        </div>
-                        <div class="mt-8 pt-6 border-t border-white/10 flex justify-between items-center text-sm font-medium">
-                            <span class="text-slate-300">자세히 보기</span>
-                            <i class="ph-bold ph-arrow-up-right text-brand-light group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
                         </div>
                     </div>
                 </div>
@@ -594,10 +492,6 @@
                                 방대한 국가 산림 데이터를 AI 기반으로 심층 분석 및 처리하여 행정 업무의 정확성과 효율성을 극대화하는 지능형 시스템을 구축 중입니다.
                             </p>
                         </div>
-                        <div class="mt-8 pt-6 border-t border-white/10 flex justify-between items-center text-sm font-medium">
-                            <span class="text-slate-300">자세히 보기</span>
-                            <i class="ph-bold ph-arrow-up-right text-green-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                        </div>
                     </div>
                 </div>
 
@@ -614,33 +508,12 @@
                                 에듀테크 및 AI 학습 영역에서의 선도적인 기술력을 바탕으로, 관련 소프트웨어에 대한 공식 저작권 등록을 완료하여 독자적인 역량을 확보했습니다.
                             </p>
                         </div>
-                        <div class="mt-8 pt-6 border-t border-white/10 flex justify-between items-center text-sm font-medium">
-                            <span class="text-slate-300">자세히 보기</span>
-                            <i class="ph-bold ph-arrow-up-right text-indigo-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
     </section>
-
-    <!-- 5. 하단 공통 콜투액션 (CTA) -->
-    <!-- <section id="contact" class="bg-white py-24 border-t border-slate-200">
-        <div class="container mx-auto px-6 max-w-4xl text-center fade-in-up">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">성공적인 인공지능 전환(AX),<br>아이웨이브의 AI 전문가와 지금 상의하세요.</h2>
-            <p class="text-slate-500 text-lg mb-12">기업 맞춤형 AI 도입 전략부터 보안 시스템 설계까지, 귀사의 가장 든든한 파트너가 되겠습니다.</p>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#" class="w-full sm:w-auto px-8 py-4 bg-brand-primary text-white font-bold rounded-xl hover:bg-brand-dark transition-colors shadow-lg flex items-center justify-center gap-2 text-lg">
-                    <i class="ph-bold ph-headset"></i> AI 사업 문의하기
-                </a>
-                <a href="#" class="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 font-bold rounded-xl border-2 border-slate-200 hover:border-brand-primary hover:text-brand-primary transition-colors flex items-center justify-center gap-2 text-lg">
-                    <i class="ph-bold ph-download-simple"></i> 회사소개서 다운로드
-                </a>
-            </div>
-        </div>
-    </section> -->
 
     <!-- Sub Footer -->
     <footer class="bg-[#0b1120] text-slate-500 py-8 text-sm text-center md:text-left">
