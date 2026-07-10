@@ -672,7 +672,7 @@
 
 
             function startInterval() {
-                slideInterval = setInterval(nextSlide, 5000); // 5초마다 자동 슬라이드
+                slideInterval = setInterval(nextSlide, 8000); // 5초마다 자동 슬라이드
             }
 
             function resetInterval() {
@@ -683,9 +683,10 @@
             startInterval(); // 슬라이드 타이머 시작
 
 
-            document.querySelectorAll('.slide video').forEach(video => {
-                video.playbackRate = 0.5;
-            });
+            const videos = document.querySelectorAll('.slide video');
+
+            videos[0].playbackRate = 0.5;
+            videos[1].playbackRate = 1;
 
 
             // 3. Scroll Intersection Observer (Fade in up 효과)
