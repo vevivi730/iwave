@@ -21,10 +21,10 @@
                     },
                     colors: {
                         brand: {
-                            dark: '#0f172a',    // 딥 네이비
+                            dark: '#121f41',    // 딥 네이비
                             primary: '#1e3a8a', // 메인 블루
                             light: '#3b82f6',   // 밝은 블루
-                            accent: '#fbbf24',  // 포인트 옐로우
+                            accent: '#ae3b4d',  // 포인트 옐로우
                             gray: '#f8fafc'     // 배경 연회색
                         }
                     }
@@ -117,68 +117,122 @@
         .sm-node {
             animation: float 4s ease-in-out infinite alternate;
         }
+
+        /* Portfolio Slider */
+        #portfolio-wrapper {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        #portfolio-slider {
+            display: flex;
+            gap: 2rem;                 /* Tailwind gap-8 */
+            width: max-content;
+            will-change: transform;
+            user-select: none;
+        }
+
+        .portfolio-card {
+            flex-shrink: 0;
+        }
+
+        .portfolio-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* 자연스러운 이동 */
+        #portfolio-slider {
+            transition: transform .45s ease;
+        }
+
+        /* Hover 효과 유지 */
+        .portfolio-card a {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 선택사항 - 드래그 시 */
+        #portfolio-slider.dragging {
+            cursor: grabbing;
+            transition: none;
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-white antialiased">
 
     <!-- Header (GNB) -->
-    <header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 subpage-header text-white">
-        <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
-            <!-- Logo -->
-            <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
-                <i class="ph-fill ph-waves text-brand-accent text-3xl"></i>
-                iWave
-            </a>
-            <!-- Desktop Nav -->
-            <nav class="hidden md:flex gap-8 font-medium h-full">
-                <!-- 회사소개 -->
-                <div class="relative group flex items-center h-full">
-                    <a href="introduce_1.html" class="hover:text-brand-accent transition-colors flex items-center h-full">회사소개</a>
-                    <div class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
-                        <a href="introduce_1.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">회사개요</a>
-                        <a href="introduce_ceo.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">대표인사말</a>
-                        <a href="introduce_history.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">연혁</a>
-                        <a href="introduce_awards.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인증 및 수상</a>
-                        <a href="introduce_location.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">오시는길</a>
-                    </div>
-                </div>
-                
-                <!-- 사업분야 (활성화) -->
-                <div class="relative group flex items-center h-full">
-                    <a href="index.html#business" class="text-brand-accent flex items-center h-full border-b-2 border-brand-accent">사업분야</a>
-                    <div class="absolute top-full left-0 w-56 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
-                        <a href="biz_ai.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">AI사업</a>
-                        <a href="biz_si.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템통합(SI)</a>
-                        <a href="#" class="block px-5 py-2.5 text-sm bg-slate-50 text-brand-primary font-bold transition-colors">시스템운영유지관리(SM)</a>
-                    </div>
-                </div>
-
-                <!-- 주요실적 -->
-                <div class="flex items-center h-full">
-                    <a href="reference.html" class="hover:text-brand-accent transition-colors flex items-center h-full">주요실적</a>
-                </div>
-                
-                <!-- 채용정보 -->
-                <div class="relative group flex items-center h-full">
-                    <a href="recruit_1.html" class="hover:text-brand-accent transition-colors flex items-center h-full">채용정보</a>
-                    <div class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
-                        <a href="recruit_1.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인재상</a>
-                        <a href="recruit_2.html" class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">채용절차</a>
-                    </div>
-                </div>
-            </nav>
-            <!-- CTA Button -->
-            <div class="hidden md:block">
-                <a href="#contact" class="px-5 py-2.5 rounded-full bg-brand-accent text-brand-dark font-bold text-sm hover:bg-yellow-300 transition-colors shadow-lg">
-                    문의하기
+    <header id="header"
+            class="fixed w-full top-0 z-[100] transition-all duration-300 bg-brand-dark/60 text-white border-b border-white/10">
+            <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
+                    <img src="./images/logo.png" alt="iWave Logo" class="Head_logo w-52 ">
+                    <!-- <i class="ph-fill ph-waves text-brand-accent text-3xl"></i>
+                    iWave -->
                 </a>
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex gap-28 font-medium h-full">
+                    <!-- 회사소개 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="introduce_1.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">회사소개</a>
+                        <div
+                            class="absolute top-full left-0 w-48 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                            <a href="introduce_1.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">회사개요</a>
+                            <a href="introduce_ceo.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">대표인사말</a>
+                            <a href="introduce_history.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">연혁</a>
+                            <a href="introduce_awards.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">인증
+                                및 수상</a>
+                            <a href="introduce_location.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">오시는길</a>
+                        </div>
+                    </div>
+                    <!-- 사업분야 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="biz_ai.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">사업분야</a>
+                        <div
+                            class="absolute top-full left-0 w-56 bg-white text-slate-800 rounded-b-lg shadow-xl border-t-2 border-brand-primary py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300">
+                            <a href="biz_ai.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">AI사업</a>
+                            <a href="biz_si.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템통합(SI)</a>
+                            <a href="biz_sm.html"
+                                class="block px-5 py-2.5 text-sm hover:bg-slate-50 hover:text-brand-primary transition-colors">시스템운영유지관리(SM)</a>
+                        </div>
+                    </div>
+                    <!-- 주요실적 -->
+                    <div class="flex items-center h-full">
+                        <a href="reference.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">주요실적</a>
+                    </div>
+                    <!-- 채용정보 -->
+                    <div class="relative group flex items-center h-full">
+                        <a href="recruit_1.html"
+                            class="hover:text-brand-accent transition-colors flex items-center h-full text-lg">채용정보</a>
+                    </div>
+                </nav>
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact"
+                        class="text-white px-3 py-1.5 rounded-full bg-brand-dark/20 text-brand-dark  border font-bold text-xs hover:bg-brand-accent transition-colors shadow-lg">
+                        문의하기
+                    </a>
+                </div>
+                <!-- Mobile Menu Toggle -->
+                <button class="md:hidden text-2xl" aria-label="Menu">
+                    <i class="ph ph-list"></i>
+                </button>
             </div>
-            <!-- Mobile Menu Toggle -->
-            <button class="md:hidden text-2xl" aria-label="Menu">
-                <i class="ph ph-list"></i>
-            </button>
-        </div>
-    </header>
+        </header>
 
     <!-- Subpage Hero Section -->
     <section class="relative pt-32 pb-20 bg-[#070b14] overflow-hidden sm-grid-bg">
@@ -208,41 +262,19 @@
         <div class="container mx-auto px-6 max-w-7xl relative z-10 text-center md:text-left">
             <!-- Breadcrumbs -->
             <div class="flex items-center justify-center md:justify-start gap-2 text-sm text-slate-400 mb-6 fade-in-up">
-                <a href="index.html" class="hover:text-cyan-400 transition-colors"><i class="ph-fill ph-house"></i></a>
+                <a href="index.html" class="hover:text-brand-accent transition-colors"><i class="ph-fill ph-house"></i></a>
                 <i class="ph-bold ph-caret-right text-xs"></i>
                 <span>사업분야</span>
                 <i class="ph-bold ph-caret-right text-xs"></i>
-                <span class="text-cyan-400 font-medium">시스템운영유지관리(SM)</span>
+                <span class="text-white font-medium">시스템운영유지관리(SM)</span>
             </div>
-            
-            <span class="inline-block bg-cyan-500/20 text-cyan-400 px-4 py-1.5 rounded-full font-bold tracking-widest text-xs mb-4 shadow-sm border border-cyan-500/30 fade-in-up delay-100">SYSTEM MANAGEMENT</span>
-            <h1 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight fade-in-up delay-100 tracking-tight">
-                공공정보시스템의 <strong class="text-cyan-400">안정적 운영</strong>,<br>
+            <h1 class="text-3xl md:text-5xl font-black text-white mb-12 md:leading-[1.2] fade-in-up delay-100 tracking-tight">
+                공공정보시스템의 안정적 운영,<br>
                 (주)아이웨이브가 책임집니다.
             </h1>
             <p class="text-slate-300 text-lg md:text-xl max-w-3xl leading-relaxed fade-in-up delay-200 break-keep font-light">
                 국제 표준 IT서비스관리(ITSM) 체계와 검증된 전문 인력을 기반으로, 중앙부처·공공기관·국방·공기업의 정보시스템 운영유지관리 서비스를 제공합니다.
             </p>
-
-            <!-- Hero Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mt-12 border-t border-white/20 pt-10 fade-in-up delay-300">
-                <div class="text-left relative group">
-                    <strong class="block text-3xl font-black text-cyan-400 mb-2 leading-none tracking-tight">24 / 7</strong>
-                    <span class="text-sm text-slate-300 leading-snug block">연중무휴 운영 지원 체계<br>운영 예정 <span class="text-brand-accent font-bold text-xs bg-brand-accent/20 px-1 py-0.5 rounded ml-1">AI추론정보</span></span>
-                </div>
-                <div class="text-left">
-                    <strong class="block text-3xl font-black text-cyan-400 mb-2 leading-none tracking-tight">ITIL</strong>
-                    <span class="text-sm text-slate-300 leading-snug block">국제표준 기반<br>서비스 관리 프로세스</span>
-                </div>
-                <div class="text-left">
-                    <strong class="block text-3xl font-black text-cyan-400 mb-2 leading-none tracking-tight">SLA</strong>
-                    <span class="text-sm text-slate-300 leading-snug block">서비스수준협약<br>정량적 관리 체계</span>
-                </div>
-                <div class="text-left">
-                    <strong class="block text-3xl font-black text-cyan-400 mb-2 leading-none tracking-tight">ISMS-P</strong>
-                    <span class="text-sm text-slate-300 leading-snug block">정보보호 및 개인정보보호<br>관리체계 준수</span>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -258,236 +290,131 @@
     </div>
 
     <!-- 1. SM 서비스 체계 (Service Portfolio) -->
-    <section class="py-24 bg-brand-gray relative">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-sm font-bold tracking-widest text-sm uppercase">Service Portfolio</span>
+    <section class="py-24 bg-white relative">
+        <div class="container py-24 mx-auto px-6 max-w-7xl">
+            <div class="text-center pb-5 mb-20 fade-in-up">
+                <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">Service Portfolio</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">SM 서비스 체계</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">정보시스템 운영에 요구되는 6대 서비스 영역을 통합적으로 제공하여, 발주기관이 본연의 업무에 집중할 수 있는 안정적 정보화 환경을 조성합니다.</p>
+                <p class="text-slate-500 max-w-2xl mx-auto break-keep mt-5 text-lg leading-relaxed ">정보시스템 운영에 요구되는 6대 서비스 영역을 통합적으로 제공하여, 발주기관이 본연의 업무에 집중할 수 있는 안정적 정보화 환경을 조성합니다.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Service 1 -->
-                <div class="sm-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 01</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-600 transition-all">애플리케이션 운영관리</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">업무 애플리케이션의 안정적 서비스 제공을 위한 상시 모니터링, 성능관리, 장애 대응 및 소규모 기능 개선 활동을 수행합니다.</p>
-                    <div class="bg-slate-50 border-l-4 border-cyan-400 p-4 rounded-r-xl mt-auto">
-                        <strong class="text-xs text-brand-dark block mb-1">주요 업무 범위</strong>
-                        <span class="text-xs text-slate-700 font-medium">장애 감시 · 사용자 지원 · 소규모 기능 개선 · 데이터 백업 · 성능 최적화</span>
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+                    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path opacity="0.3" d="M15.3125 22.75C16.3568 22.75 17.3583 23.1648 18.0967 23.9033C18.8352 24.6417 19.25 25.6432 19.25 26.6875V32.8125C19.25 33.8568 18.8352 34.8583 18.0967 35.5967C17.3583 36.3352 16.3568 36.75 15.3125 36.75H9.1875C8.14321 36.75 7.14169 36.3352 6.40327 35.5967C5.66484 34.8583 5.25 33.8568 5.25 32.8125V26.6875C5.25 25.6432 5.66484 24.6417 6.40327 23.9033C7.14169 23.1648 8.14321 22.75 9.1875 22.75H15.3125ZM32.8125 5.25C33.8568 5.25 34.8583 5.66484 35.5967 6.40327C36.3352 7.14169 36.75 8.14321 36.75 9.1875V15.3125C36.75 16.3568 36.3352 17.3583 35.5967 18.0967C34.8583 18.8352 33.8568 19.25 32.8125 19.25H26.6875C25.6432 19.25 24.6417 18.8352 23.9033 18.0967C23.1648 17.3583 22.75 16.3568 22.75 15.3125V9.1875C22.75 8.14321 23.1648 7.14169 23.9033 6.40327C24.6417 5.66484 25.6432 5.25 26.6875 5.25H32.8125Z" fill="black"/>
+<path d="M15.3125 5.25C16.3568 5.25 17.3583 5.66484 18.0967 6.40327C18.8352 7.14169 19.25 8.14321 19.25 9.1875V15.3125C19.25 16.3568 18.8352 17.3583 18.0967 18.0967C17.3583 18.8352 16.3568 19.25 15.3125 19.25H9.1875C8.14321 19.25 7.14169 18.8352 6.40327 18.0967C5.66484 17.3583 5.25 16.3568 5.25 15.3125V9.1875C5.25 8.14321 5.66484 7.14169 6.40327 6.40327C7.14169 5.66484 8.14321 5.25 9.1875 5.25H15.3125Z" fill="#AE3B4D"/>
+<path opacity="0.3" d="M32.8125 22.75C33.8568 22.75 34.8583 23.1648 35.5967 23.9033C36.3352 24.6417 36.75 25.6432 36.75 26.6875V32.8125C36.75 33.8568 36.3352 34.8583 35.5967 35.5967C34.8583 36.3352 33.8568 36.75 32.8125 36.75H26.6875C25.6432 36.75 24.6417 36.3352 23.9033 35.5967C23.1648 34.8583 22.75 33.8568 22.75 32.8125V26.6875C22.75 25.6432 23.1648 24.6417 23.9033 23.9033C24.6417 23.1648 25.6432 22.75 26.6875 22.75H32.8125Z" fill="black"/>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 mt-2">애플리케이션 운영관리</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">업무 애플리케이션의 안정적 서비스 제공을 위한 상시 모니터링, 성능관리, 장애 대응 및 <br>소규모 기능 개선 활동을 수행합니다.</p>
+                    <div class="min-h-[90px] bg-slate-50 border-l-4 border-[#AE3B4D] p-4 rounded-r-xl mt-auto flex flex-col justify-between items-start">
+                        <strong class="min-w-[90px] text-center text-xs text-white inline-block mb-2 bg-[#AE3B4D] py-[3px] px-2 rounded-xl">주요 업무 범위</strong>
+                        <span class="text-xs text-slate-700 font-medium block">장애 감시 · 사용자 지원 · <br>소규모 기능 개선 · 데이터 백업 · 성능 최적화</span>
                     </div>
                 </div>
 
                 <!-- Service 2 -->
-                <div class="sm-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-100 flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 02</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-600 transition-all">시스템 유지관리</h3>
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_2001_6339)">
+<path d="M7.08268 32.5827H26.916M10.9884 8.1551L13.9946 11.1613M13.9946 11.1613C14.7916 10.3642 15.8722 9.91602 16.9993 9.91602M13.9946 11.1613C13.1976 11.9583 12.7493 13.0388 12.7493 14.166M12.7493 14.166H8.49935M12.7493 14.166C12.7493 15.2932 13.1976 16.3737 13.9946 17.1708M13.9946 17.1708L10.9884 20.1769M13.9946 17.1708C14.7916 17.9678 15.8722 18.416 16.9993 18.416M16.9993 18.416V22.666M16.9993 18.416C18.1265 18.416 19.2071 17.9678 20.0041 17.1708M20.0041 17.1708L23.0103 20.1769M20.0041 17.1708C20.8011 16.3737 21.2493 15.2932 21.2493 14.166M25.4993 14.166H21.2493M21.2493 14.166C21.2493 13.0388 20.8011 11.9583 20.0041 11.1613M23.0103 8.1551L20.0041 11.1613M20.0041 11.1613C19.2071 10.3642 18.1265 9.91602 16.9993 9.91602M16.9993 9.91602V5.66602M1.41602 26.916H32.5827V1.41602H1.41602V26.916ZM11.3327 32.5827H22.666V26.916H11.3327V32.5827Z" stroke="#333333" stroke-width="3.16667"/>
+<path d="M10.9891 8.15217L13.9952 11.1583M13.9952 11.1583C14.7923 10.3613 15.8728 9.91309 17 9.91309M13.9952 11.1583C13.1982 11.9554 12.75 13.0359 12.75 14.1631M12.75 14.1631H8.5M12.75 14.1631C12.75 15.2903 13.1982 16.3708 13.9952 17.1678M13.9952 17.1678L10.9891 20.174M13.9952 17.1678C14.7923 17.9649 15.8728 18.4131 17 18.4131M17 18.4131V22.6631M17 18.4131C18.1272 18.4131 19.2077 17.9649 20.0047 17.1678M20.0047 17.1678L23.0109 20.174M20.0047 17.1678C20.8018 16.3708 21.25 15.2903 21.25 14.1631M25.5 14.1631H21.25M21.25 14.1631C21.25 13.0359 20.8018 11.9554 20.0047 11.1583M23.0109 8.15217L20.0047 11.1583M20.0047 11.1583C19.2077 10.3613 18.1272 9.91309 17 9.91309M17 9.91309V5.66309" stroke="#AE3B4D" stroke-width="3.16667"/>
+</g>
+<defs>
+<clipPath id="clip0_2001_6339">
+<rect width="34" height="34" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 mt-2">시스템 유지관리</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">완전형·수정형·예방형·적응형 유지관리의 4대 유형에 걸쳐 정보시스템의 지속 가능성을 확보하며, 소프트웨어사업 대가산정 가이드를 준수합니다.</p>
-                    <div class="bg-slate-50 border-l-4 border-cyan-400 p-4 rounded-r-xl mt-auto">
-                        <strong class="text-xs text-brand-dark block mb-1">유지관리 유형</strong>
-                        <span class="text-xs text-slate-700 font-medium">하자보수 · 상용SW 유지관리 · 개발SW 유지관리 · 기능개선</span>
+                    <div class="min-h-[90px] bg-slate-50 border-l-4 border-[#AE3B4D] p-4 rounded-r-xl mt-auto flex flex-col justify-between items-start">
+                        <strong class="min-w-[90px] text-center text-xs text-white inline-block mb-2 bg-[#AE3B4D] py-[3px] px-2 rounded-xl">유지관리 유형</strong>
+                        <span class="text-xs text-slate-700 font-medium block">하자보수 · 상용SW 유지관리 · 개발SW 유지관리 · 기능개선</span>
                     </div>
                 </div>
 
                 <!-- Service 3 -->
-                <div class="sm-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-200 flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 03</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-600 transition-all">헬프데스크 · 사용자 지원</h3>
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+                    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M28.233 13.7507H28.1413M34.283 13.7507H34.1913M28.3247 13.7507C28.3247 13.7993 28.3054 13.846 28.271 13.8804C28.2366 13.9147 28.19 13.934 28.1413 13.934C28.0927 13.934 28.0461 13.9147 28.0117 13.8804C27.9773 13.846 27.958 13.7993 27.958 13.7507C27.958 13.7021 27.9773 13.6555 28.0117 13.6211C28.0461 13.5867 28.0927 13.5674 28.1413 13.5674C28.19 13.5674 28.2366 13.5867 28.271 13.6211C28.3054 13.6555 28.3247 13.7021 28.3247 13.7507ZM34.3747 13.7507C34.3747 13.7993 34.3554 13.846 34.321 13.8804C34.2866 13.9147 34.24 13.934 34.1913 13.934C34.1427 13.934 34.0961 13.9147 34.0617 13.8804C34.0273 13.846 34.008 13.7993 34.008 13.7507C34.008 13.7021 34.0273 13.6555 34.0617 13.6211C34.0961 13.5867 34.1427 13.5674 34.1913 13.5674C34.24 13.5674 34.2866 13.5867 34.321 13.6211C34.3554 13.6555 34.3747 13.7021 34.3747 13.7507Z" stroke="#AE3B4D" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M40.333 14.2688C40.333 19.1125 36.2282 23.0395 31.1663 23.0395C30.5699 23.0395 29.979 22.9845 29.3935 22.8745L29.3493 22.8664C28.9569 22.7947 28.7558 22.7579 28.6143 22.7792C28.4711 22.8007 28.2684 22.9078 27.8714 23.1177L27.8425 23.133C26.6573 23.7645 25.2935 23.977 23.9723 23.7362C24.4765 23.111 24.8184 22.3711 24.9678 21.582C25.0595 21.0962 24.8322 20.625 24.493 20.2803C22.9475 18.711 21.9997 16.5972 21.9997 14.2688C21.9997 9.427 26.1045 5.5 31.1663 5.5C36.2282 5.5 40.333 9.42517 40.333 14.2688Z" stroke="#333333" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.9143 25.9381C18.1907 25.2708 18.333 24.5556 18.333 23.8333C18.333 22.3746 17.7535 20.9757 16.7221 19.9442C15.6906 18.9128 14.2917 18.3333 12.833 18.3333C11.3743 18.3333 9.97537 18.9128 8.94392 19.9442C7.91247 20.9757 7.33301 22.3746 7.33301 23.8333C7.33301 24.5556 7.47527 25.2708 7.75167 25.9381C8.02807 26.6054 8.4332 27.2117 8.94392 27.7224C9.45464 28.2331 10.061 28.6383 10.7282 28.9147C11.3955 29.1911 12.1107 29.3333 12.833 29.3333C13.5553 29.3333 14.2705 29.1911 14.9378 28.9147C15.6051 28.6383 16.2114 28.2331 16.7221 27.7224C17.2328 27.2117 17.6379 26.6054 17.9143 25.9381Z" stroke="#333333" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M22.0003 38.4997C22.0003 36.0685 21.0346 33.7369 19.3155 32.0179C17.5964 30.2988 15.2648 29.333 12.8337 29.333C10.4025 29.333 8.07093 30.2988 6.35185 32.0179C4.63276 33.7369 3.66699 36.0685 3.66699 38.4997" stroke="#333333" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 mt-2">헬프데스크 · 사용자 지원</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">단일접점(SPOC) 원칙에 따라 사용자 문의·요청을 통합 접수하고, 서비스 등급별로 신속하게 처리합니다.</p>
-                    <div class="bg-slate-50 border-l-4 border-cyan-400 p-4 rounded-r-xl mt-auto">
-                        <strong class="text-xs text-brand-dark block mb-1">서비스 채널</strong>
-                        <span class="text-xs text-slate-700 font-medium">전화 · 전자우편 · ITSM 시스템 · 현장 지원(On-site)</span>
+                    <div class="min-h-[90px] bg-slate-50 border-l-4 border-[#AE3B4D] p-4 rounded-r-xl mt-auto flex flex-col justify-between items-start">
+                        <strong class="min-w-[90px] text-center text-xs text-white inline-block mb-2 bg-[#AE3B4D] py-[3px] px-2 rounded-xl">서비스 채널</strong>
+                        <span class="text-xs text-slate-700 font-medium block">전화 · 전자우편 · ITSM 시스템 · 현장 지원(On-site)</span>
                     </div>
                 </div>
 
                 <!-- Service 4 -->
-                <div class="sm-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 04</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-600 transition-all">보안관제 · 취약점 조치</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">보안 이벤트 상시 감시, 침해사고 대응, 정기 취약점 진단 및 조치를 통해 정보자산의 기밀성·무결성·가용성을 확보합니다.</p>
-                    <div class="bg-slate-50 border-l-4 border-cyan-400 p-4 rounded-r-xl mt-auto">
-                        <strong class="text-xs text-brand-dark block mb-1">주요 활동</strong>
-                        <span class="text-xs text-slate-700 font-medium">보안이벤트 분석 · 시큐어코딩 · 취약점 점검 · 침해사고 대응</span>
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+                    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M24.5295 19.3467V17.301C24.5295 15.3917 22.6202 13.8916 20.7109 13.8916C18.8017 13.8916 16.8924 15.3917 16.8924 17.301V19.3467C16.0741 19.3467 15.2559 20.1649 15.2559 20.9832V25.7564C15.2559 26.711 16.0741 27.5293 16.8924 27.5293H24.3931C25.3478 27.5293 26.166 26.711 26.166 25.8928V21.1196C26.166 20.1649 25.3478 19.3467 24.5295 19.3467ZM22.7566 19.3467H18.6653V17.301C18.6653 16.21 19.6199 15.5281 20.7109 15.5281C21.802 15.5281 22.7566 16.21 22.7566 17.301V19.3467Z" fill="#AE3B4D"/>
+<path d="M36.2441 19.4329C36.2441 29.0118 29.6166 37.9692 20.7109 40.1439C11.8052 37.9692 5.17773 29.0118 5.17773 19.4329V9.07747L20.7109 2.17383L36.2441 9.07747V19.4329ZM20.7109 36.6921C27.1831 34.9662 32.7923 27.2686 32.7923 19.8126V11.3212L20.7109 5.93632L8.62956 11.3212V19.8126C8.62956 27.2686 14.2388 34.9662 20.7109 36.6921Z" fill="#333333"/>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 mt-2">보안관제 · 취약점 조치</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">보안 이벤트 상시 감시, 침해사고 대응, <br>정기 취약점 진단 및 조치를 통해 정보자산의 <br>기밀성·무결성·가용성을 확보합니다.</p>
+                    <div class="min-h-[90px] bg-slate-50 border-l-4 border-[#AE3B4D] p-4 rounded-r-xl mt-auto flex flex-col justify-between items-start">
+                        <strong class="min-w-[90px] text-center text-xs text-white inline-block mb-2 bg-[#AE3B4D] py-[3px] px-2 rounded-xl">주요 활동</strong>
+                        <span class="text-xs text-slate-700 font-medium block">보안이벤트 분석 · 시큐어코딩 · 취약점 점검 · 침해사고 대응</span>
                     </div>
                 </div>
 
                 <!-- Service 5 -->
-                <div class="sm-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-100 flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 05</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-600 transition-all">예방점검 · 상태관리</h3>
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+                    <svg width="40" height="37" viewBox="0 0 40 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 5.78125H8.75V33.5313H31.25V5.78125H25M12.5 24.2813H27.5M17.5 21.9688V26.5938M12.5 17.3438H27.5M22.5 15.0313V19.6563M15 8.09375L13.75 3.46875H26.25L25 8.09375H15Z" stroke="#333333" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M12.5 24.2803H27.5M17.5 21.9678V26.5928M12.5 17.3428H27.5M22.5 15.0303V19.6553" stroke="#AE3B4D" stroke-width="2.5" stroke-linejoin="round"/>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 mt-2">예방점검 · 상태관리</h3>
                     <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">정기 및 수시 예방점검과 능동적 상태 관리로 장애를 사전에 예방하고 시스템 자원 활용률을 최적화합니다.</p>
-                    <div class="bg-slate-50 border-l-4 border-cyan-400 p-4 rounded-r-xl mt-auto">
-                        <strong class="text-xs text-brand-dark block mb-1">점검 주기 <span class="bg-brand-accent text-white text-[10px] px-1 rounded mx-1">AI추론</span></strong>
-                        <span class="text-xs text-slate-700 font-medium">일일점검 · 주간점검 · 월간정기점검 · 반기 종합점검</span>
+                    <div class="min-h-[90px] bg-slate-50 border-l-4 border-[#AE3B4D] p-4 rounded-r-xl mt-auto flex flex-col justify-between items-start">
+                        <strong class="min-w-[90px] text-center text-xs text-white inline-block mb-2 bg-[#AE3B4D] py-[3px] px-2 rounded-xl">점검 주기 </strong>
+                        <span class="text-xs text-slate-700 font-medium block">일일점검 · 주간점검 · 월간정기점검 · 반기 종합점검</span>
                     </div>
                 </div>
 
                 <!-- Service 6 -->
-                <div class="sm-glow-box bg-white rounded-3xl p-8 border border-slate-100 shadow-md hover:-translate-y-2 transition-transform duration-300 group fade-in-up delay-200 flex flex-col h-full">
-                    <span class="inline-block bg-brand-dark text-white text-xs font-bold px-3 py-1.5 rounded mb-5 w-max tracking-widest shadow-sm">SERVICE 06</span>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-500 group-hover:to-blue-600 transition-all">재해복구(DR) · BCP 관리</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">재해복구체계 운영, 업무연속성계획(BCP) 관리, 정기 모의훈련 수행을 통해 비상 상황 대응 역량을 유지합니다.</p>
-                    <div class="bg-slate-50 border-l-4 border-cyan-400 p-4 rounded-r-xl mt-auto">
-                        <strong class="text-xs text-brand-dark block mb-1">대응 체계</strong>
-                        <span class="text-xs text-slate-700 font-medium">RTO · RPO 관리 · DR 모의훈련 · 백업/복구 · 위기관리 매뉴얼</span>
+                <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-md transition-transform duration-300 group fade-in-up flex flex-col h-full">
+                    <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18.2614 35.5465C17.8681 35.384 17.509 35.1538 17.184 34.8559L4.14336 21.8152C3.84544 21.4902 3.61523 21.1311 3.45273 20.7379C3.29023 20.3446 3.20898 19.9319 3.20898 19.4996C3.20898 19.0674 3.29023 18.6476 3.45273 18.2402C3.61523 17.8329 3.84544 17.4808 4.14336 17.184L17.184 4.14337C17.509 3.81837 17.8681 3.58112 18.2614 3.43162C18.6546 3.28212 19.0674 3.20791 19.4996 3.209C19.9319 3.21008 20.3517 3.28483 20.759 3.43325C21.1663 3.58166 21.5184 3.81837 21.8152 4.14337L34.8559 17.184C35.1809 17.4819 35.4181 17.834 35.5676 18.2402C35.7171 18.6465 35.7913 19.0663 35.7902 19.4996C35.7892 19.933 35.7149 20.3462 35.5676 20.7395C35.4203 21.1327 35.183 21.4913 34.8559 21.8152L21.8152 34.8559C21.5173 35.1538 21.1652 35.384 20.759 35.5465C20.3527 35.709 19.9329 35.7902 19.4996 35.7902C19.0663 35.7902 18.6546 35.709 18.2614 35.5465ZM19.4996 32.5402L32.5402 19.4996L19.4996 6.459L6.45898 19.4996L19.4996 32.5402ZM17.8746 21.1246H21.1246V11.3746H17.8746V21.1246ZM20.6582 25.5332C20.9692 25.2212 21.1246 24.835 21.1246 24.3746C21.1246 23.9142 20.9686 23.5285 20.6566 23.2176C20.3446 22.9067 19.9589 22.7507 19.4996 22.7496C19.0403 22.7485 18.6546 22.9045 18.3426 23.2176C18.0306 23.5307 17.8746 23.9164 17.8746 24.3746C17.8746 24.8329 18.0306 25.2191 18.3426 25.5332C18.6546 25.8474 19.0403 26.0029 19.4996 25.9996C19.9589 25.9964 20.3451 25.8404 20.6582 25.5316" fill="black"/>
+<path d="M17.875 21.125H21.125V11.375H17.875V21.125ZM20.6586 25.5336C20.9695 25.2216 21.125 24.8354 21.125 24.375C21.125 23.9146 20.969 23.5289 20.657 23.218C20.345 22.9071 19.9593 22.7511 19.5 22.75C19.0407 22.7489 18.655 22.9049 18.343 23.218C18.031 23.5311 17.875 23.9167 17.875 24.375C17.875 24.8332 18.031 25.2195 18.343 25.5336C18.655 25.8478 19.0407 26.0032 19.5 26C19.9593 25.9967 20.3455 25.8407 20.6586 25.532" fill="#AE3B4D"/>
+</svg>
+
+                    <h3 class="text-xl font-bold text-slate-900 mb-3 mt-2">재해복구(DR) · BCP 관리</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed break-keep mb-6">재해복구체계 운영, 업무연속성계획(BCP) 관리, <br>정기 모의훈련 수행을 통해 <br>비상 상황 대응 역량을 유지합니다.</p>
+                    <div class="min-h-[90px] bg-slate-50 border-l-4 border-[#AE3B4D] p-4 rounded-r-xl mt-auto flex flex-col justify-between items-start">
+                        <strong class="min-w-[90px] text-center text-xs text-white inline-block mb-2 bg-[#AE3B4D] py-[3px] px-2 rounded-xl">대응 체계</strong>
+                        <span class="text-xs text-slate-700 font-medium block">RTO · RPO 관리 · DR 모의훈련 · <br>백업/복구 · 위기관리 매뉴얼</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. SLA 관리 체계 -->
-    <section class="py-24 bg-white relative border-t border-slate-200">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-sm font-bold tracking-widest text-sm uppercase">SLA Management</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">서비스수준협약(SLA) 관리 체계</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">발주기관과 사전 협의된 서비스 등급별 목표 지표를 명확히 정의하고, 정량적 측정·보고 체계를 통해 서비스 품질의 투명성을 보장합니다.</p>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden fade-in-up delay-100">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left">
-                        <thead class="text-sm text-white bg-brand-dark">
-                            <tr>
-                                <th scope="col" class="px-6 py-4 font-bold rounded-tl-xl text-center">등급 구분</th>
-                                <th scope="col" class="px-6 py-4 font-bold text-center">영향도</th>
-                                <th scope="col" class="px-6 py-4 font-bold">업무 영향 범위</th>
-                                <th scope="col" class="px-6 py-4 font-bold text-center">대응 착수 목표</th>
-                                <th scope="col" class="px-6 py-4 font-bold text-center rounded-tr-xl">복구 목표 시간</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="bg-white border-b hover:bg-slate-50 transition-colors">
-                                <td class="px-6 py-5 font-bold text-slate-900 text-center">Level 1</td>
-                                <td class="px-6 py-5 text-center"><span class="bg-red-100 text-red-600 px-3 py-1 rounded-full font-bold text-xs">Critical</span></td>
-                                <td class="px-6 py-5 text-slate-600 font-medium">전체 서비스 중단 / 대국민 서비스 장애</td>
-                                <td class="px-6 py-5 text-center text-slate-600">즉시 대응</td>
-                                <td class="px-6 py-5 text-center text-slate-600">협약 시간 내</td>
-                            </tr>
-                            <tr class="bg-white border-b hover:bg-slate-50 transition-colors">
-                                <td class="px-6 py-5 font-bold text-slate-900 text-center">Level 2</td>
-                                <td class="px-6 py-5 text-center"><span class="bg-orange-100 text-orange-600 px-3 py-1 rounded-full font-bold text-xs">High</span></td>
-                                <td class="px-6 py-5 text-slate-600 font-medium">주요 기능 장애 / 다수 사용자 영향</td>
-                                <td class="px-6 py-5 text-center text-slate-600">단시간 내</td>
-                                <td class="px-6 py-5 text-center text-slate-600">협약 시간 내</td>
-                            </tr>
-                            <tr class="bg-white border-b hover:bg-slate-50 transition-colors">
-                                <td class="px-6 py-5 font-bold text-slate-900 text-center">Level 3</td>
-                                <td class="px-6 py-5 text-center"><span class="bg-blue-100 text-blue-600 px-3 py-1 rounded-full font-bold text-xs">Normal</span></td>
-                                <td class="px-6 py-5 text-slate-600 font-medium">일부 기능 장애 / 우회 가능</td>
-                                <td class="px-6 py-5 text-center text-slate-600">당일 대응</td>
-                                <td class="px-6 py-5 text-center text-slate-600">영업일 기준 협의</td>
-                            </tr>
-                            <tr class="bg-white hover:bg-slate-50 transition-colors">
-                                <td class="px-6 py-5 font-bold text-slate-900 text-center">Level 4</td>
-                                <td class="px-6 py-5 text-center"><span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-bold text-xs">Low</span></td>
-                                <td class="px-6 py-5 text-slate-600 font-medium">단순 문의 / 개선 요청</td>
-                                <td class="px-6 py-5 text-center text-slate-600">정기 처리</td>
-                                <td class="px-6 py-5 text-center text-slate-600">협의 후 처리</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 안내 박스 -->
-            <div class="mt-8 bg-yellow-50 border border-brand-accent p-6 rounded-xl fade-in-up delay-200">
-                <div class="flex items-start gap-3 text-sm text-slate-800 leading-relaxed">
-                    <i class="ph-fill ph-info text-brand-accent text-xl shrink-0 mt-0.5"></i>
-                    <p class="break-keep">
-                        <strong class="font-bold text-slate-900 mr-1">※ SLA 운영 원칙 <span class="bg-brand-accent text-white text-[10px] px-1.5 py-0.5 rounded font-bold mx-1">AI추론정보 · 예시</span></strong><br>
-                        상기 등급 체계는 SLA 설계 예시이며, 실제 대응 착수 목표시간·복구 목표시간·가용성 목표치 등의 정량 지표는 발주기관의 서비스 특성 및 계약 조건에 따라 개별 협의하여 확정합니다. 월간 서비스 보고서(Monthly Service Report)를 통해 SLA 준수 현황을 정량적으로 보고하며, 미달 시 서비스 크레딧(Service Credit) 제도의 적용 여부는 계약서에 명시된 조건을 따릅니다.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. ITIL 기반 운영 프로세스 (ITIL Process) -->
-    <section class="py-24 bg-slate-50 relative overflow-hidden border-t border-slate-200">
-        <div class="absolute top-1/2 left-0 w-full h-[400px] bg-cyan-100/40 rounded-full blur-[100px] -translate-y-1/2 -z-10"></div>
-        <div class="container mx-auto px-6 max-w-7xl relative z-10">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-sm font-bold tracking-widest text-sm uppercase">ITIL Process</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">ITIL 기반 표준 운영 프로세스</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">국제 표준 IT서비스관리(ITSM) 프레임워크인 ITIL을 기반으로, 체계적이고 통제된 운영 프로세스를 통해 서비스 품질을 지속적으로 개선합니다.</p>
-            </div>
-
-            <!-- 5 Processes -->
-            <div class="bg-white rounded-3xl p-10 md:p-14 border border-slate-200 shadow-lg fade-in-up delay-100 relative">
-                <div class="text-center mb-10">
-                    <h3 class="text-2xl font-bold text-slate-900 mb-2">5대 핵심 운영관리 프로세스</h3>
-                    <p class="text-slate-500 text-sm">사건관리 · 문제관리 · 변경관리 · 형상관리 · 릴리즈관리</p>
-                </div>
-
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 relative">
-                    <!-- Data Stream Animation Line (Desktop Only) -->
-                    <div class="hidden md:block data-stream-sm rounded-full top-[30px]"></div>
-                    
-                    <!-- Process 1 -->
-                    <div class="bg-slate-50 border-t-4 border-cyan-400 p-6 text-center rounded-b-xl shadow-sm relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                        <div class="w-14 h-14 rounded-full bg-white text-cyan-500 flex items-center justify-center mx-auto mb-4 text-2xl shadow-sm ring-2 ring-slate-100 group-hover:scale-110 transition-transform"><i class="ph-fill ph-warning-circle"></i></div>
-                        <h4 class="text-base font-bold text-slate-900 mb-1 group-hover:text-cyan-500 transition-colors">사건관리</h4>
-                        <span class="text-[11px] text-slate-400 font-bold block mb-3">Incident Mgmt.</span>
-                        <p class="text-xs text-slate-600 break-keep">장애·이벤트의 신속한 인지, 등급 판정, 복구 조치</p>
-                    </div>
-                    <!-- Process 2 -->
-                    <div class="bg-slate-50 border-t-4 border-cyan-500 p-6 text-center rounded-b-xl shadow-sm relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                        <div class="w-14 h-14 rounded-full bg-white text-cyan-600 flex items-center justify-center mx-auto mb-4 text-2xl shadow-sm ring-2 ring-slate-100 group-hover:scale-110 transition-transform"><i class="ph-fill ph-magnifying-glass"></i></div>
-                        <h4 class="text-base font-bold text-slate-900 mb-1 group-hover:text-cyan-600 transition-colors">문제관리</h4>
-                        <span class="text-[11px] text-slate-400 font-bold block mb-3">Problem Mgmt.</span>
-                        <p class="text-xs text-slate-600 break-keep">반복 장애의 근본원인 분석(RCA) 및 재발 방지</p>
-                    </div>
-                    <!-- Process 3 -->
-                    <div class="bg-slate-50 border-t-4 border-blue-500 p-6 text-center rounded-b-xl shadow-sm relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                        <div class="w-14 h-14 rounded-full bg-white text-blue-500 flex items-center justify-center mx-auto mb-4 text-2xl shadow-sm ring-2 ring-slate-100 group-hover:scale-110 transition-transform"><i class="ph-fill ph-arrows-merge"></i></div>
-                        <h4 class="text-base font-bold text-slate-900 mb-1 group-hover:text-blue-500 transition-colors">변경관리</h4>
-                        <span class="text-[11px] text-slate-400 font-bold block mb-3">Change Mgmt.</span>
-                        <p class="text-xs text-slate-600 break-keep">변경 영향도 평가, 승인 절차, 검증 및 배포</p>
-                    </div>
-                    <!-- Process 4 -->
-                    <div class="bg-slate-50 border-t-4 border-indigo-500 p-6 text-center rounded-b-xl shadow-sm relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                        <div class="w-14 h-14 rounded-full bg-white text-indigo-500 flex items-center justify-center mx-auto mb-4 text-2xl shadow-sm ring-2 ring-slate-100 group-hover:scale-110 transition-transform"><i class="ph-fill ph-tree-structure"></i></div>
-                        <h4 class="text-base font-bold text-slate-900 mb-1 group-hover:text-indigo-500 transition-colors">형상관리</h4>
-                        <span class="text-[11px] text-slate-400 font-bold block mb-3">Config. Mgmt.</span>
-                        <p class="text-xs text-slate-600 break-keep">구성 자원(CI) 식별, CMDB 관리, 이력 추적</p>
-                    </div>
-                    <!-- Process 5 -->
-                    <div class="bg-slate-50 border-t-4 border-brand-dark p-6 text-center rounded-b-xl shadow-sm relative group hover:-translate-y-2 transition-transform duration-300 z-10">
-                        <div class="w-14 h-14 rounded-full bg-white text-brand-dark flex items-center justify-center mx-auto mb-4 text-2xl shadow-sm ring-2 ring-slate-100 group-hover:scale-110 transition-transform"><i class="ph-fill ph-rocket-launch"></i></div>
-                        <h4 class="text-base font-bold text-slate-900 mb-1 group-hover:text-brand-dark transition-colors">릴리즈관리</h4>
-                        <span class="text-[11px] text-slate-400 font-bold block mb-3">Release Mgmt.</span>
-                        <p class="text-xs text-slate-600 break-keep">릴리즈 계획, 검증, 배포 및 롤백 관리</p>
-                    </div>
-                </div>
-
-                <!-- CSI Banner -->
-                <div class="mt-8 bg-brand-dark text-center p-8 rounded-2xl shadow-inner relative overflow-hidden">
-                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-transparent"></div>
-                    <strong class="relative z-10 block text-cyan-400 text-xs font-black tracking-[0.2em] mb-2">◆ CONTINUOUS SERVICE IMPROVEMENT ◆</strong>
-                    <p class="relative z-10 text-white/90 text-sm md:text-base leading-relaxed break-keep">
-                        운영 데이터의 정량적 분석을 통해 서비스 개선 기회를 지속적으로 발굴하고,<br class="hidden md:block">
-                        PDCA(Plan-Do-Check-Act) 사이클에 따라 서비스 품질을 단계적으로 향상시킵니다.
-                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 4. 3대 운영 체계 (Operational Excellence) -->
-    <section class="py-24 bg-white border-t border-slate-200">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-sm font-bold tracking-widest text-sm uppercase">Operational Excellence</span>
+    <section class="py-24 bg-brand-gray border-t border-slate-200">
+        <div class="container py-24 mx-auto px-6 max-w-7xl">
+            <div class="text-center pb-5 mb-20 fade-in-up">
+                <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">Operational Excellence</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">3대 운영관리 체계</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">공공정보시스템 운영에 요구되는 품질 · 보안 · 연속성의 세 영역을 통합적으로 관리하여, 신뢰할 수 있는 서비스 지속성을 확보합니다.</p>
+                <p class="text-slate-500 max-w-2xl mx-auto break-keep mt-5 text-lg leading-relaxed">공공정보시스템 운영에 요구되는 품질 · 보안 · 연속성의 세 영역을 통합적으로 관리하여, 신뢰할 수 있는 서비스 지속성을 확보합니다.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Quality -->
-                <div class="bg-white border border-slate-200 border-t-4 border-t-brand-dark rounded-b-2xl p-8 shadow-sm hover:shadow-lg transition-shadow fade-in-up">
-                    <span class="bg-slate-100 text-brand-dark text-[11px] font-bold px-3 py-1 rounded tracking-widest mb-4 inline-block">QUALITY</span>
+                <div class="bg-white border border-[#921C12] border-t-4 rounded-b-2xl p-8 shadow-sm hover:shadow-lg transition-shadow fade-in-up">
+                    <span class="bg-[#F9F2F1] text-brand-dark text-[11px] font-bold px-3 py-1 rounded tracking-widest mb-4 inline-block">QUALITY</span>
                     <h3 class="text-2xl font-bold text-slate-900 mb-1">품질관리 체계</h3>
                     <span class="text-xs font-bold text-slate-400 tracking-wider block mb-8 uppercase">Service Quality Mgmt.</span>
                     <ul class="space-y-4">
@@ -511,7 +438,7 @@
                 </div>
 
                 <!-- Security -->
-                <div class="bg-white border border-slate-200 border-t-4 border-t-cyan-500 rounded-b-2xl p-8 shadow-sm hover:shadow-lg transition-shadow fade-in-up delay-100">
+                <div class="bg-white border border-cyan-500 border-t-4 rounded-b-2xl p-8 shadow-sm hover:shadow-lg transition-shadow fade-in-up delay-100">
                     <span class="bg-cyan-50 text-cyan-600 text-[11px] font-bold px-3 py-1 rounded tracking-widest mb-4 inline-block">SECURITY</span>
                     <h3 class="text-2xl font-bold text-slate-900 mb-1">정보보안 운영 체계</h3>
                     <span class="text-xs font-bold text-slate-400 tracking-wider block mb-8 uppercase">Security Operations</span>
@@ -536,7 +463,7 @@
                 </div>
 
                 <!-- Continuity -->
-                <div class="bg-white border border-slate-200 border-t-4 border-t-brand-accent rounded-b-2xl p-8 shadow-sm hover:shadow-lg transition-shadow fade-in-up delay-200">
+                <div class="bg-white border border-[#FBBF24] border-t-4 rounded-b-2xl p-8 shadow-sm hover:shadow-lg transition-shadow fade-in-up delay-200">
                     <span class="bg-yellow-50 text-yellow-600 text-[11px] font-bold px-3 py-1 rounded tracking-widest mb-4 inline-block">CONTINUITY</span>
                     <h3 class="text-2xl font-bold text-slate-900 mb-1">업무연속성 관리 체계</h3>
                     <span class="text-xs font-bold text-slate-400 tracking-wider block mb-8 uppercase">Business Continuity</span>
@@ -563,260 +490,272 @@
         </div>
     </section>
 
-    <!-- 5. SM 전문 인력 (Expert Team) -->
-    <section class="py-24 bg-brand-gray border-t border-slate-200">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="text-center mb-16 fade-in-up">
-                <span class="text-gradient-sm font-bold tracking-widest text-sm uppercase">Expert Team</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">SM 전문 인력 운영 체계</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">역할별 자격을 갖춘 전문 인력을 계층적으로 배치하여, 효율적인 업무 분담과 신속한 의사결정 체계를 구축합니다.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 fade-in-up delay-100">
-                <!-- Manager -->
-                <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm text-center hover:border-brand-primary hover:shadow-md transition-all group">
-                    <div class="w-16 h-16 bg-slate-100 text-brand-dark rounded-full flex items-center justify-center text-2xl mx-auto mb-4 group-hover:bg-brand-primary group-hover:text-white transition-colors"><i class="ph-fill ph-user-gear"></i></div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-1">서비스 매니저</h4>
-                    <span class="text-[11px] text-cyan-600 font-bold tracking-widest block mb-4">SERVICE MANAGER</span>
-                    <p class="text-sm text-slate-600 break-keep leading-relaxed">SM 사업 총괄 및 발주기관 대응, SLA 관리, 서비스 개선 총괄</p>
-                </div>
-                <!-- Lead -->
-                <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm text-center hover:border-cyan-500 hover:shadow-md transition-all group">
-                    <div class="w-16 h-16 bg-slate-100 text-brand-dark rounded-full flex items-center justify-center text-2xl mx-auto mb-4 group-hover:bg-cyan-500 group-hover:text-white transition-colors"><i class="ph-fill ph-users-three"></i></div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-1">운영 리더</h4>
-                    <span class="text-[11px] text-cyan-600 font-bold tracking-widest block mb-4">OPERATION LEAD</span>
-                    <p class="text-sm text-slate-600 break-keep leading-relaxed">운영팀 관리, 장애 대응 총괄, 변경관리 승인, 기술 의사결정</p>
-                </div>
-                <!-- Engineer -->
-                <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm text-center hover:border-blue-500 hover:shadow-md transition-all group">
-                    <div class="w-16 h-16 bg-slate-100 text-brand-dark rounded-full flex items-center justify-center text-2xl mx-auto mb-4 group-hover:bg-blue-500 group-hover:text-white transition-colors"><i class="ph-fill ph-laptop"></i></div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-1">운영 엔지니어</h4>
-                    <span class="text-[11px] text-cyan-600 font-bold tracking-widest block mb-4">OPERATION ENGINEER</span>
-                    <p class="text-sm text-slate-600 break-keep leading-relaxed">시스템·애플리케이션 운영, 장애 조치, 예방점검, 성능 튜닝</p>
-                </div>
-                <!-- Support -->
-                <div class="bg-white rounded-2xl p-8 border border-slate-200 shadow-sm text-center hover:border-indigo-500 hover:shadow-md transition-all group">
-                    <div class="w-16 h-16 bg-slate-100 text-brand-dark rounded-full flex items-center justify-center text-2xl mx-auto mb-4 group-hover:bg-indigo-500 group-hover:text-white transition-colors"><i class="ph-fill ph-headset"></i></div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-1">지원 전문가</h4>
-                    <span class="text-[11px] text-cyan-600 font-bold tracking-widest block mb-4">SUPPORT SPECIALIST</span>
-                    <p class="text-sm text-slate-600 break-keep leading-relaxed">헬프데스크, 사용자 지원, 문서화, 보안 취약점 조치 지원</p>
-                </div>
-            </div>
-
-            <div class="bg-yellow-50 border border-brand-accent p-6 rounded-xl fade-in-up delay-200">
-                <div class="flex items-start gap-3 text-sm text-slate-800 leading-relaxed">
-                    <i class="ph-fill ph-info text-brand-accent text-xl shrink-0 mt-0.5"></i>
-                    <p class="break-keep">
-                        <strong class="font-bold text-slate-900 mr-1">※ 안내 <span class="bg-brand-accent text-white text-[10px] px-1.5 py-0.5 rounded font-bold mx-1">AI추론정보</span></strong><br>
-                        상기 조직 구성 예시는 SM 사업의 일반적인 인력 운영 모델을 참고하여 작성된 것이며, 실제 사업 조직 구성 및 역할 명칭은 (주)아이웨이브 SM사업본부의 조직 체계에 맞추어 조정이 필요합니다.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- 6. 주요 공공정보화 사업 실적 (Project References) -->
     <section class="py-24 bg-white relative border-t border-slate-200">
-        <div class="container mx-auto px-6 max-w-7xl">
-            <div class="text-center mb-12 fade-in-up">
-                <span class="text-gradient-sm font-bold tracking-widest text-sm uppercase">Project Reference</span>
+        <div class="container py-24 mx-auto px-6 max-w-7xl relative">
+            <div class="text-center pb-5 mb-20 fade-in-up">
+                <span class="text-brand-primary font-bold tracking-widest text-sm uppercase">Project Reference</span>
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2 mb-4">주요 SM 사업 수행 실적</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto break-keep">중앙부처 · 공공기관 · 국방 · 공기업 등 공공부문 정보시스템에 대한 장기 운영유지관리 서비스 수행 경험을 축적해왔습니다.</p>
+                <p class="text-slate-500 max-w-2xl mx-auto break-keep mt-5 text-lg leading-relaxed">중앙부처 · 공공기관 · 국방 · 공기업 등 공공부문 정보시스템에 대한 장기 운영유지관리 서비스 수행 경험을 축적해왔습니다.</p>
             </div>
+            <div class="flex gap-2 custom-btns justify-between absolute top-2/3 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[calc(100%+150px)]">
+                <button id="portfolio-prev"
+                    class="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-500 hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-colors">
+                    <i class="ph-bold ph-arrow-left"></i>
+                </button>
 
-            <!-- 카테고리 필터 (디자인용) -->
-            <div class="flex justify-center flex-wrap gap-3 mb-16 fade-in-up delay-100">
-                <span class="px-6 py-2 bg-brand-dark text-white rounded-full text-sm font-bold shadow-md cursor-default">전체</span>
-                <span class="px-6 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-medium hover:border-brand-primary hover:text-brand-primary cursor-pointer transition-colors">중앙부처</span>
-                <span class="px-6 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-medium hover:border-brand-primary hover:text-brand-primary cursor-pointer transition-colors">공공기관</span>
-                <span class="px-6 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-medium hover:border-brand-primary hover:text-brand-primary cursor-pointer transition-colors">국방</span>
-                <span class="px-6 py-2 bg-white text-slate-600 border border-slate-200 rounded-full text-sm font-medium hover:border-brand-primary hover:text-brand-primary cursor-pointer transition-colors">공기업</span>
+                <button id="portfolio-next"
+                    class="w-10 h-10 rounded-full border border-slate-300 flex items-center justify-center text-slate-500 hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-colors">
+                    <i class="ph-bold ph-arrow-right"></i>
+                </button>
             </div>
-
-            <!-- 6 Reference Cards Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                <!-- Ref 1: 중앙부처 -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-cyan-500 text-white text-[11px] font-bold px-3 py-1 rounded tracking-wider">중앙부처</span>
-                        <div class="text-white/80 text-sm font-medium flex items-center gap-2">사업기간 미기재 <span class="bg-brand-accent text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded">다년계약</span></div>
+            <!-- Horizontal Slider -->
+            <div id="portfolio-wrapper" class="overflow-hidden mt-10 fade-in-up delay-100">
+                <div id="portfolio-slider" class="flex gap-8 w-max h-[300px]">
+                    <!-- Item 1 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm1.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo1.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">관세청</h3>
+                                <p class="mt-2">2024년 내부정보시스템 유지관리 사업</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯부 통합 정보시스템 운영유지관리 사업<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 중앙부처 (실제 정보 미확인)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            대국민 서비스 및 내부 업무 시스템에 대한 통합 운영유지관리 서비스 수행 (예시). 상시 운영 체계 및 SLA 기반 서비스 관리 수행 사례에 대한 예시 콘텐츠입니다.
-                        </p>
-                        <div class="grid grid-cols-3 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">운영인력</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">SLA 관리</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">ITIL</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">헬프데스크</span>
-                        </div>
+                    <!-- Item 2 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm2.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo2.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">국가보훈부</h3>
+                                <p class="mt-2">2024년 인터넷보훈민원시스템 (ERMS) 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Ref 2: 공공기관 -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up delay-100">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-blue-500 text-white text-[11px] font-bold px-3 py-1 rounded tracking-wider">공공기관</span>
-                        <div class="text-white/80 text-sm font-medium flex items-center gap-2">사업기간 미기재 <span class="bg-brand-accent text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded">다년계약</span></div>
+                    <!-- Item 3 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm3.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo3.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">해양수산부</h3>
+                                <p class="mt-2">2024년 지능형 해상교통정보시스템 운영 및 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯공단 대내 정보시스템 유지관리 사업<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 공공기관 (실제 정보 미확인)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            기관 내 업무 포털, 그룹웨어, 지식관리시스템 등 다수 시스템의 통합 유지관리 사례에 대한 예시 콘텐츠입니다. 실제 수행 실적으로 대체가 필요합니다.
-                        </p>
-                        <div class="grid grid-cols-3 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">운영인력</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">유지관리</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">예방점검</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">On-site</span>
-                        </div>
+                    <!-- Item 4 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm4.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo4.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">통계청</h3>
+                                <p class="mt-2">차세대 Census 통합관리시스템 구축 운영</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Ref 3: 국방 -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-[#2E5C8A] text-white text-[11px] font-bold px-3 py-1 rounded tracking-wider">국방</span>
-                        <div class="text-white/80 text-sm font-medium flex items-center gap-2">사업기간 미기재</div>
+                    <!-- Item 5 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm5.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo5.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">국가보훈처</h3>
+                                <p class="mt-2">2023년도 인터넷보훈민원시스템 (ERMS)유지보수 사업</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯◯ 국방정보체계 운영지원 사업<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 국방부문 기관 (실제 정보 미확인)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            국방 폐쇄망 환경 내 정보체계 운영지원 사례에 대한 예시 콘텐츠입니다. 국방 부문 실적의 공개 여부는 관련 보안규정 확인 후 결정이 필요합니다.
-                        </p>
-                        <div class="grid grid-cols-3 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">공개 여부 검토</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">공개 여부 검토</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">운영인력</strong><span class="font-bold text-slate-900">공개 여부 검토</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">폐쇄망 운영</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">보안관제</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">Secure SDLC</span>
-                        </div>
+                    <!-- Item 6 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm6.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo6.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Ref 4: 공기업 -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up delay-100">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-brand-accent text-brand-dark text-[11px] font-black px-3 py-1 rounded tracking-wider">공기업</span>
-                        <div class="text-white/80 text-sm font-medium flex items-center gap-2">사업기간 미기재 <span class="bg-brand-accent text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded">다년계약</span></div>
+                    <!-- Item 7 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm7.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo7.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯공사 기간계 시스템 유지관리 및 헬프데스크 운영<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 공기업 (실제 정보 미확인)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            기간계·정보계 시스템 통합 유지관리와 헬프데스크 운영 사례에 대한 예시 콘텐츠입니다. 실제 수행 실적으로 대체가 필요합니다.
-                        </p>
-                        <div class="grid grid-cols-3 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">운영인력</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">기간계 운영</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">ITSM</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">헬프데스크</span>
-                        </div>
+                    <!-- Item 8 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm8.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo8.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Ref 5: 중앙부처 -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-cyan-500 text-white text-[11px] font-bold px-3 py-1 rounded tracking-wider">중앙부처</span>
-                        <div class="text-white/80 text-sm font-medium flex items-center gap-2">사업기간 미기재</div>
+                    <!-- Item 9 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm9.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo9.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯청 대국민 포털 운영 및 보안관제 사업<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 중앙부처 소속기관 (실제 정보 미확인)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            대국민 포털 사이트 상시 운영 및 보안관제 서비스 사례에 대한 예시 콘텐츠입니다. 실제 수행 실적으로 대체가 필요합니다.
-                        </p>
-                        <div class="grid grid-cols-3 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">운영인력</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">포털 운영</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">보안관제</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">침해대응</span>
-                        </div>
+                    <!-- Item 10 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm10.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo10.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                </div>
-
-                <!-- Ref 6: 공공기관 -->
-                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group fade-in-up delay-100">
-                    <div class="bg-brand-dark p-6 flex justify-between items-center">
-                        <span class="bg-blue-500 text-white text-[11px] font-bold px-3 py-1 rounded tracking-wider">공공기관</span>
-                        <div class="text-white/80 text-sm font-medium flex items-center gap-2">사업기간 미기재 <span class="bg-brand-accent text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded">다년계약</span></div>
+                    <!-- Item 11 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm11.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo11.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
-                    <div class="p-8 flex flex-col flex-1">
-                        <h3 class="text-xl font-bold text-slate-900 mb-2 leading-snug group-hover:text-brand-primary transition-colors">◯◯원 클라우드 인프라 운영관리 서비스<span class="inline-block ml-2 bg-brand-accent text-white text-[10px] px-2 py-0.5 rounded font-bold align-middle">AI추론정보</span></h3>
-                        <p class="text-cyan-600 text-sm font-bold mb-4">발주처 : 공공기관 (실제 정보 미확인)</p>
-                        <p class="text-slate-600 text-sm leading-relaxed mb-6 break-keep pb-6 border-b border-dashed border-slate-200">
-                            공공기관 클라우드 이관 시스템의 인프라 운영관리(MSP) 사례에 대한 예시 콘텐츠입니다. 실제 수행 실적으로 대체가 필요합니다.
-                        </p>
-                        <div class="grid grid-cols-3 gap-4 mb-6 text-sm">
-                            <div><strong class="block text-slate-500 text-xs mb-1">사업규모</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">수행기간</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                            <div><strong class="block text-slate-500 text-xs mb-1">운영인력</strong><span class="font-bold text-slate-900">실제 정보 필요</span></div>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mt-auto">
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">Cloud MSP</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">CSAP</span>
-                            <span class="bg-slate-100 text-slate-700 text-[11px] font-medium px-2.5 py-1 rounded">인프라 운영</span>
-                        </div>
+                    <!-- Item 12 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm12.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo12.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 13 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm13.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo13.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 14 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm14.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo14.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 15 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm15.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo15.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- Item 16 -->
+                    <div class="portfolio-card shrink-0 w-80 sm:w-96 group relative transition-all overflow-hidden">
+                        <img src="images/biz/biz_sm16.png" alt="" class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 min-w-full min-h-full">
+                        <a href="reference.html" class="relative z-1 p-10 bg-black/70 block w-full h-full text-center text-white flex items-center justify-center">
+                            <div class="group-hover:opacity-0 duration-300 ">
+                                <div class="max-w-[100%] mx-auto"><img src="images/biz/biz_logo16.png" alt=""></div>
+                                <h3 class="mt-2 font-bold text-2xl">정보통신기획평가원</h3>
+                                <p class="mt-2">2022년 ITFIND 대외서비스 운영 유지보수</p>
+                            </div>
+                            <div class="border border-white/10 flex justify-between items-center text-sm font-medium opacity-0 group-hover:opacity-100 duration-300 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                <span class="text-slate-300">자세히 보기</span>
+                                <i class="ph-bold ph-arrow-up-right text-brand-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <!-- 안내 박스 -->
-            <div class="bg-yellow-50 border border-brand-accent p-6 rounded-xl fade-in-up delay-200">
-                <div class="flex items-start gap-3 text-sm text-slate-800 leading-relaxed">
-                    <i class="ph-fill ph-info text-brand-accent text-xl shrink-0 mt-0.5"></i>
-                    <p class="break-keep">
-                        <strong class="font-bold text-slate-900 mr-1">※ 실적 게재 관련 안내 <span class="bg-brand-accent text-white text-[10px] px-1.5 py-0.5 rounded font-bold mx-1">AI추론정보</span></strong><br>
-                        본 페이지에 게재된 6건의 실적은 (주)아이웨이브의 실제 수행 실적이 아니며, SM 사업 실적의 게재 형식과 배치 예시를 보여주기 위한 <strong>AI 추론 기반 예시 콘텐츠</strong>입니다. 실제 홈페이지 게시 전에는 반드시 다음 사항을 확인·반영해 주시기 바랍니다.<br><br>
-                        <span class="block ml-2">① 발주처명, 사업명, 사업규모, 수행기간, 운영인력 등 실제 사업 수행 정보로 대체</span>
-                        <span class="block ml-2">② 국방 부문 실적의 경우 관련 보안규정에 따른 공개 가능 범위 사전 검토</span>
-                        <span class="block ml-2">③ 발주기관 로고·명칭 사용 시 사전 동의 확보 및 개인정보·기밀정보 노출 여부 검토</span>
-                    </p>
-                </div>
-            </div>
-
         </div>
     </section>
-
-    <!-- 7. 하단 공통 콜투액션 (CTA) -->
-    <!-- <section id="contact" class="bg-brand-dark py-24 relative overflow-hidden">
-        <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-500/20 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 z-0"></div>
-        <div class="container mx-auto px-6 max-w-4xl text-center fade-in-up relative z-10">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">SM 사업 문의 및 상담</h2>
-            <p class="text-slate-400 text-lg mb-12 break-keep">공공정보시스템 운영유지관리 서비스가 필요하시면, 아이웨이브 SM사업본부로 문의해 주십시오.</p>
-            
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#contact" class="w-full sm:w-auto px-10 py-4 bg-cyan-500 text-white font-bold rounded-xl hover:bg-white hover:text-brand-dark transition-colors shadow-lg flex items-center justify-center gap-2 text-lg">
-                    사업 문의하기 <i class="ph-bold ph-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </section> -->
 
     <!-- Sub Footer -->
     <footer class="bg-[#06152F] text-white/60 py-8 text-sm text-center">
@@ -859,6 +798,90 @@
             scrollToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+
+            // Portfolio Slider Auto
+            // ================================
+            // Portfolio Infinite Slider
+            // ================================
+
+            const wrapper = document.getElementById("portfolio-wrapper");
+            const slider = document.getElementById("portfolio-slider");
+            const prevBtn = document.getElementById("portfolio-prev");
+            const nextBtn = document.getElementById("portfolio-next");
+
+            // 카드 복제 (무한 루프)
+            slider.innerHTML += slider.innerHTML;
+
+            let currentX = 0;
+            let autoSpeed = 1.5; // 숫자가 클수록 빨라짐
+            let paused = false;
+
+            // 카드 너비 계산 (반응형 대응)
+            function getCardWidth() {
+                const card = slider.querySelector(".portfolio-card");
+                return card.offsetWidth + 32; // gap-8 = 32px
+            }
+
+            // 자동 이동
+            function animate() {
+
+                if (!paused) {
+
+                    currentX -= autoSpeed;
+
+                    // 절반을 지나면 처음 위치로
+                    if (Math.abs(currentX) >= slider.scrollWidth / 2) {
+                        currentX = 0;
+                    }
+
+                    slider.style.transform = `translateX(${currentX}px)`;
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            // 마우스 올리면 정지
+            wrapper.addEventListener("mouseenter", () => {
+                paused = true;
+            });
+
+            // 마우스 나가면 재시작
+            wrapper.addEventListener("mouseleave", () => {
+                paused = false;
+            });
+
+            // 화살표 이동
+            function moveSlide(direction) {
+
+                paused = true;
+
+                currentX += direction * getCardWidth();
+
+                // 무한 루프 보정
+                if (currentX > 0) {
+                    currentX -= slider.scrollWidth / 2;
+                }
+
+                if (Math.abs(currentX) >= slider.scrollWidth / 2) {
+                    currentX = 0;
+                }
+
+                slider.style.transition = "transform .45s ease";
+                slider.style.transform = `translateX(${currentX}px)`;
+
+                setTimeout(() => {
+                    slider.style.transition = "none";
+                    paused = false;
+                }, 450);
+            }
+
+            // 버튼 이벤트
+            nextBtn.addEventListener("click", () => moveSlide(-1));
+            prevBtn.addEventListener("click", () => moveSlide(1));
+
+            // 시작
+            slider.style.transition = "none";
+            animate();
         });
     </script>
 </body>
