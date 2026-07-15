@@ -39,11 +39,14 @@
         
         /* 서브페이지 헤더 기본 배경 */
         #header.subpage-header { background-color: #0f172a; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        /* 반응형 */
     </style>
 </head>
 <body class="text-slate-800 bg-white antialiased break-keep">
 
-    <!-- Header (GNB) --><header id="header"
+    <!-- Header (GNB) -->
+     <header id="header"
             class="fixed w-full top-0 z-[100] transition-all duration-300 bg-brand-dark/60 text-white border-b border-white/10">
             <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
                 <!-- Logo -->
@@ -114,10 +117,33 @@
 
     <!-- Subpage Hero Section -->
     <section class="relative pt-24 pb-5 bg-brand-dark overflow-hidden">
-        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PHBhdGggZD0iTTAgMGgyMHYyMEgweiIgZmlsbD0iIzBmMTcyYSIvPjxjaXJjbGUgY3g9IjIiIGN5PSIyIiByPSIyIiBmaWxsPSIjMWUzYThhIi8+PC9zdmc+')] opacity-30 z-0"></div>
-        <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/20 to-transparent z-0"></div>
+        <!-- AI Data Network Graphic Background -->
+        <div class="absolute inset-0 z-0 opacity-60">
+            <!-- 뇌신경망/데이터 노드 스타일 SVG -->
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <!-- Network Nodes -->
+                <circle cx="15%" cy="20%" r="4" fill="#0ea5e9" class="pulse-border ai-node" style="animation-delay: 0s;" />
+                <circle cx="25%" cy="55%" r="6" fill="#3b82f6" class="pulse-border ai-node" style="animation-delay: -1.2s;" />
+                <circle cx="8%" cy="80%" r="3" fill="#8b5cf6" class="pulse-border ai-node" style="animation-delay: -0.5s;" />
+                <circle cx="75%" cy="30%" r="4" fill="#fbbf24" class="pulse-border ai-node" style="animation-delay: -0.8s;" />
+                <circle cx="85%" cy="65%" r="7" fill="#0ea5e9" class="pulse-border ai-node" style="animation-delay: -1.5s;" />
+                <circle cx="65%" cy="85%" r="3" fill="#3b82f6" class="pulse-border ai-node" style="animation-delay: -2.1s;" />
+                
+                <!-- Connecting Lines -->
+                <path d="M15% 20% L25% 55% L8% 80%" fill="none" stroke="rgba(14, 165, 233, 0.2)" stroke-width="1.5" />
+                <path d="M25% 55% L75% 30% L85% 65% L65% 85%" fill="none" stroke="rgba(59, 130, 246, 0.2)" stroke-width="1.5" stroke-dasharray="4 4" />
+                <path d="M75% 30% L15% 20%" fill="none" stroke="rgba(139, 92, 246, 0.2)" stroke-width="1.5" />
+                <path d="M25% 55% L65% 85%" fill="none" stroke="rgba(251, 191, 36, 0.15)" stroke-width="1" />
+            </svg>
+            <!-- 빛 번짐 효과 (Glows) -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px]"></div>
+        </div>
+        <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/20 via-brand-dark/50 to-transparent z-0"></div>
         
-        <div class="container mx-auto px-6 pt-5 max-w-7xl relative z-10 text-center md:text-left">
+        <div class="container mx-auto px-6 pt-5 max-w-7xl relative z-10 text-center md:text-left flex items-end justify-between">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-4 fade-in-up delay-100">회사개요</h1>
+            
             <!-- Breadcrumbs -->
             <div class="flex items-center justify-center md:justify-start gap-2 text-sm text-slate-400 mb-3 fade-in-up">
                 <a href="index.html" class="hover:text-brand-accent transition-colors"><i class="ph-fill ph-house"></i></a>
@@ -126,9 +152,6 @@
                 <i class="ph-bold ph-caret-right text-xs"></i>
                 <span class="text-white font-medium">회사개요</span>
             </div>
-            
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 fade-in-up delay-100">회사개요</h1>
-            <!-- <p class="text-slate-300 text-lg fade-in-up delay-200">대한민국 공공 IT 인프라의 새로운 표준, 아이웨이브를 소개합니다.</p> -->
         </div>
     </section>
 
@@ -147,20 +170,20 @@
 
     <!-- Company Overview Content - Intro Only -->
     <section class="py-24 bg-white">
-        <div class="container py-24 mx-auto px-6 max-w-7xl text-center grid grid-cols-1 md:grid-cols-[3fr_5fr] md:items-end gap-14">
-            <div class="fade-in-up rounded-2xl shadow overflow-hidden mr-10">
+        <div class="container py-24 mx-auto px-6 max-w-7xl text-center grid grid-cols-1 lg:grid-cols-[3fr_5fr] md:items-end gap-5 xl:gap-14">
+            <div class="max-w-[500px] lg:max-w-full fade-in-up rounded-2xl shadow overflow-hidden mr-0 lg:mr-10">
                 <img src="images/about/company-intro.png" alt="">
             </div>
             <div class="fade-in-up text-left flex flex-col justify-between h-full">
                 <div>
                     <span class="text-brand-primary font-bold tracking-widest text-sm uppercase block mb-4">Who We Are</span>
-                    <h2 class="text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-12 md:leading-[1.2]">
-                        대한민국 IT 인프라의 새로운 표준,<br>
+                    <h2 class="text-3xl md:text-4xl xl:text-5xl font-bold text-slate-900 leading-tight mb-12 md:leading-[1.2]">
+                        대한민국 IT 인프라의 새로운 표준,<br class="hidden lg:block">
                         <span class="text-brand-accent">디지털 혁신(DX/AX)</span>을 선도하는 <br>아이웨이브입니다.
                     </h2>
                 </div>
                 <div class="min-w-0">
-                    <p class="text-slate-600 text-base md:text-lg break-keep leading-[1.6] max-w-2xl mb-6">
+                    <p class="text-slate-600 text-base md:text-lg break-keep leading-[1.6] md:max-w-2xl mb-6">
                         (주)아이웨이브는 2017년 설립 이래 공공 및 금융 기관의 대규모 IT 인프라를 성공적으로 구축(SI)하고 안정적으로 운영(SM)하며 지속 성장해 온 검증된 IT 서비스 전문 기업입니다. 관세청, 조달청, 통계청 등 국가 핵심 데이터망을 24시간 무결점으로 관리하는 독보적인 기술력과 노하우를 보유하고 있습니다.
                     </p>
                     <p class="text-slate-600 text-base md:text-lg break-keep leading-[1.6] max-w-2xl">
@@ -237,7 +260,7 @@
 
             <div class="max-w-7xl mx-auto bg-white">
                 <!-- 왼쪽 열 -->
-                <div class="p-8 flex flex-row gap-6 text-center">
+                <div class="p-8 flex flex-col md:flex-row gap-6 text-center ">
                     <div class="md:border-r border-slate-200 border-b md:border-b-0 p-8 flex-1 fade-in-up">
                         <i class="ph-fill ph-chart-pie-slice text-brand-accent text-6xl inline-block mb-3"></i>
                         <p class="text-sm font-bold text-slate-500 mb-1">매출액<span class="text-sm text-slate-500 font-normal">(2025년 기준)</span></p>
@@ -413,7 +436,7 @@
     </footer>
 
     <!-- Scroll to Top Button -->
-    <button id="scrollToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-brand-primary text-white rounded-full shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 z-50 hover:bg-brand-dark">
+    <button id="scrollToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-[#121f41] text-white rounded-full shadow-xl flex items-center justify-center transition-all duration-300 z-50 hover:bg-brand-dark opacity-100 pointer-events-auto">
         <i class="ph-bold ph-arrow-up text-xl"></i>
     </button>
 
