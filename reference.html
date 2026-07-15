@@ -84,6 +84,21 @@
             from { transform: translateX(calc(-100% - 2rem)); }
             to { transform: translateX(0); }
         }
+
+        /* 실적현황 버튼 동작 */
+        #reference-list {
+            height: 508px;
+            overflow: hidden;
+            transition: height 0.4s ease;
+        }
+        #btn-reference-more .reference-up,
+        #btn-reference-more.is-active .reference-down {
+            display: none;
+        }
+        #btn-reference-more .reference-down,
+        #btn-reference-more.is-active .reference-up {
+            display: block;
+        }
     </style>
 </head>
 <body class="text-slate-800 bg-brand-gray antialiased break-keep">
@@ -143,11 +158,12 @@
                     </div>
                 </nav>
                 <!-- CTA Button -->
-                <div class="hidden md:block">
+                <!-- <div class="hidden md:block">
                     <a href="#contact"
                         class="text-white px-3 py-1.5 rounded-full bg-brand-dark/20 text-brand-dark  border font-bold text-xs hover:bg-brand-accent transition-colors shadow-lg">
                         문의하기
                     </a>
+                </div> -->
                 </div>
                 <!-- Mobile Menu Toggle -->
                 <button class="md:hidden text-2xl" aria-label="Menu">
@@ -306,7 +322,7 @@
 
             <!-- 실적 리스트 (Table) -->
             <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden fade-in-up delay-200">
-                <div class="overflow-x-auto">
+                <div class="overflow-hidden transition-all duration-300" id="reference-list">
                     <table class="w-full text-left border-collapse min-w-[800px]">
                         <thead>
                             <tr class="bg-slate-50 border-b border-slate-200 text-sm font-bold text-slate-500 text-center">
@@ -529,9 +545,12 @@
                 </div>
 
                 <!-- 더보기 버튼 -->
-                <div class="bg-slate-50 p-4 text-center border-t border-slate-200">
-                    <button class="text-sm font-bold text-slate-600 hover:text-brand-primary transition-colors flex items-center justify-center gap-2 mx-auto">
+                <div class="bg-slate-50 p-4 text-center border-t border-slate-200" id="btn-reference-more">
+                    <button class="text-sm font-bold text-slate-600 hover:text-brand-primary transition-colors flex items-center justify-center gap-2 mx-auto reference-down">
                         더 많은 실적 불러오기 <i class="ph-bold ph-caret-down"></i>
+                    </button>
+                    <button class="text-sm font-bold text-slate-600 hover:text-brand-primary transition-colors flex items-center justify-center gap-2 mx-auto reference-up">
+                        접기 <i class="ph-bold ph-caret-up"></i>
                     </button>
                 </div>
             </div>
@@ -837,6 +856,39 @@
                         }
                     });
                 });
+            });
+
+            // 2-2. 실적 리스트 동작
+            const btn = document.querySelector("#btn-reference-more");
+            const list = document.querySelector("#reference-list");
+
+            const collapsedHeight = 500;
+
+            btn.addEventListener("click", () => {
+                if (btn.classList.contains("is-active")) {
+                    // 접기
+                    btn.classList.remove("is-active");
+
+                    // auto → 현재 높이(px)로 변경
+                    list.style.height = `${list.scrollHeight}px`;
+
+                    requestAnimationFrame(() => {
+                    list.style.height = `${collapsedHeight}px`;
+                    });
+                } else {
+                    // 펼치기
+                    btn.classList.add("is-active");
+
+                    list.style.height = `${list.scrollHeight}px`;
+
+                    list.addEventListener(
+                    "transitionend",
+                    () => {
+                        list.style.height = "auto";
+                    },
+                    { once: true }
+                    );
+                }
             });
 
             // 3. Scroll to Top Button
