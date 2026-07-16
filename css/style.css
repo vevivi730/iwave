@@ -100,6 +100,35 @@
 
 
 
+/* 담당자 연락처   */
+
+
+.main-popup {
+    display: none;
+
+}
+
+.main-popup.active {
+    display: block;
+    z-index: 100;
+}
+
+.line-befor {
+    position: relative;
+}
+
+.line-befor::after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 0.5px;
+    background: #D4D4D4;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
 /*---  사업분야   --*/
 
 .business-container {
@@ -356,24 +385,9 @@
     transition: 0.3s;
 }
 
-/* .pofol_tit_2 {
-    position: absolute;
-    background: #00000098;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-block: 1.5rem;
-    top: 0;
-    gap: 1rem;
-} */
 
-
-/* 
 /*--- 파트너십 ---*/
-/* .Partnerships_wrap {
-    background: url(../images/content_bg1.svg)bottom/cover no-repeat;
-} */
+
 
 .partner {
     position: relative;
