@@ -123,7 +123,7 @@
 
     <!-- Header (GNB) -->
     <header id="header"
-            class="fixed w-full top-0 z-[100] transition-all duration-300 bg-brand-dark text-white border-b border-white/10">
+            class="fixed w-full top-0 z-[100] transition-all duration-300 bg-brand-dark/60 text-white border-b border-white/10">
             <div class="container mx-auto px-6 max-w-7xl h-20 flex items-center justify-between">
                 <!-- Logo -->
                 <a href="index.html" class="text-2xl font-black tracking-tighter flex items-center gap-2">
@@ -193,7 +193,7 @@
         </header>
 
     <!-- Subpage Hero Section -->
-    <section class="relative pt-32 pb-20 bg-[#070b14] overflow-hidden ai-grid-bg">
+    <section class="relative pt-32 bg-[#070b14] overflow-hidden ai-grid-bg">
         <!-- AI Data Network Graphic Background -->
         <div class="absolute inset-0 z-0 opacity-60">
             <!-- 뇌신경망/데이터 노드 스타일 SVG -->
@@ -218,15 +218,7 @@
         </div>
         <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-brand-primary/20 via-brand-dark/50 to-transparent z-0"></div>
         
-        <div class="container mx-auto px-6 max-w-7xl relative z-10 text-center md:text-left">
-            <!-- Breadcrumbs -->
-            <div class="flex items-center justify-center md:justify-start gap-2 text-sm text-slate-400 mb-6 fade-in-up">
-                <a href="index.html" class="hover:text-brand-accent transition-colors"><i class="ph-fill ph-house"></i></a>
-                <i class="ph-bold ph-caret-right text-xs"></i>
-                <span>사업분야</span>
-                <i class="ph-bold ph-caret-right text-xs"></i>
-                <span class="text-white font-medium">AI 사업</span>
-            </div>
+        <div class="container mx-auto px-6 pt-10 max-w-7xl relative z-10 text-center md:text-left">
             <h1 class="text-3xl md:text-5xl font-black text-white mb-12 md:leading-[1.2] fade-in-up delay-100 tracking-tight">
                 비즈니스의 새로운 차원,<br>
                 아이웨이브 생성형 AI 서비스
@@ -234,6 +226,14 @@
             <p class="text-slate-300 text-lg md:text-xl max-w-3xl leading-relaxed fade-in-up delay-200 break-keep font-light">
                 아이웨이브는 단순한 기술 도입을 넘어, 공공 및 기업 환경에 최적화된 생성형 AI 기술을 통해 성공적인 인공지능 전환(AX)을 실현합니다. 전략 수립부터 데이터 관리, 강력한 보안까지 가장 신뢰할 수 있는 AI 혁신 로드맵을 제시합니다.
             </p>
+            <!-- Breadcrumbs -->
+            <div class="flex items-center justify-center md:justify-end gap-2 text-sm text-slate-400 mb-6 fade-in-up pt-20">
+                <a href="index.html" class="hover:text-brand-accent transition-colors"><i class="ph-fill ph-house"></i></a>
+                <i class="ph-bold ph-caret-right text-xs"></i>
+                <span>사업분야</span>
+                <i class="ph-bold ph-caret-right text-xs"></i>
+                <span class="text-white font-medium">AI 사업</span>
+            </div>
         </div>
     </section>
 
@@ -588,6 +588,19 @@
 
             scrollToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            //header
+            const header = document.getElementById('header');
+
+            window.addEventListener('scroll', () => {
+            if (window.scrollY > 0) {
+                header.classList.remove('bg-brand-dark/60');
+                header.classList.add('bg-brand-dark');
+            } else {
+                header.classList.remove('bg-brand-dark');
+                header.classList.add('bg-brand-dark/60');
+            }
             });
         });
     </script>
